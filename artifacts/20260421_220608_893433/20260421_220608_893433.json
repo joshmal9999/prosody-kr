@@ -1,0 +1,3574 @@
+{
+  "schema_version": "1.2",
+  "created_at": "2026-04-21T22:06:08.898414+09:00",
+  "profile": "ru",
+  "audio_source_name": "00215-F-97-RU-A-LAR025-0044264.wav",
+  "artifact_bundle": {
+    "artifact_id": "20260421_220608_893433",
+    "json_file_name": "20260421_220608_893433.json",
+    "audio_file_name": "20260421_220608_893433.wav"
+  },
+  "status": {
+    "evaluation_status": "ready",
+    "status_message": "음질, 문장 유사도, forced alignment 신뢰도를 모두 통과했습니다."
+  },
+  "reference": {
+    "text": "경찰이 잡은 도둑은 키가 크고 말랐어요.",
+    "representative_pronunciation": "경찰이 잡은 도둑은 키가 크고 말랐어요.",
+    "representative_ipa": {
+      "raw_text": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo .",
+      "normalized_text": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo",
+      "tokens": [
+        {
+          "symbol": "k",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "jʌ",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "ŋ",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "tɕʰ",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "a",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "l",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "i",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "tɕ",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "a",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "p̚",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "ɯ",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "n",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "t",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "o",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "t",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "u",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "k̚",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "ɯ",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "n",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "kʰ",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "i",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "k",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "a",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "kʰ",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "ɯ",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "k",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "o",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "m",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "a",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "l",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "ɾ",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "a",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "t̚",
+          "category": "consonant",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "ʌ",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        },
+        {
+          "symbol": "jo",
+          "category": "vowel",
+          "syllable_position": "unknown",
+          "confidence": null
+        }
+      ],
+      "token_symbols": [
+        "k",
+        "jʌ",
+        "ŋ",
+        "tɕʰ",
+        "a",
+        "l",
+        "i",
+        "tɕ",
+        "a",
+        "p̚",
+        "ɯ",
+        "n",
+        "t",
+        "o",
+        "t",
+        "u",
+        "k̚",
+        "ɯ",
+        "n",
+        "kʰ",
+        "i",
+        "k",
+        "a",
+        "kʰ",
+        "ɯ",
+        "k",
+        "o",
+        "m",
+        "a",
+        "l",
+        "ɾ",
+        "a",
+        "t̚",
+        "ʌ",
+        "jo"
+      ]
+    },
+    "selected_reference_candidate": {
+      "pronunciation": "경찰이 잡은 도둑은 키가 크고 말랐어요.",
+      "ipa": {
+        "raw_text": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo .",
+        "normalized_text": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo",
+        "tokens": [
+          {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "jʌ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "ŋ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "tɕʰ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "l",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "i",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "tɕ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "p̚",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "ɯ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "n",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "t",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "o",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "t",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "u",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "k̚",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "ɯ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "n",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "kʰ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "i",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "kʰ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "ɯ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "o",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "m",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "l",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "ɾ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "t̚",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "ʌ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          {
+            "symbol": "jo",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          }
+        ],
+        "token_symbols": [
+          "k",
+          "jʌ",
+          "ŋ",
+          "tɕʰ",
+          "a",
+          "l",
+          "i",
+          "tɕ",
+          "a",
+          "p̚",
+          "ɯ",
+          "n",
+          "t",
+          "o",
+          "t",
+          "u",
+          "k̚",
+          "ɯ",
+          "n",
+          "kʰ",
+          "i",
+          "k",
+          "a",
+          "kʰ",
+          "ɯ",
+          "k",
+          "o",
+          "m",
+          "a",
+          "l",
+          "ɾ",
+          "a",
+          "t̚",
+          "ʌ",
+          "jo"
+        ]
+      },
+      "notes": [
+        "대표 표준 발음형"
+      ],
+      "is_primary": true
+    },
+    "candidates": [
+      {
+        "pronunciation": "경찰이 잡은 도둑은 키가 크고 말랐어요.",
+        "ipa": {
+          "raw_text": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo .",
+          "normalized_text": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo",
+          "tokens": [
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "jʌ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ŋ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "tɕʰ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "l",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "i",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "tɕ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "p̚",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɯ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "n",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "t",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "o",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "t",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "u",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "k̚",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɯ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "n",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "kʰ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "i",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "kʰ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɯ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "o",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "m",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "l",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɾ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "t̚",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ʌ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "jo",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            }
+          ],
+          "token_symbols": [
+            "k",
+            "jʌ",
+            "ŋ",
+            "tɕʰ",
+            "a",
+            "l",
+            "i",
+            "tɕ",
+            "a",
+            "p̚",
+            "ɯ",
+            "n",
+            "t",
+            "o",
+            "t",
+            "u",
+            "k̚",
+            "ɯ",
+            "n",
+            "kʰ",
+            "i",
+            "k",
+            "a",
+            "kʰ",
+            "ɯ",
+            "k",
+            "o",
+            "m",
+            "a",
+            "l",
+            "ɾ",
+            "a",
+            "t̚",
+            "ʌ",
+            "jo"
+          ]
+        },
+        "notes": [
+          "대표 표준 발음형"
+        ],
+        "is_primary": true
+      },
+      {
+        "pronunciation": "경찰이 자븐 도두근 키가 크고 말라더요.",
+        "ipa": {
+          "raw_text": "k jʌ ŋ tɕʰ a l i tɕ a p ɯ n t o t u k ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t ʌ jo .",
+          "normalized_text": "k jʌ ŋ tɕʰ a l i tɕ a p ɯ n t o t u k ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t ʌ jo",
+          "tokens": [
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "jʌ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ŋ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "tɕʰ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "l",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "i",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "tɕ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "p",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɯ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "n",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "t",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "o",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "t",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "u",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɯ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "n",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "kʰ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "i",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "kʰ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɯ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "o",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "m",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "l",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɾ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "t",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ʌ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "jo",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            }
+          ],
+          "token_symbols": [
+            "k",
+            "jʌ",
+            "ŋ",
+            "tɕʰ",
+            "a",
+            "l",
+            "i",
+            "tɕ",
+            "a",
+            "p",
+            "ɯ",
+            "n",
+            "t",
+            "o",
+            "t",
+            "u",
+            "k",
+            "ɯ",
+            "n",
+            "kʰ",
+            "i",
+            "k",
+            "a",
+            "kʰ",
+            "ɯ",
+            "k",
+            "o",
+            "m",
+            "a",
+            "l",
+            "ɾ",
+            "a",
+            "t",
+            "ʌ",
+            "jo"
+          ]
+        },
+        "notes": [
+          "연음/표면 변이 후보"
+        ],
+        "is_primary": false
+      }
+    ]
+  },
+  "recognition": {
+    "user_ipa_raw": "k ŋ tɕʰ a ɾ tɕ a p ɯ n t o t o k ɯ n k i k a k ɯ k o a ɾ a ʌ jo",
+    "user_ipa_normalized": "k ŋ tɕʰ a ɾ tɕ a p ɯ n t o t o k ɯ n k i k a k ɯ k o a ɾ a ʌ jo",
+    "user_tokens": [
+      {
+        "symbol": "k",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "ŋ",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "tɕʰ",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "a",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "ɾ",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "tɕ",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "a",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "p",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "ɯ",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "n",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "t",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "o",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "t",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "o",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "k",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "ɯ",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "n",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "k",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "i",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "k",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "a",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "k",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "ɯ",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "k",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "o",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "a",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "ɾ",
+        "category": "consonant",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "a",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "ʌ",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      },
+      {
+        "symbol": "jo",
+        "category": "vowel",
+        "syllable_position": "unknown",
+        "confidence": null
+      }
+    ],
+    "raw_label_text": "G NG CHh A R J A B EU N D O D O G EU N G I G A G EU G O A R A EO iO",
+    "raw_labels": [
+      "G",
+      "NG",
+      "CHh",
+      "A",
+      "R",
+      "J",
+      "A",
+      "B",
+      "EU",
+      "N",
+      "D",
+      "O",
+      "D",
+      "O",
+      "G",
+      "EU",
+      "N",
+      "G",
+      "I",
+      "G",
+      "A",
+      "G",
+      "EU",
+      "G",
+      "O",
+      "A",
+      "R",
+      "A",
+      "EO",
+      "iO"
+    ]
+  },
+  "gates": {
+    "audio_quality_gate": {
+      "performed": true,
+      "passed": true,
+      "report": {
+        "passed": true,
+        "duration_sec": 5.5466875,
+        "rms_db": -21.656906507732344,
+        "silence_ratio": 0.46402877697841727,
+        "clipping_ratio": 1.1267986523488118e-05,
+        "reasons": []
+      }
+    },
+    "coarse_token_alignment_gate": {
+      "performed": true,
+      "passed": true,
+      "normalized_score": 91.66804157729749
+    },
+    "alignment_confidence_gate": {
+      "performed": true,
+      "passed": true,
+      "report": {
+        "passed": true,
+        "avg_token_confidence": 0.3215008568892311,
+        "coverage": 1.0,
+        "normalized_log_prob": -0.24639629240200767,
+        "message": "forced alignment를 신뢰할 수 있습니다."
+      }
+    }
+  },
+  "alignment": {
+    "coarse": {
+      "total_cost": 5.05,
+      "max_cost": 60.610000000000056,
+      "normalized_score": 91.66804157729749,
+      "aligned_ref": [
+        "k",
+        "jʌ",
+        "ŋ",
+        "tɕʰ",
+        "a",
+        "l",
+        "i",
+        "tɕ",
+        "a",
+        "p̚",
+        "ɯ",
+        "n",
+        "t",
+        "o",
+        "t",
+        "u",
+        "k̚",
+        "ɯ",
+        "n",
+        "kʰ",
+        "i",
+        "k",
+        "a",
+        "kʰ",
+        "ɯ",
+        "k",
+        "o",
+        "m",
+        "a",
+        "l",
+        "ɾ",
+        "a",
+        "t̚",
+        "ʌ",
+        "jo"
+      ],
+      "aligned_hyp": [
+        "k",
+        "∅",
+        "ŋ",
+        "tɕʰ",
+        "a",
+        "ɾ",
+        "∅",
+        "tɕ",
+        "a",
+        "p",
+        "ɯ",
+        "n",
+        "t",
+        "o",
+        "t",
+        "o",
+        "k",
+        "ɯ",
+        "n",
+        "k",
+        "i",
+        "k",
+        "a",
+        "k",
+        "ɯ",
+        "k",
+        "o",
+        "∅",
+        "a",
+        "∅",
+        "ɾ",
+        "a",
+        "∅",
+        "ʌ",
+        "jo"
+      ],
+      "segment_errors": [
+        "t̚ deleted",
+        "l deleted",
+        "m deleted",
+        "kʰ -> k",
+        "kʰ -> k",
+        "u -> o",
+        "i deleted",
+        "l -> ɾ",
+        "jʌ deleted"
+      ],
+      "feature_penalties": {
+        "aspiration": 0.36,
+        "height": 0.28,
+        "manner": 0.35
+      },
+      "selected_reference_candidate": {
+        "pronunciation": "경찰이 잡은 도둑은 키가 크고 말랐어요.",
+        "ipa": {
+          "raw_text": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo .",
+          "normalized_text": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo",
+          "tokens": [
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "jʌ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ŋ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "tɕʰ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "l",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "i",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "tɕ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "p̚",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɯ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "n",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "t",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "o",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "t",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "u",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "k̚",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɯ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "n",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "kʰ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "i",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "kʰ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɯ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "k",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "o",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "m",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "l",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ɾ",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "a",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "t̚",
+              "category": "consonant",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "ʌ",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            },
+            {
+              "symbol": "jo",
+              "category": "vowel",
+              "syllable_position": "unknown",
+              "confidence": null
+            }
+          ],
+          "token_symbols": [
+            "k",
+            "jʌ",
+            "ŋ",
+            "tɕʰ",
+            "a",
+            "l",
+            "i",
+            "tɕ",
+            "a",
+            "p̚",
+            "ɯ",
+            "n",
+            "t",
+            "o",
+            "t",
+            "u",
+            "k̚",
+            "ɯ",
+            "n",
+            "kʰ",
+            "i",
+            "k",
+            "a",
+            "kʰ",
+            "ɯ",
+            "k",
+            "o",
+            "m",
+            "a",
+            "l",
+            "ɾ",
+            "a",
+            "t̚",
+            "ʌ",
+            "jo"
+          ]
+        },
+        "notes": [
+          "대표 표준 발음형"
+        ],
+        "is_primary": true
+      },
+      "steps": [
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "k -> k",
+          "ref_index": 0,
+          "hyp_index": 0,
+          "feature_penalties": {}
+        },
+        {
+          "op": "delete",
+          "ref_token": {
+            "symbol": "jʌ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": null,
+          "cost": 1.0,
+          "error_type": "vowel deletion",
+          "detail": "jʌ deleted",
+          "ref_index": 1,
+          "hyp_index": null,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "ŋ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "ŋ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "ŋ -> ŋ",
+          "ref_index": 2,
+          "hyp_index": 1,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "tɕʰ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "tɕʰ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "tɕʰ -> tɕʰ",
+          "ref_index": 3,
+          "hyp_index": 2,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "a -> a",
+          "ref_index": 4,
+          "hyp_index": 3,
+          "feature_penalties": {}
+        },
+        {
+          "op": "substitute",
+          "ref_token": {
+            "symbol": "l",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "ɾ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.09999999999999998,
+          "error_type": "liquid realization issue",
+          "detail": "l -> ɾ",
+          "ref_index": 5,
+          "hyp_index": 4,
+          "feature_penalties": {
+            "manner": 0.35
+          }
+        },
+        {
+          "op": "delete",
+          "ref_token": {
+            "symbol": "i",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": null,
+          "cost": 1.0,
+          "error_type": "vowel deletion",
+          "detail": "i deleted",
+          "ref_index": 6,
+          "hyp_index": null,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "tɕ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "tɕ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "tɕ -> tɕ",
+          "ref_index": 7,
+          "hyp_index": 5,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "a -> a",
+          "ref_index": 8,
+          "hyp_index": 6,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "p̚",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "p",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "feature-similar substitution",
+          "detail": "p̚ -> p",
+          "ref_index": 9,
+          "hyp_index": 7,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "ɯ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "ɯ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "ɯ -> ɯ",
+          "ref_index": 10,
+          "hyp_index": 8,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "n",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "n",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "n -> n",
+          "ref_index": 11,
+          "hyp_index": 9,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "t",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "t",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "t -> t",
+          "ref_index": 12,
+          "hyp_index": 10,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "o",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "o",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "o -> o",
+          "ref_index": 13,
+          "hyp_index": 11,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "t",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "t",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "t -> t",
+          "ref_index": 14,
+          "hyp_index": 12,
+          "feature_penalties": {}
+        },
+        {
+          "op": "substitute",
+          "ref_token": {
+            "symbol": "u",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "o",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.28,
+          "error_type": "vowel confusion",
+          "detail": "u -> o",
+          "ref_index": 15,
+          "hyp_index": 13,
+          "feature_penalties": {
+            "height": 0.28
+          }
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "k̚",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "feature-similar substitution",
+          "detail": "k̚ -> k",
+          "ref_index": 16,
+          "hyp_index": 14,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "ɯ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "ɯ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "ɯ -> ɯ",
+          "ref_index": 17,
+          "hyp_index": 15,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "n",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "n",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "n -> n",
+          "ref_index": 18,
+          "hyp_index": 16,
+          "feature_penalties": {}
+        },
+        {
+          "op": "substitute",
+          "ref_token": {
+            "symbol": "kʰ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.06,
+          "error_type": "laryngeal contrast confusion",
+          "detail": "kʰ -> k",
+          "ref_index": 19,
+          "hyp_index": 17,
+          "feature_penalties": {
+            "aspiration": 0.18
+          }
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "i",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "i",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "i -> i",
+          "ref_index": 20,
+          "hyp_index": 18,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "k -> k",
+          "ref_index": 21,
+          "hyp_index": 19,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "a -> a",
+          "ref_index": 22,
+          "hyp_index": 20,
+          "feature_penalties": {}
+        },
+        {
+          "op": "substitute",
+          "ref_token": {
+            "symbol": "kʰ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.06,
+          "error_type": "laryngeal contrast confusion",
+          "detail": "kʰ -> k",
+          "ref_index": 23,
+          "hyp_index": 21,
+          "feature_penalties": {
+            "aspiration": 0.18
+          }
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "ɯ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "ɯ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "ɯ -> ɯ",
+          "ref_index": 24,
+          "hyp_index": 22,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "k",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "match",
+          "detail": "k -> k",
+          "ref_index": 25,
+          "hyp_index": 23,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "o",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "o",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "o -> o",
+          "ref_index": 26,
+          "hyp_index": 24,
+          "feature_penalties": {}
+        },
+        {
+          "op": "delete",
+          "ref_token": {
+            "symbol": "m",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": null,
+          "cost": 1.05,
+          "error_type": "consonant deletion",
+          "detail": "m deleted",
+          "ref_index": 27,
+          "hyp_index": null,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "a -> a",
+          "ref_index": 28,
+          "hyp_index": 25,
+          "feature_penalties": {}
+        },
+        {
+          "op": "delete",
+          "ref_token": {
+            "symbol": "l",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": null,
+          "cost": 0.75,
+          "error_type": "coda deletion",
+          "detail": "l deleted",
+          "ref_index": 29,
+          "hyp_index": null,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "ɾ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "ɾ",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "liquid realization issue",
+          "detail": "ɾ -> ɾ",
+          "ref_index": 30,
+          "hyp_index": 26,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "a",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "a -> a",
+          "ref_index": 31,
+          "hyp_index": 27,
+          "feature_penalties": {}
+        },
+        {
+          "op": "delete",
+          "ref_token": {
+            "symbol": "t̚",
+            "category": "consonant",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": null,
+          "cost": 0.75,
+          "error_type": "coda deletion",
+          "detail": "t̚ deleted",
+          "ref_index": 32,
+          "hyp_index": null,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "ʌ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "ʌ",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "ʌ -> ʌ",
+          "ref_index": 33,
+          "hyp_index": 28,
+          "feature_penalties": {}
+        },
+        {
+          "op": "match",
+          "ref_token": {
+            "symbol": "jo",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "hyp_token": {
+            "symbol": "jo",
+            "category": "vowel",
+            "syllable_position": "unknown",
+            "confidence": null
+          },
+          "cost": 0.0,
+          "error_type": "vowel confusion",
+          "detail": "jo -> jo",
+          "ref_index": 34,
+          "hyp_index": 29,
+          "feature_penalties": {}
+        }
+      ]
+    },
+    "forced": {
+      "labels": [
+        "G",
+        "iEO",
+        "NG",
+        "CHh",
+        "A",
+        "L",
+        "I",
+        "J",
+        "A",
+        "p",
+        "EU",
+        "N",
+        "D",
+        "O",
+        "D",
+        "U",
+        "k",
+        "EU",
+        "N",
+        "Kh",
+        "I",
+        "G",
+        "A",
+        "Kh",
+        "EU",
+        "G",
+        "O",
+        "M",
+        "A",
+        "L",
+        "R",
+        "A",
+        "t",
+        "EO",
+        "iO"
+      ],
+      "token_symbols": [
+        "k",
+        "jʌ",
+        "ŋ",
+        "tɕʰ",
+        "a",
+        "l",
+        "i",
+        "tɕ",
+        "a",
+        "p̚",
+        "ɯ",
+        "n",
+        "t",
+        "o",
+        "t",
+        "u",
+        "k̚",
+        "ɯ",
+        "n",
+        "kʰ",
+        "i",
+        "k",
+        "a",
+        "kʰ",
+        "ɯ",
+        "k",
+        "o",
+        "m",
+        "a",
+        "l",
+        "ɾ",
+        "a",
+        "t̚",
+        "ʌ",
+        "jo"
+      ],
+      "segments": [
+        {
+          "token": "k",
+          "label": "G",
+          "start_time": 0.5024173460144928,
+          "end_time": 0.5225140398550725,
+          "duration": 0.02009669384057966,
+          "frame_start": 25,
+          "frame_end": 25,
+          "confidence": 0.3990260028620698
+        },
+        {
+          "token": "jʌ",
+          "label": "iEO",
+          "start_time": 0.5828041213768116,
+          "end_time": 0.6029008152173913,
+          "duration": 0.02009669384057966,
+          "frame_start": 29,
+          "frame_end": 29,
+          "confidence": 0.2268399137024193
+        },
+        {
+          "token": "ŋ",
+          "label": "NG",
+          "start_time": 0.6631908967391305,
+          "end_time": 0.6832875905797102,
+          "duration": 0.02009669384057977,
+          "frame_start": 33,
+          "frame_end": 33,
+          "confidence": 0.5832553939860665
+        },
+        {
+          "token": "tɕʰ",
+          "label": "CHh",
+          "start_time": 0.9043512228260869,
+          "end_time": 0.9244479166666667,
+          "duration": 0.02009669384057977,
+          "frame_start": 45,
+          "frame_end": 45,
+          "confidence": 0.33584838257153227
+        },
+        {
+          "token": "a",
+          "label": "A",
+          "start_time": 1.0249313858695652,
+          "end_time": 1.045028079710145,
+          "duration": 0.02009669384057977,
+          "frame_start": 51,
+          "frame_end": 51,
+          "confidence": 0.5209730327607601
+        },
+        {
+          "token": "l",
+          "label": "L",
+          "start_time": 1.105318161231884,
+          "end_time": 1.1254148550724639,
+          "duration": 0.02009669384057977,
+          "frame_start": 55,
+          "frame_end": 55,
+          "confidence": 0.01871288976983876
+        },
+        {
+          "token": "i",
+          "label": "I",
+          "start_time": 1.1656082427536232,
+          "end_time": 1.185704936594203,
+          "duration": 0.02009669384057977,
+          "frame_start": 58,
+          "frame_end": 58,
+          "confidence": 0.16138535198525228
+        },
+        {
+          "token": "tɕ",
+          "label": "J",
+          "start_time": 1.3665751811594204,
+          "end_time": 1.386671875,
+          "duration": 0.02009669384057955,
+          "frame_start": 68,
+          "frame_end": 68,
+          "confidence": 0.46593422702856496
+        },
+        {
+          "token": "a",
+          "label": "A",
+          "start_time": 1.4670586503623189,
+          "end_time": 1.4871553442028986,
+          "duration": 0.02009669384057977,
+          "frame_start": 73,
+          "frame_end": 73,
+          "confidence": 0.4620544033902356
+        },
+        {
+          "token": "p̚",
+          "label": "p",
+          "start_time": 1.587638813405797,
+          "end_time": 1.6077355072463768,
+          "duration": 0.02009669384057977,
+          "frame_start": 79,
+          "frame_end": 79,
+          "confidence": 0.0009170879770493774
+        },
+        {
+          "token": "ɯ",
+          "label": "EU",
+          "start_time": 1.6278322010869564,
+          "end_time": 1.6479288949275361,
+          "duration": 0.02009669384057977,
+          "frame_start": 81,
+          "frame_end": 81,
+          "confidence": 0.5488247041613581
+        },
+        {
+          "token": "n",
+          "label": "N",
+          "start_time": 1.7283156702898552,
+          "end_time": 1.7484123641304348,
+          "duration": 0.02009669384057955,
+          "frame_start": 86,
+          "frame_end": 86,
+          "confidence": 0.5871789319994043
+        },
+        {
+          "token": "t",
+          "label": "D",
+          "start_time": 1.8488958333333334,
+          "end_time": 1.868992527173913,
+          "duration": 0.02009669384057955,
+          "frame_start": 92,
+          "frame_end": 92,
+          "confidence": 0.3413547082997048
+        },
+        {
+          "token": "o",
+          "label": "O",
+          "start_time": 1.889089221014493,
+          "end_time": 1.9091859148550725,
+          "duration": 0.02009669384057955,
+          "frame_start": 94,
+          "frame_end": 94,
+          "confidence": 0.3561903066638749
+        },
+        {
+          "token": "t",
+          "label": "D",
+          "start_time": 2.0096693840579714,
+          "end_time": 2.0297660778985507,
+          "duration": 0.020096693840579327,
+          "frame_start": 100,
+          "frame_end": 100,
+          "confidence": 0.35026820692566113
+        },
+        {
+          "token": "u",
+          "label": "U",
+          "start_time": 2.0498627717391305,
+          "end_time": 2.0699594655797102,
+          "duration": 0.02009669384057977,
+          "frame_start": 102,
+          "frame_end": 102,
+          "confidence": 0.0867108550255398
+        },
+        {
+          "token": "k̚",
+          "label": "k",
+          "start_time": 2.1704429347826086,
+          "end_time": 2.1905396286231884,
+          "duration": 0.02009669384057977,
+          "frame_start": 108,
+          "frame_end": 108,
+          "confidence": 0.0022960373935266916
+        },
+        {
+          "token": "ɯ",
+          "label": "EU",
+          "start_time": 2.2307330163043475,
+          "end_time": 2.2508297101449277,
+          "duration": 0.020096693840580215,
+          "frame_start": 111,
+          "frame_end": 111,
+          "confidence": 0.45268681963091023
+        },
+        {
+          "token": "n",
+          "label": "N",
+          "start_time": 2.351313179347826,
+          "end_time": 2.371409873188406,
+          "duration": 0.02009669384057977,
+          "frame_start": 117,
+          "frame_end": 117,
+          "confidence": 0.5893446305031822
+        },
+        {
+          "token": "kʰ",
+          "label": "Kh",
+          "start_time": 2.8135371376811595,
+          "end_time": 2.833633831521739,
+          "duration": 0.020096693840579327,
+          "frame_start": 140,
+          "frame_end": 140,
+          "confidence": 0.008824704887407978
+        },
+        {
+          "token": "i",
+          "label": "I",
+          "start_time": 2.893923913043478,
+          "end_time": 2.914020606884058,
+          "duration": 0.02009669384057977,
+          "frame_start": 144,
+          "frame_end": 144,
+          "confidence": 0.5149116969180838
+        },
+        {
+          "token": "k",
+          "label": "G",
+          "start_time": 2.9944073822463766,
+          "end_time": 3.0145040760869564,
+          "duration": 0.02009669384057977,
+          "frame_start": 149,
+          "frame_end": 149,
+          "confidence": 0.3779311673860613
+        },
+        {
+          "token": "a",
+          "label": "A",
+          "start_time": 3.054697463768116,
+          "end_time": 3.0747941576086957,
+          "duration": 0.02009669384057977,
+          "frame_start": 152,
+          "frame_end": 152,
+          "confidence": 0.5612003171946681
+        },
+        {
+          "token": "kʰ",
+          "label": "Kh",
+          "start_time": 3.2154710144927536,
+          "end_time": 3.2355677083333334,
+          "duration": 0.02009669384057977,
+          "frame_start": 160,
+          "frame_end": 160,
+          "confidence": 0.0634292756702826
+        },
+        {
+          "token": "ɯ",
+          "label": "EU",
+          "start_time": 3.275761096014493,
+          "end_time": 3.2958577898550723,
+          "duration": 0.020096693840579327,
+          "frame_start": 163,
+          "frame_end": 163,
+          "confidence": 0.41975632453359063
+        },
+        {
+          "token": "k",
+          "label": "G",
+          "start_time": 3.4164379528985505,
+          "end_time": 3.4365346467391302,
+          "duration": 0.02009669384057977,
+          "frame_start": 170,
+          "frame_end": 170,
+          "confidence": 0.3621245290902281
+        },
+        {
+          "token": "o",
+          "label": "O",
+          "start_time": 3.4566313405797104,
+          "end_time": 3.4767280344202898,
+          "duration": 0.020096693840579327,
+          "frame_start": 172,
+          "frame_end": 172,
+          "confidence": 0.26715010528625305
+        },
+        {
+          "token": "m",
+          "label": "M",
+          "start_time": 3.858565217391304,
+          "end_time": 3.878661911231884,
+          "duration": 0.02009669384057977,
+          "frame_start": 192,
+          "frame_end": 192,
+          "confidence": 0.1913573095087201
+        },
+        {
+          "token": "a",
+          "label": "A",
+          "start_time": 3.959048686594203,
+          "end_time": 3.9791453804347823,
+          "duration": 0.020096693840579327,
+          "frame_start": 197,
+          "frame_end": 197,
+          "confidence": 0.3786663685207438
+        },
+        {
+          "token": "l",
+          "label": "L",
+          "start_time": 3.999242074275362,
+          "end_time": 4.019338768115943,
+          "duration": 0.02009669384058066,
+          "frame_start": 199,
+          "frame_end": 199,
+          "confidence": 0.234892935102475
+        },
+        {
+          "token": "ɾ",
+          "label": "R",
+          "start_time": 4.079628849637681,
+          "end_time": 4.099725543478261,
+          "duration": 0.020096693840580215,
+          "frame_start": 203,
+          "frame_end": 203,
+          "confidence": 0.30305797464709616
+        },
+        {
+          "token": "a",
+          "label": "A",
+          "start_time": 4.1399189311594204,
+          "end_time": 4.160015625,
+          "duration": 0.020096693840579327,
+          "frame_start": 206,
+          "frame_end": 206,
+          "confidence": 0.4302982807686857
+        },
+        {
+          "token": "t̚",
+          "label": "t",
+          "start_time": 4.240402400362319,
+          "end_time": 4.260499094202899,
+          "duration": 0.020096693840580215,
+          "frame_start": 211,
+          "frame_end": 211,
+          "confidence": 0.004282927883399427
+        },
+        {
+          "token": "ʌ",
+          "label": "EO",
+          "start_time": 4.441369338768116,
+          "end_time": 4.461466032608695,
+          "duration": 0.020096693840579327,
+          "frame_start": 221,
+          "frame_end": 221,
+          "confidence": 0.3546560906944635
+        },
+        {
+          "token": "jo",
+          "label": "iO",
+          "start_time": 5.5466875,
+          "end_time": 5.566784193840579,
+          "duration": 0.020096693840579327,
+          "frame_start": 276,
+          "frame_end": 276,
+          "confidence": 0.29018809639397736
+        }
+      ],
+      "total_log_prob": -68.25177299535612,
+      "normalized_log_prob": -0.24639629240200767,
+      "avg_token_confidence": 0.3215008568892311,
+      "coverage": 1.0,
+      "blank_ratio": 0.8736462093862816
+    }
+  },
+  "evaluation": {
+    "score_breakdown": {
+      "overall": 91.66804157729749,
+      "consonant": 87.85087719298245,
+      "vowel": 85.75,
+      "coda": 100.0,
+      "fluency_like": 91.66804157729749,
+      "raw_cost": 5.05,
+      "max_cost": 60.610000000000056,
+      "penalty_summary": [
+        "consonant deletion: m deleted (-1.05)",
+        "vowel deletion: jʌ deleted (-1.00)",
+        "vowel deletion: i deleted (-1.00)",
+        "coda deletion: l deleted (-0.75)",
+        "coda deletion: t̚ deleted (-0.75)"
+      ]
+    },
+    "feedback_report": {
+      "summary_level": "excellent",
+      "headline": "전체적으로 기준 발음과 매우 가깝습니다.",
+      "issues": [
+        {
+          "issue_type": "consonant_deletion",
+          "severity": "high",
+          "description": "기준 자음이 약화되거나 빠져서 들렸습니다.",
+          "tip": "문장 속 자음을 흘리지 말고, 시작점에서 짧게 또렷하게 터뜨려 보세요.",
+          "ref_token": "m",
+          "hyp_token": null,
+          "cost": 1.05,
+          "acceptable": false,
+          "debug": {
+            "detail": "m deleted",
+            "feature_penalties": {}
+          }
+        },
+        {
+          "issue_type": "vowel_deletion",
+          "severity": "high",
+          "description": "기준 발음과 다른 구간이 확인되었습니다.",
+          "tip": "해당 구간을 천천히 반복해 기준 발음과의 차이를 줄여 보세요.",
+          "ref_token": "jʌ",
+          "hyp_token": null,
+          "cost": 1.0,
+          "acceptable": false,
+          "debug": {
+            "detail": "jʌ deleted",
+            "feature_penalties": {}
+          }
+        },
+        {
+          "issue_type": "vowel_deletion",
+          "severity": "high",
+          "description": "기준 발음과 다른 구간이 확인되었습니다.",
+          "tip": "해당 구간을 천천히 반복해 기준 발음과의 차이를 줄여 보세요.",
+          "ref_token": "i",
+          "hyp_token": null,
+          "cost": 1.0,
+          "acceptable": false,
+          "debug": {
+            "detail": "i deleted",
+            "feature_penalties": {}
+          }
+        },
+        {
+          "issue_type": "coda_deletion",
+          "severity": "medium",
+          "description": "받침이 약하게 실현되어 거의 들리지 않았습니다.",
+          "tip": "음절 끝을 길게 빼지 말고, 짧게 막아 주는 느낌으로 받침을 마무리해 보세요.",
+          "ref_token": "l",
+          "hyp_token": null,
+          "cost": 0.75,
+          "acceptable": false,
+          "debug": {
+            "detail": "l deleted",
+            "feature_penalties": {}
+          }
+        },
+        {
+          "issue_type": "coda_deletion",
+          "severity": "medium",
+          "description": "받침이 약하게 실현되어 거의 들리지 않았습니다.",
+          "tip": "음절 끝을 길게 빼지 말고, 짧게 막아 주는 느낌으로 받침을 마무리해 보세요.",
+          "ref_token": "t̚",
+          "hyp_token": null,
+          "cost": 0.75,
+          "acceptable": false,
+          "debug": {
+            "detail": "t̚ deleted",
+            "feature_penalties": {}
+          }
+        }
+      ],
+      "tips": [
+        "기준 자음이 약화되거나 빠져서 들렸습니다. 기준 m / 사용자 ∅. 문장 속 자음을 흘리지 말고, 시작점에서 짧게 또렷하게 터뜨려 보세요.",
+        "기준 발음과 다른 구간이 확인되었습니다. 기준 jʌ / 사용자 ∅. 해당 구간을 천천히 반복해 기준 발음과의 차이를 줄여 보세요.",
+        "기준 발음과 다른 구간이 확인되었습니다. 기준 i / 사용자 ∅. 해당 구간을 천천히 반복해 기준 발음과의 차이를 줄여 보세요.",
+        "받침이 약하게 실현되어 거의 들리지 않았습니다. 기준 l / 사용자 ∅. 음절 끝을 길게 빼지 말고, 짧게 막아 주는 느낌으로 받침을 마무리해 보세요.",
+        "받침이 약하게 실현되어 거의 들리지 않았습니다. 기준 t̚ / 사용자 ∅. 음절 끝을 길게 빼지 말고, 짧게 막아 주는 느낌으로 받침을 마무리해 보세요."
+      ],
+      "debug_notes": [
+        "overall=91.67",
+        "consonant=87.85",
+        "vowel=85.75",
+        "coda=100.00",
+        "consonant deletion: m deleted (-1.05)",
+        "vowel deletion: jʌ deleted (-1.00)",
+        "vowel deletion: i deleted (-1.00)",
+        "coda deletion: l deleted (-0.75)",
+        "coda deletion: t̚ deleted (-0.75)"
+      ]
+    }
+  },
+  "llm_feedback_input": {
+    "reference_text": "경찰이 잡은 도둑은 키가 크고 말랐어요.",
+    "reference_pronunciation": "경찰이 잡은 도둑은 키가 크고 말랐어요.",
+    "reference_ipa": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo",
+    "user_ipa": "k ŋ tɕʰ a ɾ tɕ a p ɯ n t o t o k ɯ n k i k a k ɯ k o a ɾ a ʌ jo",
+    "status": "ready",
+    "status_message": "음질, 문장 유사도, forced alignment 신뢰도를 모두 통과했습니다.",
+    "score_breakdown": {
+      "overall": 91.66804157729749,
+      "consonant": 87.85087719298245,
+      "vowel": 85.75,
+      "coda": 100.0,
+      "fluency_like": 91.66804157729749,
+      "raw_cost": 5.05,
+      "max_cost": 60.610000000000056,
+      "penalty_summary": [
+        "consonant deletion: m deleted (-1.05)",
+        "vowel deletion: jʌ deleted (-1.00)",
+        "vowel deletion: i deleted (-1.00)",
+        "coda deletion: l deleted (-0.75)",
+        "coda deletion: t̚ deleted (-0.75)"
+      ]
+    },
+    "gate_summary": {
+      "audio_quality_gate": {
+        "performed": true,
+        "passed": true,
+        "report": {
+          "passed": true,
+          "duration_sec": 5.5466875,
+          "rms_db": -21.656906507732344,
+          "silence_ratio": 0.46402877697841727,
+          "clipping_ratio": 1.1267986523488118e-05,
+          "reasons": []
+        }
+      },
+      "coarse_token_alignment_gate": {
+        "performed": true,
+        "passed": true,
+        "normalized_score": 91.66804157729749
+      },
+      "alignment_confidence_gate": {
+        "performed": true,
+        "passed": true,
+        "report": {
+          "passed": true,
+          "avg_token_confidence": 0.3215008568892311,
+          "coverage": 1.0,
+          "normalized_log_prob": -0.24639629240200767,
+          "message": "forced alignment를 신뢰할 수 있습니다."
+        }
+      }
+    },
+    "mismatches": [
+      {
+        "ref": "jʌ",
+        "hyp": "∅",
+        "cost": 1.0,
+        "error_type": "vowel deletion",
+        "detail": "jʌ deleted"
+      },
+      {
+        "ref": "l",
+        "hyp": "ɾ",
+        "cost": 0.09999999999999998,
+        "error_type": "liquid realization issue",
+        "detail": "l -> ɾ"
+      },
+      {
+        "ref": "i",
+        "hyp": "∅",
+        "cost": 1.0,
+        "error_type": "vowel deletion",
+        "detail": "i deleted"
+      },
+      {
+        "ref": "u",
+        "hyp": "o",
+        "cost": 0.28,
+        "error_type": "vowel confusion",
+        "detail": "u -> o"
+      },
+      {
+        "ref": "kʰ",
+        "hyp": "k",
+        "cost": 0.06,
+        "error_type": "laryngeal contrast confusion",
+        "detail": "kʰ -> k"
+      },
+      {
+        "ref": "kʰ",
+        "hyp": "k",
+        "cost": 0.06,
+        "error_type": "laryngeal contrast confusion",
+        "detail": "kʰ -> k"
+      },
+      {
+        "ref": "m",
+        "hyp": "∅",
+        "cost": 1.05,
+        "error_type": "consonant deletion",
+        "detail": "m deleted"
+      },
+      {
+        "ref": "l",
+        "hyp": "∅",
+        "cost": 0.75,
+        "error_type": "coda deletion",
+        "detail": "l deleted"
+      },
+      {
+        "ref": "t̚",
+        "hyp": "∅",
+        "cost": 0.75,
+        "error_type": "coda deletion",
+        "detail": "t̚ deleted"
+      }
+    ],
+    "issues": [
+      {
+        "issue_type": "consonant_deletion",
+        "severity": "high",
+        "description": "기준 자음이 약화되거나 빠져서 들렸습니다.",
+        "tip": "문장 속 자음을 흘리지 말고, 시작점에서 짧게 또렷하게 터뜨려 보세요.",
+        "ref_token": "m",
+        "hyp_token": null,
+        "cost": 1.05,
+        "acceptable": false,
+        "debug": {
+          "detail": "m deleted",
+          "feature_penalties": {}
+        }
+      },
+      {
+        "issue_type": "vowel_deletion",
+        "severity": "high",
+        "description": "기준 발음과 다른 구간이 확인되었습니다.",
+        "tip": "해당 구간을 천천히 반복해 기준 발음과의 차이를 줄여 보세요.",
+        "ref_token": "jʌ",
+        "hyp_token": null,
+        "cost": 1.0,
+        "acceptable": false,
+        "debug": {
+          "detail": "jʌ deleted",
+          "feature_penalties": {}
+        }
+      },
+      {
+        "issue_type": "vowel_deletion",
+        "severity": "high",
+        "description": "기준 발음과 다른 구간이 확인되었습니다.",
+        "tip": "해당 구간을 천천히 반복해 기준 발음과의 차이를 줄여 보세요.",
+        "ref_token": "i",
+        "hyp_token": null,
+        "cost": 1.0,
+        "acceptable": false,
+        "debug": {
+          "detail": "i deleted",
+          "feature_penalties": {}
+        }
+      },
+      {
+        "issue_type": "coda_deletion",
+        "severity": "medium",
+        "description": "받침이 약하게 실현되어 거의 들리지 않았습니다.",
+        "tip": "음절 끝을 길게 빼지 말고, 짧게 막아 주는 느낌으로 받침을 마무리해 보세요.",
+        "ref_token": "l",
+        "hyp_token": null,
+        "cost": 0.75,
+        "acceptable": false,
+        "debug": {
+          "detail": "l deleted",
+          "feature_penalties": {}
+        }
+      },
+      {
+        "issue_type": "coda_deletion",
+        "severity": "medium",
+        "description": "받침이 약하게 실현되어 거의 들리지 않았습니다.",
+        "tip": "음절 끝을 길게 빼지 말고, 짧게 막아 주는 느낌으로 받침을 마무리해 보세요.",
+        "ref_token": "t̚",
+        "hyp_token": null,
+        "cost": 0.75,
+        "acceptable": false,
+        "debug": {
+          "detail": "t̚ deleted",
+          "feature_penalties": {}
+        }
+      }
+    ]
+  },
+  "prosody_input": {
+    "reference_text": "경찰이 잡은 도둑은 키가 크고 말랐어요.",
+    "selected_reference_pronunciation": "경찰이 잡은 도둑은 키가 크고 말랐어요.",
+    "selected_reference_ipa": "k jʌ ŋ tɕʰ a l i tɕ a p̚ ɯ n t o t u k̚ ɯ n kʰ i k a kʰ ɯ k o m a l ɾ a t̚ ʌ jo",
+    "gate_summary": {
+      "audio_quality_gate": {
+        "performed": true,
+        "passed": true,
+        "report": {
+          "passed": true,
+          "duration_sec": 5.5466875,
+          "rms_db": -21.656906507732344,
+          "silence_ratio": 0.46402877697841727,
+          "clipping_ratio": 1.1267986523488118e-05,
+          "reasons": []
+        }
+      },
+      "coarse_token_alignment_gate": {
+        "performed": true,
+        "passed": true,
+        "normalized_score": 91.66804157729749
+      },
+      "alignment_confidence_gate": {
+        "performed": true,
+        "passed": true,
+        "report": {
+          "passed": true,
+          "avg_token_confidence": 0.3215008568892311,
+          "coverage": 1.0,
+          "normalized_log_prob": -0.24639629240200767,
+          "message": "forced alignment를 신뢰할 수 있습니다."
+        }
+      }
+    },
+    "phoneme_segments": [
+      {
+        "token": "k",
+        "label": "G",
+        "start_time": 0.5024173460144928,
+        "end_time": 0.5225140398550725,
+        "duration": 0.02009669384057966,
+        "frame_start": 25,
+        "frame_end": 25,
+        "confidence": 0.3990260028620698
+      },
+      {
+        "token": "jʌ",
+        "label": "iEO",
+        "start_time": 0.5828041213768116,
+        "end_time": 0.6029008152173913,
+        "duration": 0.02009669384057966,
+        "frame_start": 29,
+        "frame_end": 29,
+        "confidence": 0.2268399137024193
+      },
+      {
+        "token": "ŋ",
+        "label": "NG",
+        "start_time": 0.6631908967391305,
+        "end_time": 0.6832875905797102,
+        "duration": 0.02009669384057977,
+        "frame_start": 33,
+        "frame_end": 33,
+        "confidence": 0.5832553939860665
+      },
+      {
+        "token": "tɕʰ",
+        "label": "CHh",
+        "start_time": 0.9043512228260869,
+        "end_time": 0.9244479166666667,
+        "duration": 0.02009669384057977,
+        "frame_start": 45,
+        "frame_end": 45,
+        "confidence": 0.33584838257153227
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 1.0249313858695652,
+        "end_time": 1.045028079710145,
+        "duration": 0.02009669384057977,
+        "frame_start": 51,
+        "frame_end": 51,
+        "confidence": 0.5209730327607601
+      },
+      {
+        "token": "l",
+        "label": "L",
+        "start_time": 1.105318161231884,
+        "end_time": 1.1254148550724639,
+        "duration": 0.02009669384057977,
+        "frame_start": 55,
+        "frame_end": 55,
+        "confidence": 0.01871288976983876
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 1.1656082427536232,
+        "end_time": 1.185704936594203,
+        "duration": 0.02009669384057977,
+        "frame_start": 58,
+        "frame_end": 58,
+        "confidence": 0.16138535198525228
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 1.3665751811594204,
+        "end_time": 1.386671875,
+        "duration": 0.02009669384057955,
+        "frame_start": 68,
+        "frame_end": 68,
+        "confidence": 0.46593422702856496
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 1.4670586503623189,
+        "end_time": 1.4871553442028986,
+        "duration": 0.02009669384057977,
+        "frame_start": 73,
+        "frame_end": 73,
+        "confidence": 0.4620544033902356
+      },
+      {
+        "token": "p̚",
+        "label": "p",
+        "start_time": 1.587638813405797,
+        "end_time": 1.6077355072463768,
+        "duration": 0.02009669384057977,
+        "frame_start": 79,
+        "frame_end": 79,
+        "confidence": 0.0009170879770493774
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 1.6278322010869564,
+        "end_time": 1.6479288949275361,
+        "duration": 0.02009669384057977,
+        "frame_start": 81,
+        "frame_end": 81,
+        "confidence": 0.5488247041613581
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 1.7283156702898552,
+        "end_time": 1.7484123641304348,
+        "duration": 0.02009669384057955,
+        "frame_start": 86,
+        "frame_end": 86,
+        "confidence": 0.5871789319994043
+      },
+      {
+        "token": "t",
+        "label": "D",
+        "start_time": 1.8488958333333334,
+        "end_time": 1.868992527173913,
+        "duration": 0.02009669384057955,
+        "frame_start": 92,
+        "frame_end": 92,
+        "confidence": 0.3413547082997048
+      },
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 1.889089221014493,
+        "end_time": 1.9091859148550725,
+        "duration": 0.02009669384057955,
+        "frame_start": 94,
+        "frame_end": 94,
+        "confidence": 0.3561903066638749
+      },
+      {
+        "token": "t",
+        "label": "D",
+        "start_time": 2.0096693840579714,
+        "end_time": 2.0297660778985507,
+        "duration": 0.020096693840579327,
+        "frame_start": 100,
+        "frame_end": 100,
+        "confidence": 0.35026820692566113
+      },
+      {
+        "token": "u",
+        "label": "U",
+        "start_time": 2.0498627717391305,
+        "end_time": 2.0699594655797102,
+        "duration": 0.02009669384057977,
+        "frame_start": 102,
+        "frame_end": 102,
+        "confidence": 0.0867108550255398
+      },
+      {
+        "token": "k̚",
+        "label": "k",
+        "start_time": 2.1704429347826086,
+        "end_time": 2.1905396286231884,
+        "duration": 0.02009669384057977,
+        "frame_start": 108,
+        "frame_end": 108,
+        "confidence": 0.0022960373935266916
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 2.2307330163043475,
+        "end_time": 2.2508297101449277,
+        "duration": 0.020096693840580215,
+        "frame_start": 111,
+        "frame_end": 111,
+        "confidence": 0.45268681963091023
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 2.351313179347826,
+        "end_time": 2.371409873188406,
+        "duration": 0.02009669384057977,
+        "frame_start": 117,
+        "frame_end": 117,
+        "confidence": 0.5893446305031822
+      },
+      {
+        "token": "kʰ",
+        "label": "Kh",
+        "start_time": 2.8135371376811595,
+        "end_time": 2.833633831521739,
+        "duration": 0.020096693840579327,
+        "frame_start": 140,
+        "frame_end": 140,
+        "confidence": 0.008824704887407978
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 2.893923913043478,
+        "end_time": 2.914020606884058,
+        "duration": 0.02009669384057977,
+        "frame_start": 144,
+        "frame_end": 144,
+        "confidence": 0.5149116969180838
+      },
+      {
+        "token": "k",
+        "label": "G",
+        "start_time": 2.9944073822463766,
+        "end_time": 3.0145040760869564,
+        "duration": 0.02009669384057977,
+        "frame_start": 149,
+        "frame_end": 149,
+        "confidence": 0.3779311673860613
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 3.054697463768116,
+        "end_time": 3.0747941576086957,
+        "duration": 0.02009669384057977,
+        "frame_start": 152,
+        "frame_end": 152,
+        "confidence": 0.5612003171946681
+      },
+      {
+        "token": "kʰ",
+        "label": "Kh",
+        "start_time": 3.2154710144927536,
+        "end_time": 3.2355677083333334,
+        "duration": 0.02009669384057977,
+        "frame_start": 160,
+        "frame_end": 160,
+        "confidence": 0.0634292756702826
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 3.275761096014493,
+        "end_time": 3.2958577898550723,
+        "duration": 0.020096693840579327,
+        "frame_start": 163,
+        "frame_end": 163,
+        "confidence": 0.41975632453359063
+      },
+      {
+        "token": "k",
+        "label": "G",
+        "start_time": 3.4164379528985505,
+        "end_time": 3.4365346467391302,
+        "duration": 0.02009669384057977,
+        "frame_start": 170,
+        "frame_end": 170,
+        "confidence": 0.3621245290902281
+      },
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 3.4566313405797104,
+        "end_time": 3.4767280344202898,
+        "duration": 0.020096693840579327,
+        "frame_start": 172,
+        "frame_end": 172,
+        "confidence": 0.26715010528625305
+      },
+      {
+        "token": "m",
+        "label": "M",
+        "start_time": 3.858565217391304,
+        "end_time": 3.878661911231884,
+        "duration": 0.02009669384057977,
+        "frame_start": 192,
+        "frame_end": 192,
+        "confidence": 0.1913573095087201
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 3.959048686594203,
+        "end_time": 3.9791453804347823,
+        "duration": 0.020096693840579327,
+        "frame_start": 197,
+        "frame_end": 197,
+        "confidence": 0.3786663685207438
+      },
+      {
+        "token": "l",
+        "label": "L",
+        "start_time": 3.999242074275362,
+        "end_time": 4.019338768115943,
+        "duration": 0.02009669384058066,
+        "frame_start": 199,
+        "frame_end": 199,
+        "confidence": 0.234892935102475
+      },
+      {
+        "token": "ɾ",
+        "label": "R",
+        "start_time": 4.079628849637681,
+        "end_time": 4.099725543478261,
+        "duration": 0.020096693840580215,
+        "frame_start": 203,
+        "frame_end": 203,
+        "confidence": 0.30305797464709616
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 4.1399189311594204,
+        "end_time": 4.160015625,
+        "duration": 0.020096693840579327,
+        "frame_start": 206,
+        "frame_end": 206,
+        "confidence": 0.4302982807686857
+      },
+      {
+        "token": "t̚",
+        "label": "t",
+        "start_time": 4.240402400362319,
+        "end_time": 4.260499094202899,
+        "duration": 0.020096693840580215,
+        "frame_start": 211,
+        "frame_end": 211,
+        "confidence": 0.004282927883399427
+      },
+      {
+        "token": "ʌ",
+        "label": "EO",
+        "start_time": 4.441369338768116,
+        "end_time": 4.461466032608695,
+        "duration": 0.020096693840579327,
+        "frame_start": 221,
+        "frame_end": 221,
+        "confidence": 0.3546560906944635
+      },
+      {
+        "token": "jo",
+        "label": "iO",
+        "start_time": 5.5466875,
+        "end_time": 5.566784193840579,
+        "duration": 0.020096693840579327,
+        "frame_start": 276,
+        "frame_end": 276,
+        "confidence": 0.29018809639397736
+      }
+    ],
+    "alignment_confidence": {
+      "passed": true,
+      "avg_token_confidence": 0.3215008568892311,
+      "coverage": 1.0,
+      "normalized_log_prob": -0.24639629240200767,
+      "message": "forced alignment를 신뢰할 수 있습니다."
+    }
+  },
+  "debug": {
+    "coarse_similarity": 91.66804157729749,
+    "coarse_similarity_threshold": 25.0,
+    "raw_label_text": "G NG CHh A R J A B EU N D O D O G EU N G I G A G EU G O A R A EO iO",
+    "raw_labels": [
+      "G",
+      "NG",
+      "CHh",
+      "A",
+      "R",
+      "J",
+      "A",
+      "B",
+      "EU",
+      "N",
+      "D",
+      "O",
+      "D",
+      "O",
+      "G",
+      "EU",
+      "N",
+      "G",
+      "I",
+      "G",
+      "A",
+      "G",
+      "EU",
+      "G",
+      "O",
+      "A",
+      "R",
+      "A",
+      "EO",
+      "iO"
+    ],
+    "frame_confidence_preview": [
+      0.9503748416900635,
+      0.9662356972694397,
+      0.9748084545135498,
+      0.9780939221382141,
+      0.9707287549972534,
+      0.9838966131210327,
+      0.9845898151397705,
+      0.9801586866378784,
+      0.9856199026107788,
+      0.9733659625053406
+    ],
+    "frame_timestamp_preview": [
+      0.0,
+      0.02009669384057971,
+      0.04019338768115942,
+      0.060290081521739126,
+      0.08038677536231884,
+      0.10048346920289855,
+      0.12058016304347825,
+      0.14067685688405798,
+      0.16077355072463767,
+      0.1808702445652174
+    ],
+    "selected_candidate_notes": [
+      "대표 표준 발음형"
+    ]
+  }
+}

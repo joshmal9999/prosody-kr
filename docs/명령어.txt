@@ -1,0 +1,33 @@
+cd C:\OSYSTUDY\260406\korean_ipa_pron_eval_streamlit
+py -3.11 -m venv .venv
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+.\.venv\Scripts\Activate.ps1
+
+python -m pip install --upgrade pip setuptools wheel
+winget uninstall -e --id espeak.espeak
+winget uninstall -e --id eSpeak-NG.eSpeak-NG
+winget install -e --id eSpeak-NG.eSpeak-NG --accept-package-agreements --accept-source-agreements
+
+Get-ChildItem "C:\Program Files", "C:\Program Files (x86)" -Recurse -Include espeak.exe,espeak-ng.exe -ErrorAction SilentlyContinue | Select-Object FullName
+$env:Path = "C:\Program Files\eSpeak NG;$env:Path"
+espeak-ng --version
+[Environment]::SetEnvironmentVariable(
+  "Path",
+  "$($exe.DirectoryName);" + [Environment]::GetEnvironmentVariable("Path","User"),
+  "User"
+)
+Get-ChildItem "C:\Program Files\eSpeak NG" -Recurse -Include libespeak-ng.dll,*.dll | Select-Object FullName
+$env:PHONEMIZER_ESPEAK_LIBRARY = "C:\Program Files\eSpeak NG\libespeak-ng.dll"
+
+pip install torch torchvision torchaudio
+pip install -r requirements.txt
+python -m pip install --upgrade streamlit
+
+winget install EclipseAdoptium.Temurin.17.JDK
+java -version
+$env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot"
+$env:Path = "$env:JAVA_HOME\bin;$env:Path"
+Test-Path "$env:JAVA_HOME\bin\server\jvm.dll"
+
+$env:PYTHONUTF8="1"
+streamlit run app.py

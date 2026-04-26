@@ -1,0 +1,11 @@
+streamlit==1.39.0
+transformers==4.44.1
+huggingface_hub==0.24.6
+tokenizers==0.19.1
+torch
+torchaudio
+librosa==0.10.2.post1
+soundfile==0.12.1
+numpy==1.26.4
+regex==2024.11.6
+IPAkor==2.8.1
