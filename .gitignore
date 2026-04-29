@@ -23,3 +23,6 @@ build/
 *.pt
 *.bin
 *.safetensors
+
+# Claude.md
+claude.md

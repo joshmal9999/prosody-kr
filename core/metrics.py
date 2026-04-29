@@ -1,34 +1,59 @@
 import numpy as np
 from dataclasses import dataclass
+from core.comparator import SyllableComparison
 
 
 @dataclass
-class SyllableRMSE:
+class SyllableMetrics:
     syllable_idx: int
-    t_start: float
-    t_end: float
-    rmse: float           # voiced frame 없으면 nan
+    rmse: float
+    pearson: float          # nan if voiced_count < 5
+    slope_diff: float       # native_slope - learner_slope, nan if voiced_count < 3
     voiced_frame_count: int
+    duration_ratio: float   # learner_duration / native_duration
 
 
-def rmse_by_syllable(
-    aligned_native: np.ndarray,
-    aligned_learner: np.ndarray,
-    learner_indices: np.ndarray,
-    voiced_mask: np.ndarray,
-    learner_times: np.ndarray,
-    syllable_boundaries: list[tuple[float, float]],  # [(t_start, t_end), ...]
-) -> list[SyllableRMSE]:
+def compute_metrics(comparisons: list[SyllableComparison]) -> list[SyllableMetrics]:
     results = []
-    learner_times_aligned = learner_times[learner_indices]
+    for c in comparisons:
+        v = c.voiced_mask
+        count = int(v.sum())
+        duration_ratio = (
+            c.learner_duration / c.native_duration if c.native_duration > 0 else float("nan")
+        )
 
-    for idx, (t_start, t_end) in enumerate(syllable_boundaries):
-        in_syllable = (learner_times_aligned >= t_start) & (learner_times_aligned < t_end)
-        mask = in_syllable & voiced_mask
-        count = int(mask.sum())
         if count == 0:
-            results.append(SyllableRMSE(idx, t_start, t_end, float("nan"), 0))
+            results.append(SyllableMetrics(
+                syllable_idx=c.syllable_idx,
+                rmse=float("nan"),
+                pearson=float("nan"),
+                slope_diff=float("nan"),
+                voiced_frame_count=0,
+                duration_ratio=duration_ratio,
+            ))
             continue
-        rmse = float(np.sqrt(np.mean((aligned_native[mask] - aligned_learner[mask]) ** 2)))
-        results.append(SyllableRMSE(idx, t_start, t_end, rmse, count))
+
+        native_v = c.native_f0[v]
+        learner_v = c.learner_f0[v]
+
+        rmse = float(np.sqrt(np.mean((native_v - learner_v) ** 2)))
+
+        pearson = float(np.corrcoef(native_v, learner_v)[0, 1]) if count >= 5 else float("nan")
+
+        if count >= 3:
+            positions = np.where(v)[0].astype(float)
+            native_slope = float(np.polyfit(positions, native_v, 1)[0])
+            learner_slope = float(np.polyfit(positions, learner_v, 1)[0])
+            slope_diff = native_slope - learner_slope
+        else:
+            slope_diff = float("nan")
+
+        results.append(SyllableMetrics(
+            syllable_idx=c.syllable_idx,
+            rmse=rmse,
+            pearson=pearson,
+            slope_diff=slope_diff,
+            voiced_frame_count=count,
+            duration_ratio=duration_ratio,
+        ))
     return results

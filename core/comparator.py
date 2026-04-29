@@ -1,35 +1,63 @@
 import numpy as np
 from dataclasses import dataclass
-from dtaidistance import dtw
-from core.f0_extractor import extract_f0
+from core.f0_extractor import extract_f0, F0Result
 
 
 @dataclass
-class ComparisonResult:
-    aligned_native: np.ndarray
-    aligned_learner: np.ndarray
-    native_indices: np.ndarray    # DTW 각 위치의 원본 native 프레임 인덱스
-    learner_indices: np.ndarray   # DTW 각 위치의 원본 learner 프레임 인덱스
-    voiced_mask: np.ndarray       # 양쪽 모두 voiced인 DTW 위치
-    native_times: np.ndarray      # native 원본 시간 배열 (음절 경계 매핑용)
-    learner_times: np.ndarray     # learner 원본 시간 배열 (플롯 등 참고용)
+class SyllableComparison:
+    syllable_idx: int
+    native_f0: np.ndarray      # (n_frames,) resampled z-score, 0 where unvoiced
+    learner_f0: np.ndarray     # (n_frames,) resampled z-score, 0 where unvoiced
+    voiced_mask: np.ndarray    # (n_frames,) bool: both voiced
+    native_duration: float     # seconds
+    learner_duration: float    # seconds
 
 
 class IntonationComparator:
-    def compare(self, native_path: str, learner_path: str) -> ComparisonResult:
+    def compare(
+        self,
+        native_path: str,
+        learner_path: str,
+        native_boundaries: list[tuple[float, float]],
+        learner_boundaries: list[tuple[float, float]],
+        n_frames: int = 50,
+    ) -> list[SyllableComparison]:
         native = extract_f0(native_path)
         learner = extract_f0(learner_path)
 
-        path = dtw.warping_path(native.f0, learner.f0)
-        native_idx = np.array([i for i, j in path])
-        learner_idx = np.array([j for i, j in path])
+        results = []
+        for idx, ((n_start, n_end), (l_start, l_end)) in enumerate(
+            zip(native_boundaries, learner_boundaries)
+        ):
+            native_f0, native_voiced = self._resample_syllable(native, n_start, n_end, n_frames)
+            learner_f0, learner_voiced = self._resample_syllable(learner, l_start, l_end, n_frames)
 
-        return ComparisonResult(
-            aligned_native=native.f0[native_idx],
-            aligned_learner=learner.f0[learner_idx],
-            native_indices=native_idx,
-            learner_indices=learner_idx,
-            voiced_mask=native.voiced_mask[native_idx] & learner.voiced_mask[learner_idx],
-            native_times=native.times,
-            learner_times=learner.times,
-        )
+            results.append(SyllableComparison(
+                syllable_idx=idx,
+                native_f0=native_f0,
+                learner_f0=learner_f0,
+                voiced_mask=native_voiced & learner_voiced,
+                native_duration=n_end - n_start,
+                learner_duration=l_end - l_start,
+            ))
+        return results
+
+    def _resample_syllable(
+        self,
+        f0_result: F0Result,
+        t_start: float,
+        t_end: float,
+        n_frames: int,
+    ) -> tuple[np.ndarray, np.ndarray]:
+        mask = (f0_result.times >= t_start) & (f0_result.times < t_end)
+        f0 = f0_result.f0[mask]
+        voiced = f0_result.voiced_mask[mask]
+
+        if len(f0) == 0:
+            return np.zeros(n_frames), np.zeros(n_frames, dtype=bool)
+
+        src = np.linspace(0, n_frames - 1, len(f0))
+        dst = np.arange(n_frames, dtype=float)
+        resampled_f0 = np.interp(dst, src, f0)
+        resampled_voiced = np.interp(dst, src, voiced.astype(float)) > 0.5
+        return resampled_f0, resampled_voiced
