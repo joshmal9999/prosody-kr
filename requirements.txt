@@ -9,3 +9,11 @@ soundfile==0.12.1
 numpy==1.26.4
 regex==2024.11.6
 IPAkor==2.8.1
+
+# core/ 억양 분석
+praat-parselmouth
+dtaidistance
+pandas
+
+# 개발/테스트
+pytest
