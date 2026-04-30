@@ -1,30 +1,29 @@
+from __future__ import annotations
+
 import numpy as np
 from dataclasses import dataclass
-from core.f0_extractor import extract_f0, F0Result
+from core.f0_extractor import F0Result
 
 
 @dataclass
 class SyllableComparison:
     syllable_idx: int
-    native_f0: np.ndarray      # (n_frames,) resampled z-score, 0 where unvoiced
-    learner_f0: np.ndarray     # (n_frames,) resampled z-score, 0 where unvoiced
-    voiced_mask: np.ndarray    # (n_frames,) bool: both voiced
-    native_duration: float     # seconds
-    learner_duration: float    # seconds
+    native_f0: np.ndarray        # (n_frames,) resampled z-score, 0 where unvoiced
+    learner_f0: np.ndarray       # (n_frames,) resampled z-score, 0 where unvoiced
+    joint_voiced_mask: np.ndarray  # (n_frames,) bool: native AND learner both voiced
+    native_duration: float       # seconds
+    learner_duration: float      # seconds
 
 
 class IntonationComparator:
     def compare(
         self,
-        native_path: str,
-        learner_path: str,
+        native: F0Result,
+        learner: F0Result,
         native_boundaries: list[tuple[float, float]],
         learner_boundaries: list[tuple[float, float]],
         n_frames: int = 50,
     ) -> list[SyllableComparison]:
-        native = extract_f0(native_path)
-        learner = extract_f0(learner_path)
-
         results = []
         for idx, ((n_start, n_end), (l_start, l_end)) in enumerate(
             zip(native_boundaries, learner_boundaries)
@@ -36,7 +35,7 @@ class IntonationComparator:
                 syllable_idx=idx,
                 native_f0=native_f0,
                 learner_f0=learner_f0,
-                voiced_mask=native_voiced & learner_voiced,
+                joint_voiced_mask=native_voiced & learner_voiced,
                 native_duration=n_end - n_start,
                 learner_duration=l_end - l_start,
             ))

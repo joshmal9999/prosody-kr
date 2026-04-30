@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+import math
+
 import numpy as np
 from dataclasses import dataclass
 from core.comparator import SyllableComparison
@@ -16,7 +20,7 @@ class SyllableMetrics:
 def compute_metrics(comparisons: list[SyllableComparison]) -> list[SyllableMetrics]:
     results = []
     for c in comparisons:
-        v = c.voiced_mask
+        v = c.joint_voiced_mask
         count = int(v.sum())
         duration_ratio = (
             c.learner_duration / c.native_duration if c.native_duration > 0 else float("nan")
@@ -57,3 +61,29 @@ def compute_metrics(comparisons: list[SyllableComparison]) -> list[SyllableMetri
             duration_ratio=duration_ratio,
         ))
     return results
+
+
+def _nan_to_none(v: float) -> float | None:
+    return None if math.isnan(v) else v
+
+
+def to_dict(
+    comparisons: list[SyllableComparison],
+    metrics: list[SyllableMetrics],
+) -> list[dict]:
+    return [
+        {
+            "syllable_idx": m.syllable_idx,
+            "native_f0": c.native_f0.tolist(),
+            "learner_f0": c.learner_f0.tolist(),
+            "joint_voiced_mask": c.joint_voiced_mask.tolist(),
+            "native_duration": c.native_duration,
+            "learner_duration": c.learner_duration,
+            "rmse": _nan_to_none(m.rmse),
+            "pearson": _nan_to_none(m.pearson),
+            "slope_diff": _nan_to_none(m.slope_diff),
+            "voiced_frame_count": m.voiced_frame_count,
+            "duration_ratio": _nan_to_none(m.duration_ratio),
+        }
+        for c, m in zip(comparisons, metrics)
+    ]

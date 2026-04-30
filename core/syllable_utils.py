@@ -29,7 +29,14 @@ def segments_to_syllable_boundaries(
         prev_nuc_idx = nucleus_indices[k - 1] if k > 0 else -1
         onset_start_idx = prev_nuc_idx + 1
         t_start = segments[onset_start_idx]["start_time"]
-        t_end = segments[nuc_idx]["end_time"]
+
+        # 마지막 음절은 마지막 segment 끝까지, 나머지는 다음 음절 onset 시작까지
+        if k < len(nucleus_indices) - 1:
+            next_onset_idx = nuc_idx + 1
+            t_end = segments[next_onset_idx]["start_time"]
+        else:
+            t_end = segments[-1]["end_time"]
+
         boundaries.append((t_start, t_end))
 
     return boundaries

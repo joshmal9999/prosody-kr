@@ -1,7 +1,10 @@
-"""native/learner wav 모두에 대해 forced alignment를 실행하고 prosody_input JSON을 생성한다.
+"""artifact JSON을 기반으로 native(TTS) forced alignment를 실행하고
+prosody 비교용 JSON을 생성한다.
 
 Usage:
-    python3 scripts/make_intonation_json.py
+    python3 scripts/make_intonation_json.py [artifact_json_path]
+
+    artifact_json_path 미지정 시 DEFAULT_ARTIFACT 사용.
 """
 from __future__ import annotations
 
@@ -12,16 +15,17 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from core.tts import generate_tts
 from src.audio_to_ipa import AudioToIPARecognizer
 from src.forced_alignment import force_align_candidate
 from src.korean_ipa import pronunciation_to_ipa
 from src.recognition import recognize_audio
 from src.types import PronunciationCandidate
 
-TEXT = "시간이 멈춘 것 같았습니다"
-NATIVE_WAV = Path("data/intonation_01_correct.wav")
-LEARNER_WAV = Path("data/intonation_01_error.wav")
-OUT_JSON = Path("artifacts/intonation_01/intonation_01.json")
+TTS_CACHE_DIR = Path("artifacts/tts_cache")
+DEFAULT_ARTIFACT = Path(
+    "artifacts/20260421_220712_176144/20260421_220712_176144.json"
+)
 
 
 def _run_forced_alignment(
@@ -43,31 +47,54 @@ def _run_forced_alignment(
     )
 
 
-def main() -> None:
+def main(artifact_json: Path = DEFAULT_ARTIFACT) -> None:
+    with open(artifact_json, encoding="utf-8") as f:
+        artifact = json.load(f)
+
+    text = artifact["reference"]["text"]
+    artifact_dir = artifact_json.parent
+    learner_wav = artifact_dir / artifact["artifact_bundle"]["audio_file_name"]
+    learner_segments = artifact["prosody_input"]["phoneme_segments"]
+
+    print(f"reference text: {text!r}")
+    print(f"learner wav: {learner_wav}")
+    print(f"learner segments: {len(learner_segments)}개")
+
+    print(f"\nTTS 생성 중...")
+    native_wav = generate_tts(text, cache_dir=TTS_CACHE_DIR)
+    print(f"native wav: {native_wav}")
+
     print("모델 로딩 중...")
     recognizer = AudioToIPARecognizer()
 
-    print(f"native 정렬 중: {NATIVE_WAV}")
-    native_fa = _run_forced_alignment(recognizer, NATIVE_WAV, TEXT)
+    print("native forced alignment 중 (TTS)...")
+    native_fa = _run_forced_alignment(recognizer, native_wav, text)
 
-    print(f"learner 정렬 중: {LEARNER_WAV}")
-    learner_fa = _run_forced_alignment(recognizer, LEARNER_WAV, TEXT)
+    artifact_id = artifact["artifact_bundle"]["artifact_id"]
+    out_json = artifact_dir / f"{artifact_id}_prosody.json"
+    out_json.parent.mkdir(parents=True, exist_ok=True)
 
-    OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     payload = {
-        "reference_text": TEXT,
+        "artifact_id": artifact_id,
+        "reference_text": text,
         "native": {
+            "wav": str(native_wav),
             "phoneme_segments": [asdict(seg) for seg in native_fa.segments],
         },
         "learner": {
-            "phoneme_segments": [asdict(seg) for seg in learner_fa.segments],
+            "wav": str(learner_wav),
+            "phoneme_segments": learner_segments,
         },
     }
-    with open(OUT_JSON, "w", encoding="utf-8") as f:
+    with open(out_json, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
-    print(f"저장 완료 → {OUT_JSON}  (native {len(native_fa.segments)}seg / learner {len(learner_fa.segments)}seg)")
+    print(
+        f"\n저장 완료 → {out_json}"
+        f"  (native {len(native_fa.segments)}seg / learner {len(learner_segments)}seg)"
+    )
 
 
 if __name__ == "__main__":
-    main()
+    artifact_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_ARTIFACT
+    main(artifact_path)

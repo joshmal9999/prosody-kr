@@ -14,6 +14,8 @@ IPAkor==2.8.1
 praat-parselmouth
 dtaidistance
 pandas
+requests
+google-cloud-texttospeech
 
 # 개발/테스트
 pytest

@@ -8,10 +8,11 @@ import numpy as np
 import pytest
 
 from core.comparator import IntonationComparator, SyllableComparison
-from core.metrics import SyllableMetrics, compute_metrics
+from core.f0_extractor import extract_f0
+from core.metrics import SyllableMetrics, compute_metrics, to_dict
 from core.syllable_utils import _is_vowel, segments_to_syllable_boundaries
 
-ARTIFACT_DIR = Path(__file__).parent.parent / "artifacts" / "intonation_01"
+ARTIFACT_DIR = Path(__file__).parent.parent / "artifacts" / "20260421_220712_176144"
 
 
 # ── syllable_utils ────────────────────────────────────────────────────────────
@@ -75,7 +76,7 @@ def _make_syllable(
         syllable_idx=idx,
         native_f0=native_f0,
         learner_f0=learner_f0,
-        voiced_mask=voiced_mask,
+        joint_voiced_mask=voiced_mask,
         native_duration=native_dur,
         learner_duration=learner_dur,
     )
@@ -120,31 +121,29 @@ class TestComputeMetrics:
 
 # ── segmental alignment 통합 (real audio) ─────────────────────────────────────
 
-INTONATION_NATIVE  = Path(__file__).parent.parent / "data" / "intonation_01_correct.wav"
-INTONATION_LEARNER = Path(__file__).parent.parent / "data" / "intonation_01_error.wav"
-INTONATION_JSON    = ARTIFACT_DIR / "intonation_01.json"
+INTONATION_JSON = ARTIFACT_DIR / "20260421_220712_176144_prosody.json"
 
-_intonation_files_exist = (
-    INTONATION_NATIVE.exists() and INTONATION_LEARNER.exists() and INTONATION_JSON.exists()
-)
+_intonation_files_exist = INTONATION_JSON.exists()
 
 
 @pytest.mark.skipif(
     not _intonation_files_exist,
-    reason="intonation_01 artifact 없음 — scripts/make_intonation_json.py 먼저 실행",
+    reason="prosody JSON 없음",
 )
 class TestIntonationComparison:
-    def _load_boundaries(self):
+    def _load(self):
         with open(INTONATION_JSON) as f:
             data = json.load(f)
+        native_f0 = extract_f0(data["native"]["wav"])
+        learner_f0 = extract_f0(data["learner"]["wav"])
         native_b = segments_to_syllable_boundaries(data["native"]["phoneme_segments"])
         learner_b = segments_to_syllable_boundaries(data["learner"]["phoneme_segments"])
-        return native_b, learner_b
+        return native_f0, learner_f0, native_b, learner_b
 
     def test_voiced_syllables_exist(self):
-        native_b, learner_b = self._load_boundaries()
+        native_f0, learner_f0, native_b, learner_b = self._load()
         comparisons = IntonationComparator().compare(
-            str(INTONATION_NATIVE), str(INTONATION_LEARNER),
+            native_f0, learner_f0,
             native_boundaries=native_b, learner_boundaries=learner_b,
         )
         metrics = compute_metrics(comparisons)
@@ -152,26 +151,45 @@ class TestIntonationComparison:
         assert any(not math.isnan(m.rmse) for m in metrics)
 
     def test_same_audio_gives_zero_rmse(self):
-        native_b, _ = self._load_boundaries()
+        native_f0, _, native_b, _ = self._load()
         comparisons = IntonationComparator().compare(
-            str(INTONATION_NATIVE), str(INTONATION_NATIVE),
+            native_f0, native_f0,
             native_boundaries=native_b, learner_boundaries=native_b,
         )
         for m in compute_metrics(comparisons):
             if not math.isnan(m.rmse):
                 assert m.rmse == pytest.approx(0.0, abs=1e-5)
 
-    def test_plot_native_vs_learner(self):
-        from core.plotter import ComparisonPlotter
-
-        native_b, learner_b = self._load_boundaries()
+    def test_to_dict_is_json_serializable(self):
+        import json as json_mod
+        native_f0, learner_f0, native_b, learner_b = self._load()
         comparisons = IntonationComparator().compare(
-            str(INTONATION_NATIVE), str(INTONATION_LEARNER),
+            native_f0, learner_f0,
             native_boundaries=native_b, learner_boundaries=learner_b,
         )
         metrics = compute_metrics(comparisons)
-        ComparisonPlotter(threshold=1).plot(
-            comparisons, metrics,
-            title="시간이 멈춘 것 같았습니다 — 억양 비교",
-            syllable_labels=list("시간이멈춘것같았습니다"),
+        result = to_dict(comparisons, metrics)
+        json_mod.dumps(result)  # NaN이 있으면 여기서 TypeError 발생
+
+    def test_plot_native_vs_learner(self):
+        import matplotlib.pyplot as plt
+        from core.plotter import ComparisonPlotter
+
+        with open(INTONATION_JSON) as f:
+            data = json.load(f)
+        ref_text = data.get("reference_text", "")
+        syllable_labels = [c for c in ref_text if c.strip() and c not in ".·,!?。"]
+
+        native_f0, learner_f0, native_b, learner_b = self._load()
+        comparisons = IntonationComparator().compare(
+            native_f0, learner_f0,
+            native_boundaries=native_b, learner_boundaries=learner_b,
         )
+        metrics = compute_metrics(comparisons)
+        fig = ComparisonPlotter(threshold=1).plot(
+            comparisons, metrics,
+            title=ref_text,
+            syllable_labels=syllable_labels,
+        )
+        plt.show()
+        assert fig is not None

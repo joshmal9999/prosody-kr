@@ -52,7 +52,6 @@ class ComparisonPlotter:
                 rmse_text, color = 'N/A', 'gray'
             elif m.rmse > self.threshold:
                 rmse_text, color = f'R:{m.rmse:.2f}', 'red'
-                print(f"음절 {i}: RMSE={m.rmse:.3f}  Pearson={m.pearson:.2f}  slope_diff={m.slope_diff:.3f}")
             else:
                 rmse_text, color = f'R:{m.rmse:.2f}', 'gray'
 
@@ -74,7 +73,7 @@ class ComparisonPlotter:
 
         if save_path:
             plt.savefig(save_path)
-        plt.show()
+        return fig
 
     def plot_raw_f0(
         self,
@@ -103,4 +102,4 @@ class ComparisonPlotter:
         plt.tight_layout()
         if save_path:
             plt.savefig(save_path)
-        plt.show()
+        return fig
