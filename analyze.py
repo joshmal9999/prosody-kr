@@ -5,42 +5,37 @@
     src/    — AudioToIPARecognizer (Wav2Vec2), forced alignment, Korean IPA 변환
 
 사용법:
+    from pronunciation_backend_pipeline import get_prosody_input
     from analyze import analyze
 
-    results = analyze("artifacts/20260421_220712_176144/20260421_220712_176144.json")
+    prosody_input = get_prosody_input(audio_path, reference_text)
+    results = analyze(prosody_input)
 """
 from __future__ import annotations
 
 import json
 from dataclasses import asdict
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from core.comparator import IntonationComparator
 from core.f0_extractor import extract_f0
 from core.metrics import compute_metrics, to_dict
 from core.syllable_utils import segments_to_syllable_boundaries
 from core.tts import generate_tts
-from src.audio_to_ipa import AudioToIPARecognizer
+from pronunciation_backend_pipeline import get_default_recognizer
 from src.forced_alignment import force_align_candidate
 from src.korean_ipa import pronunciation_to_ipa
 from src.recognition import recognize_audio
 from src.types import PronunciationCandidate
 
+if TYPE_CHECKING:
+    from src.audio_to_ipa import AudioToIPARecognizer
+
 _TTS_CACHE_DIR = Path("artifacts/tts_cache")
 
-# Wav2Vec2 모델은 로딩 비용이 크므로 프로세스 내 싱글톤으로 유지
-_recognizer: AudioToIPARecognizer | None = None
 
-
-def _get_recognizer() -> AudioToIPARecognizer:
-    global _recognizer
-    if _recognizer is None:
-        _recognizer = AudioToIPARecognizer()
-    return _recognizer
-
-
-def _forced_align(wav_path: Path, text: str):
-    recognizer = _get_recognizer()
+def _forced_align(wav_path: Path, text: str, recognizer: AudioToIPARecognizer):
     ipa_seq = pronunciation_to_ipa(text)
     candidate = PronunciationCandidate(pronunciation=text, ipa=ipa_seq, is_primary=True)
     recog = recognize_audio(recognizer, wav_path)
@@ -55,13 +50,22 @@ def _forced_align(wav_path: Path, text: str):
     )
 
 
-def analyze(artifact_json: Path | str) -> list[dict]:
-    """teammate artifact JSON → 음절별 억양 분석 결과.
+def analyze(
+    prosody_input: dict,
+    *,
+    recognizer: AudioToIPARecognizer | None = None,
+) -> list[dict]:
+    """prosody_input dict → 음절별 억양 분석 결과.
 
     Args:
-        artifact_json: 음소분석 파이프라인이 생성한 artifact JSON 경로.
-                       status.evaluation_status == "ready" 조건을 통과한
-                       artifact 여야 합니다.
+        prosody_input: `pronunciation_backend_pipeline.get_prosody_input()` 또는
+                       `build_backend_payload()["prosody_input"]`의 반환값.
+                       반드시 `audio_file_path` 키를 포함해야 한다
+                       (build_backend_payload가 런타임에 주입하는 절대 경로).
+        recognizer:    AudioToIPARecognizer 인스턴스. None이면
+                       get_default_recognizer() 싱글톤을 사용한다.
+                       팀원 파이프라인과 같은 프로세스에서 호출할 때는
+                       None으로 두어 모델 중복 로드를 방지한다.
 
     Returns:
         음절별 dict 리스트. 음절 수 = min(native 음절 수, learner 음절 수).
@@ -71,7 +75,9 @@ def analyze(artifact_json: Path | str) -> list[dict]:
             syllable_idx        (int)          음절 인덱스 (0부터)
             native_f0           (list[float])  50프레임 z-score F0, 무성=0 (원어민 TTS)
             learner_f0          (list[float])  50프레임 z-score F0, 무성=0 (학습자)
-            joint_voiced_mask   (list[bool])   두 화자 모두 유성인 프레임
+            joint_voiced_mask   (list[bool])   두 화자 모두 유성인 프레임.
+                                               False 구간은 프런트엔드에서 반투명/점선 처리
+                                               등으로 "비교 불가 구간"임을 표시하는 데 활용.
             native_duration     (float)        원어민 음절 지속시간 (초)
             learner_duration    (float)        학습자 음절 지속시간 (초)
             rmse                (float|None)   F0 RMSE (z-score 단위); 유성 프레임 없으면 None
@@ -82,13 +88,13 @@ def analyze(artifact_json: Path | str) -> list[dict]:
     """
 
     # ── pipeline 개요 ────────────────────────────────────────────────────────
-    # 음소분석 파이프라인의 artifact JSON은 learner 정보만 담고 있어
+    # 음소분석 파이프라인의 prosody_input은 learner 정보만 담고 있어
     # 억양 비교를 위한 native 기준값이 없다.
     # 이를 보완하기 위해 reference text로 TTS를 합성하고,
     # learner에 적용한 것과 동일한 forced alignment를 native에도 수행하여
     # 양쪽의 음소 경계를 확보한다.
-    # 이 때문에 위에 _get_recognizer, _forced_align 함수는 억양분석 모듈(core)이 아닌
-    # 음소분석 모듈(src)에 의존한다. **주의**
+    # 이 때문에 위에 _forced_align 함수는 억양분석 모듈(core)이 아닌
+    # 음소분석 모듈(src)에 의존한다.
     #
     # 음소 경계 → 음절 경계로 변환한 뒤,
     # z-score 정규화(화자 간 음역대 차이 제거) + segmental alignment(음절 인덱스 1:1 매핑)로
@@ -102,23 +108,20 @@ def analyze(artifact_json: Path | str) -> list[dict]:
     # 시각화와 API 전달에 필요한 모든 feature를 JSON 직렬화 가능한
     # list[dict] 형태로 반환한다.
 
+    _rec = recognizer or get_default_recognizer()
 
-    # ── Step 1. artifact JSON 파싱 ──────────────────────────────────────────
-    # 음소분석 파이프라인 출력물. learner wav 경로와 음소 강제 정렬 결과를 읽는다.
-    artifact_json = Path(artifact_json)
-    with open(artifact_json, encoding="utf-8") as f:
-        artifact = json.load(f)
-
-    text = artifact["reference"]["text"]
-    artifact_dir = artifact_json.parent
-    learner_wav = artifact_dir / artifact["artifact_bundle"]["audio_file_name"]
-    learner_segments = artifact["prosody_input"]["phoneme_segments"]  # src/ forced alignment 결과
+    # ── Step 1. prosody_input 파싱 ───────────────────────────────────────────
+    # 음소분석 파이프라인이 런타임에 주입한 learner wav 절대 경로와
+    # 강제 정렬 결과(phoneme_segments)를 읽는다.
+    text = prosody_input["reference_text"]
+    learner_wav = Path(prosody_input["audio_file_path"])
+    learner_segments = prosody_input["phoneme_segments"]
 
     # ── Step 2. native(TTS) 생성 + forced alignment ──────────────────────────
     # TTS로 원어민 기준 오디오 합성 → Wav2Vec2 CTC로 음소별 시간 경계 추출
     # TTS 결과는 (text, voice, speed) 해시 기반으로 캐시됨 (재호출 비용 없음)
     native_wav = generate_tts(text, cache_dir=_TTS_CACHE_DIR)
-    native_fa = _forced_align(native_wav, text)
+    native_fa = _forced_align(native_wav, text, _rec)
     native_segments = [asdict(seg) for seg in native_fa.segments]
 
     # ── Step 3. F0 추출 + z-score 정규화 ────────────────────────────────────
@@ -152,5 +155,16 @@ if __name__ == "__main__":
     import sys
 
     path = sys.argv[1] if len(sys.argv) > 1 else "artifacts/20260421_220712_176144/20260421_220712_176144.json"
-    results = analyze(path)
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f)
+
+    pi = data["prosody_input"]
+    # audio_file_path는 런타임에 주입되므로 저장된 JSON에는 없을 수 있다.
+    # 없으면 artifact_bundle에서 경로를 복원한다.
+    if "audio_file_path" not in pi:
+        pi["audio_file_path"] = str(
+            Path(path).parent / data["artifact_bundle"]["audio_file_name"]
+        )
+
+    results = analyze(pi)
     print(json.dumps(results, indent=2, ensure_ascii=False))

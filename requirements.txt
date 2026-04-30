@@ -1,3 +1,4 @@
+# src/ 음소 분석
 streamlit==1.39.0
 transformers==4.44.1
 huggingface_hub==0.24.6
@@ -16,6 +17,7 @@ dtaidistance
 pandas
 requests
 google-cloud-texttospeech
+matplotlib
 
 # 개발/테스트
 pytest
