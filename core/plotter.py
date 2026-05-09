@@ -38,7 +38,7 @@ class ComparisonPlotter:
         learner_all = np.concatenate([c.learner_f0 for c in comparisons])
         frames = np.arange(len(native_all))
 
-        fig, ax = plt.subplots(1, 1, figsize=(14, 4))
+        fig, ax = plt.subplots(1, 1, figsize=(30, 10))
         ax.axhline(0, color='black', linestyle='--', alpha=0.5)
         ax.plot(frames, native_all, color=self.NATIVE_COLOR, linewidth=2.5, label=self.native_label)
         ax.plot(frames, learner_all, color=self.LEARNER_COLOR, linewidth=2.5, label=self.learner_label)
@@ -50,16 +50,14 @@ class ComparisonPlotter:
 
             if np.isnan(m.rmse):
                 rmse_text, color = 'N/A', 'gray'
-            elif m.rmse > self.threshold:
-                rmse_text, color = f'R:{m.rmse:.2f}', 'red'
             else:
                 rmse_text, color = f'R:{m.rmse:.2f}', 'gray'
 
-            ax.text(x_mid, 2.7, rmse_text, ha='center', fontsize=8, color=color)
+            ax.text(x_mid, 2.7, rmse_text, ha='center', fontsize=10, color=color)
 
             if not np.isnan(m.pearson):
                 p_color = 'red' if m.pearson < 0.5 else 'gray'
-                ax.text(x_mid, 2.3, f'P:{m.pearson:.2f}', ha='center', fontsize=7, color=p_color)
+                ax.text(x_mid, 2.3, f'P:{m.pearson:.2f}', ha='center', fontsize=10, color=p_color)
 
             if syllable_labels and i < len(syllable_labels):
                 ax.text(x_mid, -3.2, syllable_labels[i], ha='center', fontsize=10, color=color)
