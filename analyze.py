@@ -54,6 +54,7 @@ def analyze(
     prosody_input: dict,
     *,
     recognizer: AudioToIPARecognizer | None = None,
+    tts_cache_dir: str | Path | None = None,
 ) -> list[dict]:
     """prosody_input dict → 음절별 억양 분석 결과.
 
@@ -66,6 +67,9 @@ def analyze(
                        get_default_recognizer() 싱글톤을 사용한다.
                        팀원 파이프라인과 같은 프로세스에서 호출할 때는
                        None으로 두어 모델 중복 로드를 방지한다.
+        tts_cache_dir: TTS WAV 캐시 디렉토리 경로. None이면 기본값
+                       `artifacts/tts_cache`를 사용한다.
+                       프로덕션에서는 절대 경로 또는 공유 스토리지 경로를 전달하라.
 
     Returns:
         음절별 dict 리스트. 음절 수 = min(native 음절 수, learner 음절 수).
@@ -73,6 +77,9 @@ def analyze(
 
         각 dict 필드:
             syllable_idx        (int)          음절 인덱스 (0부터)
+            syllable_label      (str)          해당 음절의 한글 문자 (reference_text 기준)
+            native_start        (float)        원어민 오디오 내 음절 시작 시각 (초)
+            learner_start       (float)        학습자 오디오 내 음절 시작 시각 (초)
             native_f0           (list[float])  50프레임 z-score F0, 무성=0 (원어민 TTS)
             learner_f0          (list[float])  50프레임 z-score F0, 무성=0 (학습자)
             joint_voiced_mask   (list[bool])   두 화자 모두 유성인 프레임.
@@ -109,6 +116,7 @@ def analyze(
     # list[dict] 형태로 반환한다.
 
     _rec = recognizer or get_default_recognizer()
+    _cache_dir = Path(tts_cache_dir) if tts_cache_dir is not None else _TTS_CACHE_DIR
 
     # ── Step 1. prosody_input 파싱 ───────────────────────────────────────────
     # 음소분석 파이프라인이 런타임에 주입한 learner wav 절대 경로와
@@ -120,7 +128,7 @@ def analyze(
     # ── Step 2. native(TTS) 생성 + forced alignment ──────────────────────────
     # TTS로 원어민 기준 오디오 합성 → Wav2Vec2 CTC로 음소별 시간 경계 추출
     # TTS 결과는 (text, voice, speed) 해시 기반으로 캐시됨 (재호출 비용 없음)
-    native_wav = generate_tts(text, cache_dir=_TTS_CACHE_DIR)
+    native_wav = generate_tts(text, cache_dir=_cache_dir)
     native_fa = _forced_align(native_wav, text, _rec)
     native_segments = [asdict(seg) for seg in native_fa.segments]
 
@@ -148,7 +156,20 @@ def analyze(
     # 음절별 RMSE / Pearson / slope_diff / duration_ratio 산출
     # NaN → None 변환으로 JSON 직렬화 보장
     metrics = compute_metrics(comparisons)
-    return to_dict(comparisons, metrics)
+    result = to_dict(comparisons, metrics)
+
+    # ── Step 7. 시각화 보조 필드 주입 ───────────────────────────────────────
+    # syllable_label : reference_text → 공백·구두점 제거 → 음절 단위 한글 문자
+    # native_start   : 원어민 오디오 내 음절 시작 시각 (초) — 시간축 배치용
+    # learner_start  : 학습자 오디오 내 음절 시작 시각 (초) — 시간축 배치용
+    syllable_labels = [c for c in text if c.strip() and c not in ".·,!?。"]
+    for item in result:
+        idx = item["syllable_idx"]
+        item["syllable_label"] = syllable_labels[idx]
+        item["native_start"] = native_boundaries[idx][0]
+        item["learner_start"] = learner_boundaries[idx][0]
+
+    return result
 
 
 if __name__ == "__main__":
