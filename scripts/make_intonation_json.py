@@ -22,7 +22,7 @@ from src.korean_ipa import pronunciation_to_ipa
 from src.recognition import recognize_audio
 from src.types import PronunciationCandidate
 
-TTS_CACHE_DIR = Path("artifacts/tts_cache")
+TTS_CACHE_DIR = Path("artifacts/tts_cache/sage_gpt-4o-mini-tts_1x_2026-05-04T04_54_41-955Z.wav")
 DEFAULT_ARTIFACT = Path(
     "artifacts/20260421_220712_176144/20260421_220712_176144.json"
 )
@@ -60,9 +60,10 @@ def main(artifact_json: Path = DEFAULT_ARTIFACT) -> None:
     print(f"learner wav: {learner_wav}")
     print(f"learner segments: {len(learner_segments)}개")
 
-    print(f"\nTTS 생성 중...")
-    native_wav = generate_tts(text, cache_dir=TTS_CACHE_DIR)
-    print(f"native wav: {native_wav}")
+    # print(f"\nTTS 생성 중...")
+    # native_wav = generate_tts(text, cache_dir=TTS_CACHE_DIR)
+    # print(f"native wav: {native_wav}")
+    native_wav = "/Users/jeawook02094/Downloads/prosody/artifacts/tts_cache/sage_gpt-4o-mini-tts_1x_2026-05-04T04_54_41-955Z.wav"
 
     print("모델 로딩 중...")
     recognizer = AudioToIPARecognizer()
