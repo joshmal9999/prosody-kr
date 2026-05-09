@@ -1,0 +1,1420 @@
+{
+  "artifact_id": "20260421_220712_176144",
+  "reference_text": "오늘 티셔츠를 입고 있었어요. 횐색 티셔츠. 청바지는 블루랜진입니다. 운동화와 모자.",
+  "native": {
+    "wav": "/Users/jeawook02094/Downloads/prosody/artifacts/tts_cache/sage_gpt-4o-mini-tts_1x_2026-05-04T04_54_41-955Z.wav",
+    "phoneme_segments": [
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 0.040145985401459854,
+        "end_time": 0.060218978102189784,
+        "frame_start": 2,
+        "frame_end": 2,
+        "confidence": 0.917202719870772
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 0.20072992700729927,
+        "end_time": 0.2208029197080292,
+        "frame_start": 10,
+        "frame_end": 10,
+        "confidence": 0.9986580141333073
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 0.26094890510948904,
+        "end_time": 0.28102189781021897,
+        "frame_start": 13,
+        "frame_end": 13,
+        "confidence": 0.9562820926100968
+      },
+      {
+        "token": "l",
+        "label": "L",
+        "start_time": 0.3613138686131387,
+        "end_time": 0.3813868613138686,
+        "frame_start": 18,
+        "frame_end": 18,
+        "confidence": 0.9831656523176088
+      },
+      {
+        "token": "tʰ",
+        "label": "Th",
+        "start_time": 0.5218978102189781,
+        "end_time": 0.541970802919708,
+        "frame_start": 26,
+        "frame_end": 26,
+        "confidence": 0.017797483074653394
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 0.6423357664233577,
+        "end_time": 0.6624087591240876,
+        "frame_start": 32,
+        "frame_end": 32,
+        "confidence": 0.017318181547909525
+      },
+      {
+        "token": "ɕ",
+        "label": "S",
+        "start_time": 0.7627737226277372,
+        "end_time": 0.7828467153284672,
+        "frame_start": 38,
+        "frame_end": 38,
+        "confidence": 0.9396552595823013
+      },
+      {
+        "token": "jʌ",
+        "label": "iEO",
+        "start_time": 0.8029197080291971,
+        "end_time": 0.822992700729927,
+        "frame_start": 40,
+        "frame_end": 40,
+        "confidence": 0.7111266892411812
+      },
+      {
+        "token": "tɕʰ",
+        "label": "CHh",
+        "start_time": 1.0036496350364963,
+        "end_time": 1.0237226277372262,
+        "frame_start": 50,
+        "frame_end": 50,
+        "confidence": 0.0010203542759662097
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 1.0437956204379562,
+        "end_time": 1.063868613138686,
+        "frame_start": 52,
+        "frame_end": 52,
+        "confidence": 0.0002671133272816554
+      },
+      {
+        "token": "ɾ",
+        "label": "R",
+        "start_time": 1.083941605839416,
+        "end_time": 1.104014598540146,
+        "frame_start": 54,
+        "frame_end": 54,
+        "confidence": 0.9983075375767431
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 1.1441605839416058,
+        "end_time": 1.1642335766423357,
+        "frame_start": 57,
+        "frame_end": 57,
+        "confidence": 0.9990311841804752
+      },
+      {
+        "token": "l",
+        "label": "L",
+        "start_time": 1.1843065693430657,
+        "end_time": 1.2043795620437956,
+        "frame_start": 59,
+        "frame_end": 59,
+        "confidence": 0.9986855780641211
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 1.3047445255474452,
+        "end_time": 1.3248175182481752,
+        "frame_start": 65,
+        "frame_end": 65,
+        "confidence": 0.9993365292494472
+      },
+      {
+        "token": "p̚",
+        "label": "p",
+        "start_time": 1.385036496350365,
+        "end_time": 1.405109489051095,
+        "frame_start": 69,
+        "frame_end": 69,
+        "confidence": 0.03246274532076083
+      },
+      {
+        "token": "k",
+        "label": "G",
+        "start_time": 1.4653284671532847,
+        "end_time": 1.4854014598540146,
+        "frame_start": 73,
+        "frame_end": 73,
+        "confidence": 0.0002039373857873869
+      },
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 1.5255474452554745,
+        "end_time": 1.5456204379562044,
+        "frame_start": 76,
+        "frame_end": 76,
+        "confidence": 0.9971536005947745
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 1.6259124087591241,
+        "end_time": 1.666058394160584,
+        "frame_start": 81,
+        "frame_end": 82,
+        "confidence": 0.7625430744780592
+      },
+      {
+        "token": "t̚",
+        "label": "t",
+        "start_time": 1.7463503649635037,
+        "end_time": 1.7664233576642336,
+        "frame_start": 87,
+        "frame_end": 87,
+        "confidence": 5.5298284722854585e-06
+      },
+      {
+        "token": "ʌ",
+        "label": "EO",
+        "start_time": 1.7864963503649636,
+        "end_time": 1.8065693430656935,
+        "frame_start": 89,
+        "frame_end": 89,
+        "confidence": 0.9978003017367418
+      },
+      {
+        "token": "t̚",
+        "label": "t",
+        "start_time": 1.947080291970803,
+        "end_time": 1.967153284671533,
+        "frame_start": 97,
+        "frame_end": 97,
+        "confidence": 4.541247313720766e-06
+      },
+      {
+        "token": "ʌ",
+        "label": "EO",
+        "start_time": 2.0072992700729926,
+        "end_time": 2.0273722627737225,
+        "frame_start": 100,
+        "frame_end": 100,
+        "confidence": 0.982700181601335
+      },
+      {
+        "token": "jo",
+        "label": "iO",
+        "start_time": 2.147810218978102,
+        "end_time": 2.167883211678832,
+        "frame_start": 107,
+        "frame_end": 107,
+        "confidence": 0.2949761610359295
+      },
+      {
+        "token": "h",
+        "label": "H",
+        "start_time": 2.75,
+        "end_time": 2.77007299270073,
+        "frame_start": 137,
+        "frame_end": 137,
+        "confidence": 0.9953322892704723
+      },
+      {
+        "token": "we",
+        "label": "oE",
+        "start_time": 2.81021897810219,
+        "end_time": 2.8302919708029197,
+        "frame_start": 140,
+        "frame_end": 140,
+        "confidence": 7.165367257064647e-05
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 2.8905109489051095,
+        "end_time": 2.9105839416058394,
+        "frame_start": 144,
+        "frame_end": 144,
+        "confidence": 0.008481814663892426
+      },
+      {
+        "token": "s",
+        "label": "S",
+        "start_time": 2.990875912408759,
+        "end_time": 3.010948905109489,
+        "frame_start": 149,
+        "frame_end": 149,
+        "confidence": 0.9973668569407892
+      },
+      {
+        "token": "ɛ",
+        "label": "E",
+        "start_time": 3.031021897810219,
+        "end_time": 3.051094890510949,
+        "frame_start": 151,
+        "frame_end": 151,
+        "confidence": 0.9380522657792884
+      },
+      {
+        "token": "k̚",
+        "label": "k",
+        "start_time": 3.1313868613138687,
+        "end_time": 3.1514598540145986,
+        "frame_start": 156,
+        "frame_end": 156,
+        "confidence": 0.9754313763012085
+      },
+      {
+        "token": "tʰ",
+        "label": "Th",
+        "start_time": 3.2116788321167884,
+        "end_time": 3.2317518248175183,
+        "frame_start": 160,
+        "frame_end": 160,
+        "confidence": 0.9909032991225358
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 3.271897810218978,
+        "end_time": 3.291970802919708,
+        "frame_start": 163,
+        "frame_end": 163,
+        "confidence": 0.17860353434596202
+      },
+      {
+        "token": "ɕ",
+        "label": "S",
+        "start_time": 3.352189781021898,
+        "end_time": 3.372262773722628,
+        "frame_start": 167,
+        "frame_end": 167,
+        "confidence": 0.9760890581486532
+      },
+      {
+        "token": "jʌ",
+        "label": "iEO",
+        "start_time": 3.4124087591240877,
+        "end_time": 3.4324817518248176,
+        "frame_start": 170,
+        "frame_end": 170,
+        "confidence": 0.01792981153148416
+      },
+      {
+        "token": "tɕʰ",
+        "label": "CHh",
+        "start_time": 3.593065693430657,
+        "end_time": 3.613138686131387,
+        "frame_start": 179,
+        "frame_end": 179,
+        "confidence": 0.9961378445003423
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 3.653284671532847,
+        "end_time": 3.673357664233577,
+        "frame_start": 182,
+        "frame_end": 182,
+        "confidence": 0.9939416317539965
+      },
+      {
+        "token": "tɕʰ",
+        "label": "CHh",
+        "start_time": 4.155109489051095,
+        "end_time": 4.175182481751825,
+        "frame_start": 207,
+        "frame_end": 207,
+        "confidence": 0.9986434990327102
+      },
+      {
+        "token": "ʌ",
+        "label": "EO",
+        "start_time": 4.255474452554744,
+        "end_time": 4.275547445255475,
+        "frame_start": 212,
+        "frame_end": 212,
+        "confidence": 0.9983749430986174
+      },
+      {
+        "token": "ŋ",
+        "label": "NG",
+        "start_time": 4.315693430656935,
+        "end_time": 4.335766423357664,
+        "frame_start": 215,
+        "frame_end": 215,
+        "confidence": 0.9969697570120627
+      },
+      {
+        "token": "p",
+        "label": "B",
+        "start_time": 4.416058394160584,
+        "end_time": 4.436131386861314,
+        "frame_start": 220,
+        "frame_end": 220,
+        "confidence": 0.9986249040206807
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 4.456204379562044,
+        "end_time": 4.476277372262774,
+        "frame_start": 222,
+        "frame_end": 222,
+        "confidence": 0.9986140658675217
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 4.556569343065694,
+        "end_time": 4.576642335766423,
+        "frame_start": 227,
+        "frame_end": 227,
+        "confidence": 0.9985939207981428
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 4.616788321167883,
+        "end_time": 4.636861313868613,
+        "frame_start": 230,
+        "frame_end": 230,
+        "confidence": 0.9962076957936989
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 4.656934306569343,
+        "end_time": 4.677007299270073,
+        "frame_start": 232,
+        "frame_end": 232,
+        "confidence": 0.9978907820154086
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 4.697080291970803,
+        "end_time": 4.717153284671533,
+        "frame_start": 234,
+        "frame_end": 234,
+        "confidence": 0.9988646550693938
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 4.7773722627737225,
+        "end_time": 4.797445255474453,
+        "frame_start": 238,
+        "frame_end": 238,
+        "confidence": 0.998040071654334
+      },
+      {
+        "token": "p",
+        "label": "B",
+        "start_time": 4.958029197080292,
+        "end_time": 4.978102189781022,
+        "frame_start": 247,
+        "frame_end": 247,
+        "confidence": 0.9967726007390773
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 4.998175182481752,
+        "end_time": 5.018248175182482,
+        "frame_start": 249,
+        "frame_end": 249,
+        "confidence": 0.025126162713728188
+      },
+      {
+        "token": "l",
+        "label": "L",
+        "start_time": 5.098540145985401,
+        "end_time": 5.118613138686132,
+        "frame_start": 254,
+        "frame_end": 254,
+        "confidence": 0.9986256460498426
+      },
+      {
+        "token": "ɾ",
+        "label": "R",
+        "start_time": 5.178832116788321,
+        "end_time": 5.218978102189781,
+        "frame_start": 258,
+        "frame_end": 259,
+        "confidence": 0.8948092280044699
+      },
+      {
+        "token": "u",
+        "label": "U",
+        "start_time": 5.218978102189781,
+        "end_time": 5.239051094890511,
+        "frame_start": 260,
+        "frame_end": 260,
+        "confidence": 0.002743322296346922
+      },
+      {
+        "token": "ɾ",
+        "label": "R",
+        "start_time": 5.319343065693431,
+        "end_time": 5.339416058394161,
+        "frame_start": 265,
+        "frame_end": 265,
+        "confidence": 0.9607799974561987
+      },
+      {
+        "token": "ɛ",
+        "label": "E",
+        "start_time": 5.41970802919708,
+        "end_time": 5.439781021897811,
+        "frame_start": 270,
+        "frame_end": 270,
+        "confidence": 0.9984163344941162
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 5.45985401459854,
+        "end_time": 5.4799270072992705,
+        "frame_start": 272,
+        "frame_end": 272,
+        "confidence": 0.953672481976356
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 5.560218978102189,
+        "end_time": 5.58029197080292,
+        "frame_start": 277,
+        "frame_end": 277,
+        "confidence": 0.9920071853101767
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 5.600364963503649,
+        "end_time": 5.62043795620438,
+        "frame_start": 279,
+        "frame_end": 279,
+        "confidence": 0.004235808553997099
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 5.640510948905109,
+        "end_time": 5.680656934306569,
+        "frame_start": 281,
+        "frame_end": 282,
+        "confidence": 0.9034677324840199
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 5.700729927007299,
+        "end_time": 5.720802919708029,
+        "frame_start": 284,
+        "frame_end": 284,
+        "confidence": 0.9989464905474025
+      },
+      {
+        "token": "p̚",
+        "label": "p",
+        "start_time": 5.740875912408759,
+        "end_time": 5.760948905109489,
+        "frame_start": 286,
+        "frame_end": 286,
+        "confidence": 1.1227341283722892e-05
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 5.781021897810219,
+        "end_time": 5.821167883211679,
+        "frame_start": 288,
+        "frame_end": 289,
+        "confidence": 0.9842649995784001
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 5.841240875912408,
+        "end_time": 5.861313868613139,
+        "frame_start": 291,
+        "frame_end": 291,
+        "confidence": 0.9988164418614797
+      },
+      {
+        "token": "t",
+        "label": "D",
+        "start_time": 5.901459854014599,
+        "end_time": 5.921532846715328,
+        "frame_start": 294,
+        "frame_end": 294,
+        "confidence": 0.9942767077067723
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 5.961678832116788,
+        "end_time": 5.981751824817518,
+        "frame_start": 297,
+        "frame_end": 297,
+        "confidence": 0.9944120004042555
+      },
+      {
+        "token": "u",
+        "label": "U",
+        "start_time": 6.523722627737226,
+        "end_time": 6.543795620437956,
+        "frame_start": 325,
+        "frame_end": 325,
+        "confidence": 0.9821510898599404
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 6.644160583941606,
+        "end_time": 6.664233576642336,
+        "frame_start": 331,
+        "frame_end": 331,
+        "confidence": 0.9982562551121514
+      },
+      {
+        "token": "t",
+        "label": "D",
+        "start_time": 6.764598540145985,
+        "end_time": 6.7846715328467155,
+        "frame_start": 337,
+        "frame_end": 337,
+        "confidence": 0.9991850721775051
+      },
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 6.804744525547445,
+        "end_time": 6.824817518248175,
+        "frame_start": 339,
+        "frame_end": 339,
+        "confidence": 0.9977885545125738
+      },
+      {
+        "token": "ŋ",
+        "label": "NG",
+        "start_time": 6.885036496350365,
+        "end_time": 6.905109489051095,
+        "frame_start": 343,
+        "frame_end": 343,
+        "confidence": 0.9964858619538932
+      },
+      {
+        "token": "h",
+        "label": "H",
+        "start_time": 6.945255474452555,
+        "end_time": 6.985401459854015,
+        "frame_start": 346,
+        "frame_end": 347,
+        "confidence": 0.9841186905788668
+      },
+      {
+        "token": "wa",
+        "label": "oA",
+        "start_time": 7.045620437956204,
+        "end_time": 7.065693430656935,
+        "frame_start": 351,
+        "frame_end": 351,
+        "confidence": 0.44143484473970906
+      },
+      {
+        "token": "wa",
+        "label": "oA",
+        "start_time": 7.166058394160584,
+        "end_time": 7.186131386861314,
+        "frame_start": 357,
+        "frame_end": 357,
+        "confidence": 0.9978732897266536
+      },
+      {
+        "token": "m",
+        "label": "M",
+        "start_time": 7.447080291970803,
+        "end_time": 7.467153284671533,
+        "frame_start": 371,
+        "frame_end": 371,
+        "confidence": 0.9990790858712437
+      },
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 7.487226277372263,
+        "end_time": 7.507299270072993,
+        "frame_start": 373,
+        "frame_end": 373,
+        "confidence": 0.9903949622503606
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 7.627737226277373,
+        "end_time": 7.647810218978102,
+        "frame_start": 380,
+        "frame_end": 380,
+        "confidence": 0.9985600613158199
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 8.25,
+        "end_time": 8.27007299270073,
+        "frame_start": 411,
+        "frame_end": 411,
+        "confidence": 0.9882670578924372
+      }
+    ]
+  },
+  "learner": {
+    "wav": "artifacts/20260421_220712_176144/20260421_220712_176144.wav",
+    "phoneme_segments": [
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 0.7814579439252336,
+        "end_time": 0.8014953271028038,
+        "duration": 0.0200373831775702,
+        "frame_start": 39,
+        "frame_end": 39,
+        "confidence": 5.639116819388395e-05
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 0.9016822429906542,
+        "end_time": 0.9217196261682243,
+        "duration": 0.02003738317757009,
+        "frame_start": 45,
+        "frame_end": 45,
+        "confidence": 0.9971204765760364
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 0.9818317757009347,
+        "end_time": 1.0018691588785047,
+        "duration": 0.02003738317756998,
+        "frame_start": 49,
+        "frame_end": 49,
+        "confidence": 0.7783307645437487
+      },
+      {
+        "token": "l",
+        "label": "L",
+        "start_time": 1.1220934579439252,
+        "end_time": 1.1421308411214954,
+        "duration": 0.0200373831775702,
+        "frame_start": 56,
+        "frame_end": 56,
+        "confidence": 0.9949839393922323
+      },
+      {
+        "token": "tʰ",
+        "label": "Th",
+        "start_time": 1.2222803738317758,
+        "end_time": 1.2423177570093458,
+        "duration": 0.02003738317756998,
+        "frame_start": 61,
+        "frame_end": 61,
+        "confidence": 0.00015207902789752113
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 1.3024299065420561,
+        "end_time": 1.3224672897196263,
+        "duration": 0.0200373831775702,
+        "frame_start": 65,
+        "frame_end": 65,
+        "confidence": 0.8484075646111472
+      },
+      {
+        "token": "ɕ",
+        "label": "S",
+        "start_time": 1.4026168224299067,
+        "end_time": 1.422654205607477,
+        "duration": 0.0200373831775702,
+        "frame_start": 70,
+        "frame_end": 70,
+        "confidence": 0.9813924117255999
+      },
+      {
+        "token": "jʌ",
+        "label": "iEO",
+        "start_time": 1.5228411214953272,
+        "end_time": 1.5428785046728974,
+        "duration": 0.0200373831775702,
+        "frame_start": 76,
+        "frame_end": 76,
+        "confidence": 0.24485883175889
+      },
+      {
+        "token": "tɕʰ",
+        "label": "CHh",
+        "start_time": 1.683140186915888,
+        "end_time": 1.703177570093458,
+        "duration": 0.02003738317756998,
+        "frame_start": 84,
+        "frame_end": 84,
+        "confidence": 0.0004686226975502868
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 1.7432523364485983,
+        "end_time": 1.7632897196261685,
+        "duration": 0.0200373831775702,
+        "frame_start": 87,
+        "frame_end": 87,
+        "confidence": 0.9758114431854368
+      },
+      {
+        "token": "ɾ",
+        "label": "R",
+        "start_time": 1.8434392523364487,
+        "end_time": 1.8634766355140189,
+        "duration": 0.0200373831775702,
+        "frame_start": 92,
+        "frame_end": 92,
+        "confidence": 0.9978445864900534
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 1.9035514018691588,
+        "end_time": 1.923588785046729,
+        "duration": 0.0200373831775702,
+        "frame_start": 95,
+        "frame_end": 95,
+        "confidence": 0.026412621226936907
+      },
+      {
+        "token": "l",
+        "label": "L",
+        "start_time": 2.0838878504672897,
+        "end_time": 2.1039252336448597,
+        "duration": 0.02003738317756998,
+        "frame_start": 104,
+        "frame_end": 104,
+        "confidence": 0.9787650380747605
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 2.284261682242991,
+        "end_time": 2.304299065420561,
+        "duration": 0.02003738317756998,
+        "frame_start": 114,
+        "frame_end": 114,
+        "confidence": 0.9939186267544893
+      },
+      {
+        "token": "p̚",
+        "label": "p",
+        "start_time": 2.4044859813084116,
+        "end_time": 2.4245233644859816,
+        "duration": 0.02003738317756998,
+        "frame_start": 120,
+        "frame_end": 120,
+        "confidence": 0.9139404419967116
+      },
+      {
+        "token": "k͈",
+        "label": "GG",
+        "start_time": 2.4846355140186915,
+        "end_time": 2.5046728971962615,
+        "duration": 0.02003738317756998,
+        "frame_start": 124,
+        "frame_end": 124,
+        "confidence": 0.9093798389034223
+      },
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 2.564785046728972,
+        "end_time": 2.5848224299065423,
+        "duration": 0.020037383177570423,
+        "frame_start": 128,
+        "frame_end": 128,
+        "confidence": 0.03203834579379246
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 2.845308411214954,
+        "end_time": 2.865345794392524,
+        "duration": 0.02003738317756998,
+        "frame_start": 142,
+        "frame_end": 142,
+        "confidence": 0.9994915898995007
+      },
+      {
+        "token": "t̚",
+        "label": "t",
+        "start_time": 2.965532710280374,
+        "end_time": 2.985570093457944,
+        "duration": 0.02003738317756998,
+        "frame_start": 148,
+        "frame_end": 148,
+        "confidence": 3.918967550312244e-06
+      },
+      {
+        "token": "ʌ",
+        "label": "EO",
+        "start_time": 3.0256448598130845,
+        "end_time": 3.0456822429906545,
+        "duration": 0.02003738317756998,
+        "frame_start": 151,
+        "frame_end": 151,
+        "confidence": 0.6368579127076208
+      },
+      {
+        "token": "t̚",
+        "label": "t",
+        "start_time": 3.2660934579439256,
+        "end_time": 3.2861308411214956,
+        "duration": 0.02003738317756998,
+        "frame_start": 163,
+        "frame_end": 163,
+        "confidence": 2.0006980767451776e-06
+      },
+      {
+        "token": "ʌ",
+        "label": "EO",
+        "start_time": 3.3262056074766355,
+        "end_time": 3.3462429906542055,
+        "duration": 0.02003738317756998,
+        "frame_start": 166,
+        "frame_end": 166,
+        "confidence": 0.8817907471906412
+      },
+      {
+        "token": "jo",
+        "label": "iO",
+        "start_time": 3.5065420560747667,
+        "end_time": 3.526579439252337,
+        "duration": 0.020037383177570423,
+        "frame_start": 175,
+        "frame_end": 175,
+        "confidence": 0.7183265006722979
+      },
+      {
+        "token": "h",
+        "label": "H",
+        "start_time": 4.2078504672897195,
+        "end_time": 4.24792523364486,
+        "duration": 0.040074766355140845,
+        "frame_start": 210,
+        "frame_end": 211,
+        "confidence": 0.9338054949223861
+      },
+      {
+        "token": "we",
+        "label": "oE",
+        "start_time": 4.408224299065421,
+        "end_time": 4.428261682242991,
+        "duration": 0.02003738317756998,
+        "frame_start": 220,
+        "frame_end": 220,
+        "confidence": 0.00013209611734065735
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 4.528448598130842,
+        "end_time": 4.548485981308412,
+        "duration": 0.02003738317756998,
+        "frame_start": 226,
+        "frame_end": 226,
+        "confidence": 0.7610367231012373
+      },
+      {
+        "token": "s",
+        "label": "S",
+        "start_time": 5.069457943925234,
+        "end_time": 5.089495327102804,
+        "duration": 0.02003738317756998,
+        "frame_start": 253,
+        "frame_end": 253,
+        "confidence": 0.8960419619096317
+      },
+      {
+        "token": "ɛ",
+        "label": "E",
+        "start_time": 5.149607476635515,
+        "end_time": 5.169644859813085,
+        "duration": 0.02003738317756998,
+        "frame_start": 257,
+        "frame_end": 257,
+        "confidence": 0.9966534860598883
+      },
+      {
+        "token": "k̚",
+        "label": "k",
+        "start_time": 5.410093457943925,
+        "end_time": 5.430130841121495,
+        "duration": 0.02003738317756998,
+        "frame_start": 270,
+        "frame_end": 270,
+        "confidence": 0.9080598871864616
+      },
+      {
+        "token": "tʰ",
+        "label": "Th",
+        "start_time": 6.29173831775701,
+        "end_time": 6.31177570093458,
+        "duration": 0.02003738317756998,
+        "frame_start": 314,
+        "frame_end": 314,
+        "confidence": 1.3254324023013272e-05
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 6.37188785046729,
+        "end_time": 6.39192523364486,
+        "duration": 0.020037383177570867,
+        "frame_start": 318,
+        "frame_end": 318,
+        "confidence": 0.9984497466615643
+      },
+      {
+        "token": "ɕ",
+        "label": "S",
+        "start_time": 6.532186915887851,
+        "end_time": 6.552224299065421,
+        "duration": 0.02003738317756998,
+        "frame_start": 326,
+        "frame_end": 326,
+        "confidence": 0.9318017700313896
+      },
+      {
+        "token": "jʌ",
+        "label": "iEO",
+        "start_time": 6.632373831775701,
+        "end_time": 6.652411214953271,
+        "duration": 0.02003738317756998,
+        "frame_start": 331,
+        "frame_end": 331,
+        "confidence": 0.10399555852233282
+      },
+      {
+        "token": "tɕʰ",
+        "label": "CHh",
+        "start_time": 6.852785046728973,
+        "end_time": 6.872822429906543,
+        "duration": 0.02003738317756998,
+        "frame_start": 342,
+        "frame_end": 342,
+        "confidence": 0.00024690785125849093
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 6.932934579439253,
+        "end_time": 6.952971962616823,
+        "duration": 0.02003738317756998,
+        "frame_start": 346,
+        "frame_end": 346,
+        "confidence": 0.9547173172190965
+      },
+      {
+        "token": "tɕʰ",
+        "label": "CHh",
+        "start_time": 7.734429906542057,
+        "end_time": 7.754467289719627,
+        "duration": 0.02003738317756998,
+        "frame_start": 386,
+        "frame_end": 386,
+        "confidence": 0.003652031282705501
+      },
+      {
+        "token": "ʌ",
+        "label": "EO",
+        "start_time": 7.794542056074767,
+        "end_time": 7.814579439252337,
+        "duration": 0.02003738317756998,
+        "frame_start": 389,
+        "frame_end": 389,
+        "confidence": 0.9963419808822894
+      },
+      {
+        "token": "ŋ",
+        "label": "NG",
+        "start_time": 7.894728971962618,
+        "end_time": 7.914766355140187,
+        "duration": 0.02003738317756909,
+        "frame_start": 394,
+        "frame_end": 394,
+        "confidence": 0.0006102677141153313
+      },
+      {
+        "token": "p",
+        "label": "B",
+        "start_time": 8.075065420560747,
+        "end_time": 8.095102803738317,
+        "duration": 0.02003738317756998,
+        "frame_start": 403,
+        "frame_end": 403,
+        "confidence": 0.9861058563865711
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 8.115140186915887,
+        "end_time": 8.13517757009346,
+        "duration": 0.020037383177571755,
+        "frame_start": 405,
+        "frame_end": 405,
+        "confidence": 0.022474630401699253
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 8.255401869158879,
+        "end_time": 8.275439252336449,
+        "duration": 0.02003738317756998,
+        "frame_start": 412,
+        "frame_end": 412,
+        "confidence": 0.09296627482759173
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 8.315514018691589,
+        "end_time": 8.335551401869159,
+        "duration": 0.02003738317756998,
+        "frame_start": 415,
+        "frame_end": 415,
+        "confidence": 0.00728832017279323
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 8.415700934579439,
+        "end_time": 8.47581308411215,
+        "duration": 0.06011214953271171,
+        "frame_start": 420,
+        "frame_end": 422,
+        "confidence": 0.8226690749943325
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 8.53592523364486,
+        "end_time": 8.55596261682243,
+        "duration": 0.02003738317756998,
+        "frame_start": 426,
+        "frame_end": 426,
+        "confidence": 0.9831021418640944
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 8.716261682242992,
+        "end_time": 8.736299065420562,
+        "duration": 0.02003738317756998,
+        "frame_start": 435,
+        "frame_end": 435,
+        "confidence": 0.9937479381611296
+      },
+      {
+        "token": "p",
+        "label": "B",
+        "start_time": 8.916635514018692,
+        "end_time": 8.936672897196262,
+        "duration": 0.02003738317756998,
+        "frame_start": 445,
+        "frame_end": 445,
+        "confidence": 2.208299433778594e-05
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 8.936672897196262,
+        "end_time": 8.956710280373832,
+        "duration": 0.02003738317756998,
+        "frame_start": 446,
+        "frame_end": 446,
+        "confidence": 0.008760407379303784
+      },
+      {
+        "token": "l",
+        "label": "L",
+        "start_time": 9.036859813084114,
+        "end_time": 9.056897196261684,
+        "duration": 0.02003738317756998,
+        "frame_start": 451,
+        "frame_end": 451,
+        "confidence": 0.0007429488517168504
+      },
+      {
+        "token": "ɾ",
+        "label": "R",
+        "start_time": 9.157084112149533,
+        "end_time": 9.177121495327103,
+        "duration": 0.02003738317756998,
+        "frame_start": 457,
+        "frame_end": 457,
+        "confidence": 3.723714256052724e-05
+      },
+      {
+        "token": "u",
+        "label": "U",
+        "start_time": 9.197158878504673,
+        "end_time": 9.217196261682243,
+        "duration": 0.02003738317756998,
+        "frame_start": 459,
+        "frame_end": 459,
+        "confidence": 0.8787654432794032
+      },
+      {
+        "token": "ɾ",
+        "label": "R",
+        "start_time": 10.41943925233645,
+        "end_time": 10.43947663551402,
+        "duration": 0.02003738317756998,
+        "frame_start": 520,
+        "frame_end": 520,
+        "confidence": 0.9880988325249701
+      },
+      {
+        "token": "ɛ",
+        "label": "E",
+        "start_time": 10.49958878504673,
+        "end_time": 10.5196261682243,
+        "duration": 0.02003738317756998,
+        "frame_start": 524,
+        "frame_end": 524,
+        "confidence": 0.9942333900452992
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 10.65988785046729,
+        "end_time": 10.67992523364486,
+        "duration": 0.02003738317756998,
+        "frame_start": 532,
+        "frame_end": 532,
+        "confidence": 0.7665020343623761
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 12.423177570093458,
+        "end_time": 12.443214953271028,
+        "duration": 0.02003738317756998,
+        "frame_start": 620,
+        "frame_end": 620,
+        "confidence": 0.9584375003048865
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 12.503327102803738,
+        "end_time": 12.523364485981308,
+        "duration": 0.02003738317756998,
+        "frame_start": 624,
+        "frame_end": 624,
+        "confidence": 0.42770994356202946
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 12.6636261682243,
+        "end_time": 12.68366355140187,
+        "duration": 0.02003738317756998,
+        "frame_start": 632,
+        "frame_end": 632,
+        "confidence": 0.996907050033443
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 12.88403738317757,
+        "end_time": 12.90407476635514,
+        "duration": 0.02003738317756998,
+        "frame_start": 643,
+        "frame_end": 643,
+        "confidence": 0.9988631659117294
+      },
+      {
+        "token": "m",
+        "label": "M",
+        "start_time": 12.984224299065422,
+        "end_time": 13.004261682242992,
+        "duration": 0.02003738317756998,
+        "frame_start": 648,
+        "frame_end": 648,
+        "confidence": 0.9990808010800485
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 13.064373831775702,
+        "end_time": 13.084411214953272,
+        "duration": 0.02003738317756998,
+        "frame_start": 652,
+        "frame_end": 652,
+        "confidence": 0.9949143058586682
+      },
+      {
+        "token": "i",
+        "label": "I",
+        "start_time": 13.124485981308412,
+        "end_time": 13.144523364485982,
+        "duration": 0.02003738317756998,
+        "frame_start": 655,
+        "frame_end": 655,
+        "confidence": 0.9989910659969167
+      },
+      {
+        "token": "t",
+        "label": "D",
+        "start_time": 13.244710280373834,
+        "end_time": 13.264747663551402,
+        "duration": 0.020037383177568202,
+        "frame_start": 661,
+        "frame_end": 661,
+        "confidence": 0.9988123100314765
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 13.324859813084112,
+        "end_time": 13.344897196261682,
+        "duration": 0.02003738317756998,
+        "frame_start": 665,
+        "frame_end": 665,
+        "confidence": 0.9986872789804933
+      },
+      {
+        "token": "u",
+        "label": "U",
+        "start_time": 13.946018691588787,
+        "end_time": 13.966056074766357,
+        "duration": 0.02003738317756998,
+        "frame_start": 696,
+        "frame_end": 696,
+        "confidence": 0.0003817223686343942
+      },
+      {
+        "token": "n",
+        "label": "N",
+        "start_time": 14.066242990654207,
+        "end_time": 14.086280373831778,
+        "duration": 0.020037383177571755,
+        "frame_start": 702,
+        "frame_end": 702,
+        "confidence": 0.9977441127430221
+      },
+      {
+        "token": "t",
+        "label": "D",
+        "start_time": 14.186467289719626,
+        "end_time": 14.206504672897196,
+        "duration": 0.02003738317756998,
+        "frame_start": 708,
+        "frame_end": 708,
+        "confidence": 0.9985208178980104
+      },
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 14.226542056074766,
+        "end_time": 14.246579439252336,
+        "duration": 0.02003738317756998,
+        "frame_start": 710,
+        "frame_end": 710,
+        "confidence": 0.0008309106348699133
+      },
+      {
+        "token": "ŋ",
+        "label": "NG",
+        "start_time": 14.406878504672898,
+        "end_time": 14.426915887850468,
+        "duration": 0.02003738317756998,
+        "frame_start": 719,
+        "frame_end": 719,
+        "confidence": 7.346518018667328e-05
+      },
+      {
+        "token": "h",
+        "label": "H",
+        "start_time": 14.72747663551402,
+        "end_time": 14.74751401869159,
+        "duration": 0.02003738317756998,
+        "frame_start": 735,
+        "frame_end": 735,
+        "confidence": 0.0046564850337194475
+      },
+      {
+        "token": "wa",
+        "label": "oA",
+        "start_time": 14.807626168224301,
+        "end_time": 14.827663551401871,
+        "duration": 0.02003738317756998,
+        "frame_start": 739,
+        "frame_end": 739,
+        "confidence": 0.9956042956845126
+      },
+      {
+        "token": "wa",
+        "label": "oA",
+        "start_time": 15.549009345794394,
+        "end_time": 15.569046728971964,
+        "duration": 0.02003738317756998,
+        "frame_start": 776,
+        "frame_end": 776,
+        "confidence": 0.9875108962055591
+      },
+      {
+        "token": "m",
+        "label": "M",
+        "start_time": 16.069981308411215,
+        "end_time": 16.090018691588785,
+        "duration": 0.02003738317756998,
+        "frame_start": 802,
+        "frame_end": 802,
+        "confidence": 0.998737660975068
+      },
+      {
+        "token": "o",
+        "label": "O",
+        "start_time": 16.150130841121495,
+        "end_time": 16.170168224299065,
+        "duration": 0.02003738317756998,
+        "frame_start": 806,
+        "frame_end": 806,
+        "confidence": 0.000601568503610501
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 16.3505046728972,
+        "end_time": 16.37054205607477,
+        "duration": 0.02003738317756998,
+        "frame_start": 816,
+        "frame_end": 816,
+        "confidence": 0.9973409116378235
+      },
+      {
+        "token": "a",
+        "label": "A",
+        "start_time": 17.152,
+        "end_time": 17.17203738317757,
+        "duration": 0.02003738317756998,
+        "frame_start": 856,
+        "frame_end": 856,
+        "confidence": 0.8219512673607372
+      }
+    ]
+  }
+}

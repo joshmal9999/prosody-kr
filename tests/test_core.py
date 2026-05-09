@@ -191,5 +191,6 @@ class TestIntonationComparison:
             title=ref_text,
             syllable_labels=syllable_labels,
         )
-        plt.show()
+        out = ARTIFACT_DIR / "plot.png"
+        fig.savefig(out)
         assert fig is not None
