@@ -74,14 +74,48 @@ def _ipa_token_counts(eojeols: list[str]) -> list[int]:
     return [len(pronunciation_to_ipa(ej).tokens) for ej in eojeols]
 
 
+_N_CONTOUR_FRAMES = 50
+
+
+def _resample_f0(f0_result, t_start: float, t_end: float) -> np.ndarray:
+    """구간 F0를 50프레임으로 리샘플 (z-score 기준)."""
+    mask = (f0_result.times >= t_start) & (f0_result.times < t_end)
+    f0 = f0_result.f0[mask]
+    if len(f0) == 0:
+        return np.zeros(_N_CONTOUR_FRAMES)
+    src = np.linspace(0, _N_CONTOUR_FRAMES - 1, len(f0))
+    return np.interp(np.arange(_N_CONTOUR_FRAMES, dtype=float), src, f0)
+
+
+def _compute_mean_contours(
+    speaker_contours: list[list[np.ndarray]],
+) -> list[list[float]]:
+    """화자 × 음절 contour 리스트 → 음절별 frame-wise mean.
+
+    음절 수가 다른 화자는 제외 (mode 기준).
+    """
+    if not speaker_contours:
+        return []
+    from collections import Counter
+    syl_counts = Counter(len(sc) for sc in speaker_contours)
+    canonical_n = syl_counts.most_common(1)[0][0]
+    filtered = [sc for sc in speaker_contours if len(sc) == canonical_n]
+    if not filtered:
+        return []
+    # shape: (n_speakers, n_syllables, 50) → mean over speakers
+    stacked = np.array(filtered)          # (S, N_syl, 50)
+    mean_contour = stacked.mean(axis=0)   # (N_syl, 50)
+    return mean_contour.tolist()
+
+
 def process_wav(
     recognizer: AudioToIPARecognizer,
     wav_path: Path,
     text: str,
     eojeols: list[str],
     token_counts: list[int],
-) -> list[np.ndarray] | None:
-    """WAV 1개 → 어절별 12-dim vector 리스트. 실패 시 None."""
+) -> tuple[list[np.ndarray], list[list[np.ndarray]]] | None:
+    """WAV 1개 → (어절별 12-dim vector, 어절별 음절 contour 리스트). 실패 시 None."""
     try:
         recog = recognize_audio(recognizer, wav_path)
         vocab = recognizer.processor.tokenizer.get_vocab()
@@ -105,6 +139,7 @@ def process_wav(
         f0_result = extract_f0(wav_path)
 
         vectors: list[np.ndarray] = []
+        syl_contours: list[list[np.ndarray]] = []  # [eojeol][syllable] → (50,)
         offset = 0
         for ej, n in zip(eojeols, token_counts):
             ej_segs = segs[offset: offset + n]
@@ -113,10 +148,11 @@ def process_wav(
             t_start = ej_segs[0]["start_time"]
             t_end   = ej_segs[-1]["end_time"]
             vectors.append(extract_eojeol_vector(f0_result, (t_start, t_end), syl_b))
+            syl_contours.append([_resample_f0(f0_result, sb, eb) for sb, eb in syl_b])
 
-        return vectors
+        return vectors, syl_contours
 
-    except Exception as e:
+    except Exception:
         return None
 
 
@@ -145,16 +181,20 @@ def main(out_path: Path) -> None:
         print(f"\n[{s_idx+1}/{len(sentences)}] {text!r}  ({len(wav_paths)}명)")
 
         eojeol_vecs: list[list[np.ndarray]] = [[] for _ in eojeols]
+        # [eojeol_i][speaker_j][syllable_k] → (50,) contour
+        eojeol_syl_contours: list[list[list[np.ndarray]]] = [[] for _ in eojeols]
 
         for wav_str in wav_paths:
             wav = Path(wav_str)
-            vecs = process_wav(recognizer, wav, text, eojeols, token_counts)
-            if vecs is None:
+            result = process_wav(recognizer, wav, text, eojeols, token_counts)
+            if result is None:
                 skipped.append(f"{text} | {wav.name}")
                 print(f"  ✗ {wav.name}")
                 continue
-            for i, v in enumerate(vecs):
+            vecs, syl_contours = result
+            for i, (v, sc) in enumerate(zip(vecs, syl_contours)):
                 eojeol_vecs[i].append(v)
+                eojeol_syl_contours[i].append(sc)
             print(f"  ✓ {wav.name}")
 
         eojeol_entries: list[dict] = []
@@ -164,9 +204,14 @@ def main(out_path: Path) -> None:
                 continue
             dist = GaussianEojeolDistribution()
             dist.fit(np.array(vecs))
-            entry = {"text": ej, "idx": i, **dist.to_dict()}
+
+            # 음절 평균 contour: 화자 수가 같은 음절만 frame-wise mean
+            mean_syl_contours = _compute_mean_contours(eojeol_syl_contours[i])
+
+            entry = {"text": ej, "idx": i, **dist.to_dict(),
+                     "syllable_contours": mean_syl_contours}
             eojeol_entries.append(entry)
-            print(f"  {ej!r}: {dist._n}명, {dist._mode}")
+            print(f"  {ej!r}: {dist._n}명, {dist._mode}, {len(mean_syl_contours)}음절")
 
         output["sentences"][text] = {
             "n_speakers": len(wav_paths),

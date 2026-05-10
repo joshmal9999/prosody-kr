@@ -133,11 +133,16 @@ class KoreanDistributionStore:
             data = json.load(f)
         self._store: dict[str, list[GaussianEojeolDistribution]] = {}
         self._eojeol_texts: dict[str, list[str]] = {}
+        # [text][eojeol_idx] → list of (50,) contours, one per syllable
+        self._syllable_contours: dict[str, list[list[list[float]]]] = {}
         for text, entry in data["sentences"].items():
             self._store[text] = [
                 GaussianEojeolDistribution.from_dict(e) for e in entry["eojeols"]
             ]
             self._eojeol_texts[text] = [e["text"] for e in entry["eojeols"]]
+            self._syllable_contours[text] = [
+                e.get("syllable_contours", []) for e in entry["eojeols"]
+            ]
 
     def get(self, text: str) -> list[GaussianEojeolDistribution] | None:
         """문장 전체 텍스트로 어절별 분포 리스트 조회."""
@@ -145,6 +150,10 @@ class KoreanDistributionStore:
 
     def eojeol_texts(self, text: str) -> list[str]:
         return self._eojeol_texts.get(text, [])
+
+    def syllable_contours(self, text: str) -> list[list[list[float]]]:
+        """어절별 음절 평균 contour 조회. [[syl0_50frames], [syl1_50frames], ...]."""
+        return self._syllable_contours.get(text, [])
 
     def texts(self) -> list[str]:
         return list(self._store.keys())
