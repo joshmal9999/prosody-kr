@@ -1,7 +1,9 @@
 """어절 단위 Gaussian 분포 fitting + Mahalanobis 판정 + rule-based 분류."""
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import json
+from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
 
@@ -102,3 +104,47 @@ class GaussianEojeolDistribution:
             sample_count=self._n,
             warning=warning,
         )
+
+    def to_dict(self) -> dict:
+        return {
+            "mean": self.mean_.tolist(),
+            "std": self.std_.tolist(),
+            "cov_inv": self.cov_inv_.tolist(),
+            "mode": self._mode,
+            "n": self._n,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "GaussianEojeolDistribution":
+        obj = cls.__new__(cls)
+        obj.mean_ = np.array(d["mean"])
+        obj.std_ = np.array(d["std"])
+        obj.cov_inv_ = np.array(d["cov_inv"])
+        obj._mode = d["mode"]
+        obj._n = d["n"]
+        return obj
+
+
+class KoreanDistributionStore:
+    """저장된 분포 JSON 로드 + 문장별 조회 인터페이스."""
+
+    def __init__(self, path: str | Path) -> None:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        self._store: dict[str, list[GaussianEojeolDistribution]] = {}
+        self._eojeol_texts: dict[str, list[str]] = {}
+        for text, entry in data["sentences"].items():
+            self._store[text] = [
+                GaussianEojeolDistribution.from_dict(e) for e in entry["eojeols"]
+            ]
+            self._eojeol_texts[text] = [e["text"] for e in entry["eojeols"]]
+
+    def get(self, text: str) -> list[GaussianEojeolDistribution] | None:
+        """문장 전체 텍스트로 어절별 분포 리스트 조회."""
+        return self._store.get(text)
+
+    def eojeol_texts(self, text: str) -> list[str]:
+        return self._eojeol_texts.get(text, [])
+
+    def texts(self) -> list[str]:
+        return list(self._store.keys())
