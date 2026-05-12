@@ -139,7 +139,9 @@ def analyze_prosody(
     for i, (ej_text, ej_segs, dist) in enumerate(
         zip(eojeol_texts, eojeol_segs, dists)
     ):
-        syl_boundaries = segments_to_syllable_boundaries(ej_segs)
+        clean_ej = "".join(c for c in ej_text if c not in ".·,!?。")
+        ej_positions = [t.syllable_position for t in pronunciation_to_ipa(clean_ej).tokens]
+        syl_boundaries = segments_to_syllable_boundaries(ej_segs, ej_positions)
         t_start = ej_segs[0]["start_time"]
         t_end   = ej_segs[-1]["end_time"]
 

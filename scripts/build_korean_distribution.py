@@ -121,8 +121,10 @@ def process_wav(
         vocab = recognizer.processor.tokenizer.get_vocab()
         blank_id = vocab[recognizer.processor.tokenizer.pad_token]
 
-        ipa_full = pronunciation_to_ipa(text)
-        candidate = PronunciationCandidate(pronunciation=text, ipa=ipa_full, is_primary=True)
+        # 구두점은 pronunciation_to_ipa의 syllable_position 할당을 깨뜨리므로 사전 제거
+        clean_text = "".join(c for c in text if c not in ".·,!?。")
+        ipa_full = pronunciation_to_ipa(clean_text)
+        candidate = PronunciationCandidate(pronunciation=clean_text, ipa=ipa_full, is_primary=True)
         fa = force_align_candidate(
             candidate, recog.logits, recog.frame_timestamps,
             label_to_id=vocab, blank_id=blank_id,
@@ -138,13 +140,15 @@ def process_wav(
 
         f0_result = extract_f0(wav_path)
 
+        all_positions = [t.syllable_position for t in ipa_full.tokens]
         vectors: list[np.ndarray] = []
         syl_contours: list[list[np.ndarray]] = []  # [eojeol][syllable] → (50,)
         offset = 0
         for ej, n in zip(eojeols, token_counts):
             ej_segs = segs[offset: offset + n]
+            ej_positions = all_positions[offset: offset + n]
             offset += n
-            syl_b = segments_to_syllable_boundaries(ej_segs)
+            syl_b = segments_to_syllable_boundaries(ej_segs, ej_positions)
             t_start = ej_segs[0]["start_time"]
             t_end   = ej_segs[-1]["end_time"]
             vectors.append(extract_eojeol_vector(f0_result, (t_start, t_end), syl_b))

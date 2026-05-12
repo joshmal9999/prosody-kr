@@ -84,8 +84,11 @@ def run(
     # ── F0 추출 + 음절 경계 변환 ─────────────────────────────────────────────
     native_f0 = extract_f0(native_wav)
     learner_f0 = extract_f0(learner_wav)
-    native_b = segments_to_syllable_boundaries(payload["native"]["phoneme_segments"])
-    learner_b = segments_to_syllable_boundaries(payload["learner"]["phoneme_segments"])
+    # 구두점은 pronunciation_to_ipa의 position 할당을 깨뜨리므로 사전 제거
+    clean_text = "".join(c for c in text if c not in ".·,!?。")
+    positions = [t.syllable_position for t in pronunciation_to_ipa(clean_text).tokens]
+    native_b = segments_to_syllable_boundaries(payload["native"]["phoneme_segments"], positions)
+    learner_b = segments_to_syllable_boundaries(payload["learner"]["phoneme_segments"], positions)
 
     # ── segmental alignment + 메트릭 + plot ──────────────────────────────────
     comparisons = IntonationComparator().compare(

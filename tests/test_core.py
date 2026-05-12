@@ -10,54 +10,53 @@ import pytest
 from core.comparator import IntonationComparator, SyllableComparison
 from core.f0_extractor import extract_f0
 from core.metrics import SyllableMetrics, compute_metrics, to_dict
-from core.syllable_utils import _is_vowel, segments_to_syllable_boundaries
+from core.syllable_utils import segments_to_syllable_boundaries
+from src.korean_ipa import pronunciation_to_ipa
 
 ARTIFACT_DIR = Path(__file__).parent.parent / "artifacts" / "20260421_220712_176144"
 
 
 # ── syllable_utils ────────────────────────────────────────────────────────────
 
-class TestIsVowel:
-    def test_pure_vowels(self):
-        for token in ["a", "o", "u", "i", "e", "ɯ", "ʌ", "ɛ"]:
-            assert _is_vowel(token), token
-
-    def test_diphthongs(self):  # 이중모음
-        for token in ["ja", "wa", "jo", "we"]:
-            assert _is_vowel(token), token
-
-    def test_consonants(self): # 자음
-        for token in ["k", "tɕ", "t̚", "p̚", "n", "m", "h", "s", "ŋ"]:
-            assert not _is_vowel(token), token
-
-
 class TestSegmentsToSyllableBoundaries:
-    def _seg(self, token, start, end):
-        return {"token": token, "start_time": start, "end_time": end}
+    def _seg(self, start, end):
+        return {"start_time": start, "end_time": end}
 
     def test_cv_structure(self):
         # 조 = tɕ + o
-        segs = [self._seg("tɕ", 0.0, 0.05), self._seg("o", 0.05, 0.15)]
-        boundaries = segments_to_syllable_boundaries(segs)
-        assert len(boundaries) == 1
-        assert boundaries[0] == (0.0, 0.15)
+        segs = [self._seg(0.0, 0.05), self._seg(0.05, 0.15)]
+        positions = ["onset", "nucleus"]
+        assert segments_to_syllable_boundaries(segs, positions) == [(0.0, 0.15)]
 
-    def test_cvc_cvc_structure(self):
-        # 조타 = tɕ + o + t̚ + a (coda t̚ is treated as onset of next syllable)
+    def test_cvc_v_with_pause(self):
+        # 각아 = k + a + k̚ ... (pause) ... + a
+        # 받침 k̚는 각의 coda로 묶이고, 다음 음절 아 사이의 묵음은 어느 boundary에도 포함되지 않아야 함
         segs = [
-            self._seg("tɕ", 0.0, 0.05),
-            self._seg("o",  0.05, 0.15),
-            self._seg("t̚", 0.15, 0.20),
-            self._seg("a",  0.20, 0.30),
+            self._seg(0.00, 0.05),  # k    (onset)
+            self._seg(0.05, 0.15),  # a    (nucleus)
+            self._seg(0.15, 0.20),  # k̚   (coda)
+            self._seg(0.30, 0.40),  # a    (nucleus) — 0.20~0.30 사이 묵음
         ]
-        boundaries = segments_to_syllable_boundaries(segs)
-        assert len(boundaries) == 2
-        assert boundaries[0] == (0.0, 0.15)   # tɕ ~ o
-        assert boundaries[1] == (0.15, 0.30)  # t̚ ~ a
+        positions = ["onset", "nucleus", "coda", "nucleus"]
+        boundaries = segments_to_syllable_boundaries(segs, positions)
+        assert boundaries == [(0.0, 0.20), (0.30, 0.40)]
+
+    def test_silent_onset_consecutive_nuclei(self):
+        # 아이 = a + i (둘 다 ㅇ초성이라 onset token 없음)
+        segs = [self._seg(0.0, 0.10), self._seg(0.10, 0.20)]
+        positions = ["nucleus", "nucleus"]
+        assert segments_to_syllable_boundaries(segs, positions) == [
+            (0.0, 0.10), (0.10, 0.20),
+        ]
+
+    def test_length_mismatch_raises(self):
+        segs = [self._seg(0.0, 0.05)]
+        with pytest.raises(ValueError):
+            segments_to_syllable_boundaries(segs, ["onset", "nucleus"])
 
     def test_no_nucleus_returns_empty(self):
-        segs = [self._seg("k", 0.0, 0.05), self._seg("t", 0.05, 0.10)]
-        assert segments_to_syllable_boundaries(segs) == []
+        segs = [self._seg(0.0, 0.05), self._seg(0.05, 0.10)]
+        assert segments_to_syllable_boundaries(segs, ["onset", "coda"]) == []
 
 
 # ── compute_metrics ───────────────────────────────────────────────────────────
@@ -136,8 +135,10 @@ class TestIntonationComparison:
             data = json.load(f)
         native_f0 = extract_f0(data["native"]["wav"])
         learner_f0 = extract_f0(data["learner"]["wav"])
-        native_b = segments_to_syllable_boundaries(data["native"]["phoneme_segments"])
-        learner_b = segments_to_syllable_boundaries(data["learner"]["phoneme_segments"])
+        clean_text = "".join(c for c in data["reference_text"] if c not in ".·,!?。")
+        positions = [t.syllable_position for t in pronunciation_to_ipa(clean_text).tokens]
+        native_b = segments_to_syllable_boundaries(data["native"]["phoneme_segments"], positions)
+        learner_b = segments_to_syllable_boundaries(data["learner"]["phoneme_segments"], positions)
         return native_f0, learner_f0, native_b, learner_b
 
     def test_voiced_syllables_exist(self):

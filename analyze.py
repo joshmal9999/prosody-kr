@@ -139,9 +139,15 @@ def analyze(
     learner_f0 = extract_f0(learner_wav)
 
     # ── Step 4. 음소 segments → 음절 경계 변환 ──────────────────────────────
-    # 각 음절의 (t_start, t_end) 를 확보. nucleus(모음) 기준으로 경계를 묶는다.
-    native_boundaries = segments_to_syllable_boundaries(native_segments)
-    learner_boundaries = segments_to_syllable_boundaries(learner_segments)
+    # 각 음절의 (t_start, t_end) 를 확보. syllable_position(onset/nucleus/coda)
+    # 기준으로 segments를 그룹핑한다.
+    # native/learner 모두 동일 reference IPA로 forced alignment 되었으므로
+    # positions는 동일하다 (token sequence 1:1 대응).
+    # 구두점이 포함되면 pronunciation_to_ipa의 position 할당이 깨지므로 사전에 제거.
+    clean_text = "".join(c for c in text if c not in ".·,!?。")
+    positions = [t.syllable_position for t in pronunciation_to_ipa(clean_text).tokens]
+    native_boundaries = segments_to_syllable_boundaries(native_segments, positions)
+    learner_boundaries = segments_to_syllable_boundaries(learner_segments, positions)
 
     # ── Step 5. Segmental Alignment — 음절별 F0 비교 ─────────────────────────
     # 음절 인덱스 1:1 매핑. 각 음절을 50프레임으로 리샘플 후 비교.
