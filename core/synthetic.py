@@ -175,19 +175,57 @@ def perturb_audio_slope_flip(
     return out.values[0].astype(np.float32), int(out.sampling_frequency)
 
 
+def perturb_audio_f0_ramp(
+    wav_path: Path | str,
+    semitones_start: float = 0.0,
+    semitones_end: float = 8.0,
+) -> tuple[np.ndarray, int]:
+    """발화 시작→끝으로 F0를 선형 ramp (PSOLA 재합성).
+
+    f0_slope, f0_end dim을 분포에서 이탈시켜 'rising 과도' 감지.
+    semitones_start=0, semitones_end=8 → 끝 부분이 +8 semitone 올라감.
+    """
+    _, manip = _make_manip(wav_path)
+    pt = _praat(manip, "Extract pitch tier")
+    t0 = _praat(pt, "Get start time")
+    t1 = _praat(pt, "Get end time")
+    n = int(_praat(pt, "Get number of points"))
+    pts: list[tuple[float, float]] = [
+        (_praat(pt, "Get time from index", i), _praat(pt, "Get value at index", i))
+        for i in range(1, n + 1)
+    ]
+    new_pts = []
+    for t, f in pts:
+        pos = (t - t0) / (t1 - t0) if t1 > t0 else 0.5
+        semitones = semitones_start + (semitones_end - semitones_start) * pos
+        factor = 2.0 ** (semitones / 12.0)
+        new_pts.append((t, f * factor))
+    _praat(pt, "Remove points between", t0, t1)
+    for t, f in new_pts:
+        _praat(pt, "Add point", t, f)
+    _praat([pt, manip], "Replace pitch tier")
+    out = _praat(manip, "Get resynthesis (overlap-add)")
+    return out.values[0].astype(np.float32), int(out.sampling_frequency)
+
+
 def perturb_audio_elongate_last(
     wav_path: Path | str,
     last_syl_start: float,
-    factor: float = 1.5,
+    factor: float = 2.0,
     target_sr: int = 16000,
+    min_samples: int = 4096,
 ) -> tuple[np.ndarray, int]:
     """마지막 음절 구간을 factor배 시간 연장 (librosa time_stretch).
 
     last_syl_start: 마지막 음절 시작 시간(초). 이 이후가 늘어남.
+    min_samples: 구간이 너무 짧으면 onset을 앞당겨 최소 길이 확보.
     """
     import librosa
     y, sr = librosa.load(str(wav_path), sr=target_sr, mono=True)
     onset = int(last_syl_start * sr)
+    # 구간이 너무 짧으면 onset을 앞당겨 n_fft 제한 회피
+    if len(y) - onset < min_samples:
+        onset = max(0, len(y) - min_samples)
     stretched = librosa.effects.time_stretch(y[onset:], rate=1.0 / factor)
     return np.concatenate([y[:onset], stretched]).astype(np.float32), sr
 
