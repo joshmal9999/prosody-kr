@@ -56,14 +56,18 @@ def run(
 ) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    # 구두점은 pronunciation_to_ipa의 position 할당을 깨뜨리므로 사전 제거
+    # _forced_align과 positions 계산이 동일한 텍스트를 사용해야 segments 수가 일치함
+    clean_text = "".join(c for c in text if c not in ".·,!?。")
+
     print("모델 로딩 중...")
     recognizer = AudioToIPARecognizer()
 
     print("learner forced alignment 중...")
-    learner_fa = _forced_align(recognizer, learner_wav, text)
+    learner_fa = _forced_align(recognizer, learner_wav, clean_text)
 
     print("native forced alignment 중...")
-    native_fa = _forced_align(recognizer, native_wav, text)
+    native_fa = _forced_align(recognizer, native_wav, clean_text)
 
     # ── prosody JSON 저장 ────────────────────────────────────────────────────
     payload = {
@@ -84,8 +88,6 @@ def run(
     # ── F0 추출 + 음절 경계 변환 ─────────────────────────────────────────────
     native_f0 = extract_f0(native_wav)
     learner_f0 = extract_f0(learner_wav)
-    # 구두점은 pronunciation_to_ipa의 position 할당을 깨뜨리므로 사전 제거
-    clean_text = "".join(c for c in text if c not in ".·,!?。")
     positions = [t.syllable_position for t in pronunciation_to_ipa(clean_text).tokens]
     native_b = segments_to_syllable_boundaries(payload["native"]["phoneme_segments"], positions)
     learner_b = segments_to_syllable_boundaries(payload["learner"]["phoneme_segments"], positions)
