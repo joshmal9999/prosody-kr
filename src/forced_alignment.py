@@ -10,6 +10,10 @@ from src.label_to_ipa import ipa_tokens_to_labels
 from src.types import AlignmentSegment, ForcedAlignmentResult, PronunciationCandidate
 
 
+MAX_BRIDGED_BLANK_FRAMES = 20
+MAX_EDGE_PADDING_FRAMES = 2
+
+
 def _build_extended_sequence(target_ids: list[int], blank_id: int) -> list[int]:
     sequence = [blank_id]
     for token_id in target_ids:
@@ -60,6 +64,73 @@ def _viterbi_ctc_path(log_probs: np.ndarray, target_ids: list[int], blank_id: in
     return states, float(best_score)
 
 
+def _frame_boundaries(frame_timestamps: list[float], num_frames: int) -> list[float]:
+    if num_frames <= 0:
+        return [0.0]
+
+    if len(frame_timestamps) >= num_frames + 1:
+        return [float(timestamp) for timestamp in frame_timestamps[:num_frames + 1]]
+
+    if len(frame_timestamps) == num_frames and num_frames > 1:
+        audio_duration = float(frame_timestamps[-1])
+        if audio_duration > 0.0:
+            return [audio_duration * index / num_frames for index in range(num_frames + 1)]
+
+    if frame_timestamps:
+        frame_width = (
+            float(frame_timestamps[1] - frame_timestamps[0])
+            if len(frame_timestamps) > 1
+            else 0.02
+        )
+        boundaries = [float(timestamp) for timestamp in frame_timestamps]
+        while len(boundaries) < num_frames + 1:
+            boundaries.append(boundaries[-1] + frame_width)
+        return boundaries
+
+    return [float(index) for index in range(num_frames + 1)]
+
+
+def _segment_boundaries(label_frame_buckets: list[list[int]], num_frames: int) -> list[tuple[int, int] | None]:
+    evidence_ranges: list[tuple[int, int] | None] = [
+        (frame_indices[0], frame_indices[-1])
+        if frame_indices else None
+        for frame_indices in label_frame_buckets
+    ]
+    present = [index for index, frame_range in enumerate(evidence_ranges) if frame_range is not None]
+    boundaries: list[tuple[int, int] | None] = [None for _ in label_frame_buckets]
+
+    for label_index in present:
+        frame_range = evidence_ranges[label_index]
+        assert frame_range is not None
+        raw_start, raw_end = frame_range
+        start_boundary = max(0, raw_start - MAX_EDGE_PADDING_FRAMES)
+        end_boundary = min(num_frames, raw_end + 1 + MAX_EDGE_PADDING_FRAMES)
+        boundaries[label_index] = (start_boundary, max(start_boundary + 1, end_boundary))
+
+    for previous_index, next_index in zip(present, present[1:]):
+        previous_range = evidence_ranges[previous_index]
+        next_range = evidence_ranges[next_index]
+        previous_boundary = boundaries[previous_index]
+        next_boundary = boundaries[next_index]
+        assert previous_range is not None and next_range is not None
+        assert previous_boundary is not None and next_boundary is not None
+
+        previous_end_exclusive = previous_range[1] + 1
+        next_start = next_range[0]
+        blank_gap = next_start - previous_end_exclusive
+        if blank_gap <= MAX_BRIDGED_BLANK_FRAMES:
+            split = previous_end_exclusive + max(0, blank_gap) // 2
+            boundaries[previous_index] = (previous_boundary[0], max(previous_boundary[0] + 1, split))
+            boundaries[next_index] = (min(split, next_boundary[1] - 1), next_boundary[1])
+        else:
+            previous_end = min(previous_boundary[1], previous_end_exclusive + MAX_EDGE_PADDING_FRAMES)
+            next_start_boundary = max(next_boundary[0], next_start - MAX_EDGE_PADDING_FRAMES)
+            boundaries[previous_index] = (previous_boundary[0], max(previous_boundary[0] + 1, previous_end))
+            boundaries[next_index] = (min(next_start_boundary, next_boundary[1] - 1), next_boundary[1])
+
+    return boundaries
+
+
 def force_align_candidate(
     candidate: PronunciationCandidate,
     logits: list[list[float]],
@@ -79,6 +150,7 @@ def force_align_candidate(
 
     states, best_score = _viterbi_ctc_path(log_probs, target_ids, blank_id)
     num_frames = len(states)
+    frame_boundaries = _frame_boundaries(frame_timestamps, num_frames)
 
     label_frame_buckets: list[list[int]] = [[] for _ in labels]
     blank_frames = 0
@@ -93,20 +165,17 @@ def force_align_candidate(
 
     segments: list[AlignmentSegment] = []
     confidences: list[float] = []
+    segment_boundaries = _segment_boundaries(label_frame_buckets, num_frames)
     for index, frame_indices in enumerate(label_frame_buckets):
         if not frame_indices:
             continue
 
-        frame_start = frame_indices[0]
-        frame_end = frame_indices[-1]
-        time_start = frame_timestamps[frame_start] if frame_timestamps else float(frame_start)
-        if frame_timestamps and frame_end + 1 < len(frame_timestamps):
-            time_end = frame_timestamps[frame_end + 1]
-        elif frame_timestamps:
-            frame_width = frame_timestamps[1] - frame_timestamps[0] if len(frame_timestamps) > 1 else 0.02
-            time_end = frame_timestamps[frame_end] + frame_width
-        else:
-            time_end = float(frame_end + 1)
+        boundary_range = segment_boundaries[index]
+        if boundary_range is None:
+            continue
+        frame_start, frame_end_exclusive = boundary_range
+        time_start = frame_boundaries[frame_start]
+        time_end = frame_boundaries[min(frame_end_exclusive, len(frame_boundaries) - 1)]
 
         label_id = target_ids[index]
         probs = np.exp(log_probs[frame_indices, label_id])
@@ -119,7 +188,7 @@ def force_align_candidate(
                 start_time=time_start,
                 end_time=time_end,
                 frame_start=frame_start,
-                frame_end=frame_end,
+                frame_end=max(frame_start, frame_end_exclusive - 1),
                 confidence=confidence,
             )
         )
