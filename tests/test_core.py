@@ -173,7 +173,6 @@ class TestIntonationComparison:
         json_mod.dumps(result)  # NaN이 있으면 여기서 TypeError 발생
 
     def test_plot_native_vs_learner(self):
-        import matplotlib.pyplot as plt
         from core.plotter import ComparisonPlotter
 
         with open(INTONATION_JSON) as f:
@@ -192,6 +191,7 @@ class TestIntonationComparison:
             title=ref_text,
             syllable_labels=syllable_labels,
         )
-        out = ARTIFACT_DIR / "plot.png"
-        fig.savefig(out)
+        out = ARTIFACT_DIR / "plot.html"
+        fig.write_html(out)
         assert fig is not None
+        assert out.exists() and out.stat().st_size > 0

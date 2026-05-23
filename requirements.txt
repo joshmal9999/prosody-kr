@@ -17,7 +17,7 @@ dtaidistance
 pandas
 requests
 google-cloud-texttospeech
-matplotlib
+plotly
 
 # 개발/테스트
 pytest
