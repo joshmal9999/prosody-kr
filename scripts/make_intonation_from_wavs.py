@@ -17,15 +17,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-
-from core.comparator import IntonationComparator
-from core.f0_extractor import extract_f0
-from core.metrics import compute_metrics
-from core.plotter import ComparisonPlotter
-from core.syllable_utils import segments_to_syllable_boundaries
+# NOTE: core/* (parselmouth·dtaidistance) 임포트는 run() 안에서 torch 모델
+# 구성 이후로 지연한다. parselmouth가 torch보다 먼저 로드되면 Wav2Vec2의
+# weight_norm(LAPACK 호출)이 macOS arm64에서 segfault한다.
 from src.audio_to_ipa import AudioToIPARecognizer
 from src.forced_alignment import force_align_candidate
 from src.korean_ipa import pronunciation_to_ipa
@@ -63,6 +57,14 @@ def run(
     print("모델 로딩 중...")
     recognizer = AudioToIPARecognizer()
 
+    # torch 모델 구성 완료 후에만 parselmouth/dtaidistance 로드 (segfault 회피)
+    from core.aligner import DtwAligner, NoAligner
+    from core.f0_extractor import extract_f0
+    from core.features import delta_f0
+    from core.lens import build_plot_model
+    from core.plotter import figure_from_model
+    from core.segmenter import EojeolSegmenter, SyllableSegmenter, WholeSegmenter
+
     print("learner forced alignment 중...")
     learner_fa = _forced_align(recognizer, learner_wav, clean_text)
 
@@ -85,31 +87,55 @@ def run(
     json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"JSON 저장 → {json_path}")
 
-    # ── F0 추출 + 음절 경계 변환 ─────────────────────────────────────────────
+    # ── F0 추출 ──────────────────────────────────────────────────────────────
     native_f0 = extract_f0(native_wav)
     learner_f0 = extract_f0(learner_wav)
     positions = [t.syllable_position for t in pronunciation_to_ipa(clean_text).tokens]
-    native_b = segments_to_syllable_boundaries(payload["native"]["phoneme_segments"], positions)
-    learner_b = segments_to_syllable_boundaries(payload["learner"]["phoneme_segments"], positions)
-
-    # ── segmental alignment + 메트릭 + plot ──────────────────────────────────
-    comparisons = IntonationComparator().compare(
-        native_f0, learner_f0,
-        native_boundaries=native_b,
-        learner_boundaries=learner_b,
-    )
-    metrics = compute_metrics(comparisons)
-
+    n_seg = payload["native"]["phoneme_segments"]
+    l_seg = payload["learner"]["phoneme_segments"]
     syllable_labels = [c for c in text if c.strip() and c not in ".·,!?。"]
-    fig = ComparisonPlotter(threshold=1).plot(
-        comparisons, metrics,
-        title=text,
-        syllable_labels=syllable_labels,
+
+    # ── 렌즈 매트릭스 = Segmenter × Aligner × feature ────────────────────────
+    # 새 렌즈가 보고 싶으면 dict 한 줄 추가. feature 생략 시 z-score f0.
+    delta_kw = dict(
+        feature=delta_f0,
+        y_axis_title="ΔF0 (z-score/frame)",
+        y_range=None,  # delta는 진폭이 달라 autoscale
     )
-    plot_path = out_dir / "plot.png"
-    fig.savefig(plot_path)
-    plt.close(fig)
-    print(f"plot 저장 → {plot_path}")
+    lenses = [
+        dict(name="syllable_noalign",
+             segmenter=SyllableSegmenter(n_seg, l_seg, positions, syllable_labels),
+             aligner=NoAligner()),
+        dict(name="syllable_dtw",
+             segmenter=SyllableSegmenter(n_seg, l_seg, positions, syllable_labels),
+             aligner=DtwAligner()),
+        dict(name="eojeol_noalign",
+             segmenter=EojeolSegmenter(n_seg, l_seg, positions, clean_text),
+             aligner=NoAligner()),
+        dict(name="eojeol_noalign_delta",
+             segmenter=EojeolSegmenter(n_seg, l_seg, positions, clean_text),
+             aligner=NoAligner(), **delta_kw),
+        dict(name="eojeol_dtw",
+             segmenter=EojeolSegmenter(n_seg, l_seg, positions, clean_text),
+             aligner=DtwAligner()),
+        dict(name="eojeol_dtw_delta",
+             segmenter=EojeolSegmenter(n_seg, l_seg, positions, clean_text),
+             aligner=DtwAligner(), **delta_kw),
+        dict(name="global_dtw",
+             segmenter=WholeSegmenter(native_f0, learner_f0),
+             aligner=DtwAligner()),
+    ]
+    for cfg in lenses:
+        name = cfg.pop("name")
+        model = build_plot_model(
+            native_f0, learner_f0, title=f"{text} — {name}", **cfg
+        )
+        if model is None:
+            print(f"렌즈 {name}: 경계 없음, 건너뜀")
+            continue
+        plot_path = out_dir / f"plot_{name}.html"
+        figure_from_model(model).write_html(plot_path)
+        print(f"plot 저장 → {plot_path}")
 
 
 if __name__ == "__main__":
