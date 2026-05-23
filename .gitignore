@@ -31,3 +31,5 @@ data/
 
 # Claude.md
 claude.md
+.codegraph
+.cursor
