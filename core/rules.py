@@ -1,10 +1,10 @@
-"""5 rule trigger 로직 — lens 출력 → list[Record].
+"""5 rule trigger 로직 — lens 출력 + DTW path → list[Record].
 
-lens-rule paradigm의 실행 코어. lens 신호(어절 단위 metric)를 받아 threshold
-비교 후 Record를 만든다. severity quantize → flat list → severity 내림차순까지
-deterministic. LLM은 결과만 받아 NL 합성·톤 조절.
+lens-rule paradigm v3:
+- pitch_rising/falling_excess: DTW path 위 learner-time 슬라이딩 윈도우 → 부호별 묶음 record
+- pitch_offset / syllable_elongation / eojeol_slow: 기존 lens metric 그대로
 
-threshold는 config/thresholds.toml에서 로드 (hardcode 금지 — reactive 조정용).
+threshold + window 파라미터는 config/thresholds.toml에서 로드 (hardcode 금지).
 """
 from __future__ import annotations
 
@@ -14,17 +14,19 @@ from pathlib import Path
 import numpy as np
 
 from core.f0_extractor import F0Result
-from core.features import delta_f0
+from core.features import delta_f0, interp_unvoiced
 from core.record import Record, RuleLabel, Severity, sort_by_severity
 
 _HANGUL_LO, _HANGUL_HI = 0xAC00, 0xD7A3
 _CONFIG_PATH = Path(__file__).resolve().parent.parent / "config" / "thresholds.toml"
+_SYLLABLE_OVERLAP_TH = 0.3  # 윈도우가 음절 시간의 30% 이상이면 그 음절 포함 (hardcode — micro)
 
 
-def load_thresholds(path: str | Path | None = None) -> dict[str, float]:
+def load_config(path: str | Path | None = None) -> dict:
+    """config/thresholds.toml 전체 로드 — {thresholds, window} 반환."""
     p = Path(path) if path else _CONFIG_PATH
     with open(p, "rb") as f:
-        return tomllib.load(f)["thresholds"]
+        return tomllib.load(f)
 
 
 def _quantize(value: float, threshold: float) -> Severity:
@@ -33,13 +35,13 @@ def _quantize(value: float, threshold: float) -> Severity:
 
 def _slice(
     times: np.ndarray, arr: np.ndarray, voiced: np.ndarray, t0: float, t1: float
-) -> tuple[np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     mask = (times >= t0) & (times < t1)
-    return arr[mask], voiced[mask]
+    return arr[mask], voiced[mask], times[mask]
 
 
 def _mean_voiced(arr: np.ndarray, voiced: np.ndarray) -> float | None:
-    if not voiced.any():
+    if arr.size == 0 or not voiced.any():
         return None
     return float(arr[voiced].mean())
 
@@ -67,6 +69,36 @@ def _position_hint(pos: int, total: int, label: str) -> str:
     return f"{prefix} ({label})" if label else prefix
 
 
+def _window_to_syllables(
+    w_start: float, w_end: float,
+    syll_spans: list[tuple[float, float]],
+    syll_labels: list[str],
+) -> str | None:
+    """윈도우 절대 시간 → overlap ≥ threshold인 음절들 hint. 없으면 None."""
+    included: list[tuple[int, str]] = []
+    for i, (s0, s1) in enumerate(syll_spans):
+        dur = s1 - s0
+        if dur <= 0:
+            continue
+        ovlp = max(0.0, min(w_end, s1) - max(w_start, s0))
+        if ovlp / dur >= _SYLLABLE_OVERLAP_TH:
+            label = syll_labels[i] if i < len(syll_labels) else ""
+            included.append((i, label))
+    if not included:
+        return None
+    n_total = len(syll_spans)
+    if len(included) == 1:
+        i, lbl = included[0]
+        return _position_hint(i, n_total, lbl)
+    first_i, _ = included[0]
+    last_i, _ = included[-1]
+    labels_concat = "".join(lbl for _, lbl in included if lbl)
+    first_hint = _position_hint(first_i, n_total, "")
+    last_hint = _position_hint(last_i, n_total, "")
+    suffix = f" ({labels_concat})" if labels_concat else ""
+    return f"{first_hint}~{last_hint}{suffix}"
+
+
 def evaluate(
     native_f0: F0Result,
     learner_f0: F0Result,
@@ -77,13 +109,14 @@ def evaluate(
     syllable_learner_spans: list[tuple[float, float]],
     syllable_labels: list[str],
     eojeol_text: str,
-    thresholds: dict[str, float] | None = None,
+    config_path: str | Path | None = None,
 ) -> list[Record]:
     """모든 어절에 대해 5 rule 평가 → flat list[Record], severity 내림차순."""
-    th = thresholds or load_thresholds()
-    records: list[Record] = []
+    cfg = load_config(config_path)
+    th = cfg["thresholds"]
+    win = cfg["window"]
 
-    # 전체 발화에서 delta-f0 1회 계산 (어절 경계 미분 artifact 회피)
+    records: list[Record] = []
     n_delta = delta_f0(native_f0)
     l_delta = delta_f0(learner_f0)
     syll_ranges = _eojeol_syllable_ranges(eojeol_text)
@@ -93,13 +126,16 @@ def evaluate(
         n_t0, n_t1 = eojeol_native_spans[idx]
         l_t0, l_t1 = eojeol_learner_spans[idx]
         label = eojeol_labels[idx] if idx < len(eojeol_labels) else ""
+        s0, s1 = syll_ranges[idx] if idx < len(syll_ranges) else (0, 0)
+        s1_eff = min(s1, len(syllable_learner_spans))
+        syll_spans_eo = syllable_learner_spans[s0:s1_eff]
+        syll_labels_eo = syllable_labels[s0:s1_eff]
 
-        rec = _rule_pitch_shape(
+        records.extend(_rule_pitch_shape_windowed(
             idx, label, native_f0, learner_f0,
-            n_delta, l_delta, n_t0, n_t1, l_t0, l_t1, th,
-        )
-        if rec:
-            records.append(rec)
+            n_delta, l_delta, n_t0, n_t1, l_t0, l_t1,
+            syll_spans_eo, syll_labels_eo, th, win,
+        ))
 
         rec = _rule_pitch_offset(
             idx, label, native_f0, learner_f0,
@@ -114,10 +150,10 @@ def evaluate(
         if rec:
             records.append(rec)
 
-        if idx < len(syll_ranges):
-            s0, s1 = syll_ranges[idx]
+        s1_native = min(s1, len(syllable_native_spans))
+        if s0 < s1_native and s0 < s1_eff:
             rec = _rule_syllable_elongation(
-                idx, label, s0, s1,
+                idx, label, s0, min(s1_native, s1_eff),
                 syllable_native_spans, syllable_learner_spans, syllable_labels,
                 th["syllable_elongation"],
             )
@@ -127,40 +163,132 @@ def evaluate(
     return sort_by_severity(records)
 
 
-def _rule_pitch_shape(
+def _rule_pitch_shape_windowed(
     idx: int, label: str,
     native_f0: F0Result, learner_f0: F0Result,
     n_delta: np.ndarray, l_delta: np.ndarray,
     n_t0: float, n_t1: float, l_t0: float, l_t1: float,
+    syll_spans_eo: list[tuple[float, float]],
+    syll_labels_eo: list[str],
     th: dict[str, float],
-) -> Record | None:
-    n_d, n_v = _slice(native_f0.times, n_delta, native_f0.voiced_mask, n_t0, n_t1)
-    l_d, l_v = _slice(learner_f0.times, l_delta, learner_f0.voiced_mask, l_t0, l_t1)
-    n_mean = _mean_voiced(n_d, n_v)
-    l_mean = _mean_voiced(l_d, l_v)
-    if n_mean is None or l_mean is None:
-        return None
-    diff = l_mean - n_mean
+    win: dict[str, float],
+) -> list[Record]:
+    """DTW path + learner-time 슬라이딩 윈도우. 부호별로 0~2 record."""
+    n_d, n_v, _ = _slice(native_f0.times, n_delta, native_f0.voiced_mask, n_t0, n_t1)
+    l_d, l_v, l_t = _slice(learner_f0.times, l_delta, learner_f0.voiced_mask, l_t0, l_t1)
+    if len(n_d) < 3 or len(l_d) < 3:
+        return []
+
+    # DTW는 무성 보간 후 연속 contour에서. metric은 원래 voiced frame만 사용 (mean_voiced).
+    n_interp = interp_unvoiced(n_d, n_v)
+    l_interp = interp_unvoiced(l_d, l_v)
+
+    from dtaidistance import dtw  # parselmouth/torch 순서 보호 (deferred import 패턴 유지)
+    path = dtw.warping_path(n_interp, l_interp)
+    # path 인덱스: (native_idx, learner_idx). learner idx에 매핑된 native idx 모음.
+    n_idx_by_l: dict[int, list[int]] = {}
+    for ni, li in path:
+        n_idx_by_l.setdefault(li, []).append(ni)
+
+    dur = l_t1 - l_t0
+    if dur <= 0:
+        return []
+    size = win["size_ratio"] * dur
+    stride = win["stride_ratio"] * dur
+    if stride <= 0 or size <= 0 or size > dur:
+        return []
+    n_windows = max(1, int((dur - size) / stride) + 1)
+
     th_r = th["pitch_rising_excess"]
     th_f = th["pitch_falling_excess"]
-    if diff > th_r:
-        rule: RuleLabel = "pitch_rising_excess"
-        sev = _quantize(diff, th_r)
-    elif diff < -th_f:
-        rule = "pitch_falling_excess"
-        sev = _quantize(diff, th_f)
-    else:
-        return None
+
+    rising_wins: list[tuple[float, dict]] = []
+    falling_wins: list[tuple[float, dict]] = []
+
+    for k in range(n_windows):
+        w_start_t = l_t0 + k * stride
+        w_end_t = w_start_t + size
+        l_mask = (l_t >= w_start_t) & (l_t < w_end_t)
+        if not l_mask.any():
+            continue
+        li_indices = np.where(l_mask)[0]
+        li_start, li_end = int(li_indices[0]), int(li_indices[-1])
+
+        n_idx_set: list[int] = []
+        for li in range(li_start, li_end + 1):
+            n_idx_set.extend(n_idx_by_l.get(li, []))
+        if not n_idx_set:
+            continue
+        ni_start, ni_end = min(n_idx_set), max(n_idx_set)
+
+        l_mean = _mean_voiced(l_d[li_start:li_end + 1], l_v[li_start:li_end + 1])
+        n_mean = _mean_voiced(n_d[ni_start:ni_end + 1], n_v[ni_start:ni_end + 1])
+        if l_mean is None or n_mean is None:
+            continue
+        diff = l_mean - n_mean
+
+        if not (diff > th_r or diff < -th_f):
+            continue
+
+        ratio_s = (w_start_t - l_t0) / dur
+        ratio_e = (w_end_t - l_t0) / dur
+        syll_str = _window_to_syllables(w_start_t, w_end_t, syll_spans_eo, syll_labels_eo) or ""
+        win_info = {
+            "learner_time_ratio": [round(ratio_s, 3), round(ratio_e, 3)],
+            "delta_diff": round(diff, 4),
+            "syllable": syll_str,
+        }
+        if diff > th_r:
+            rising_wins.append((diff, win_info))
+        else:
+            falling_wins.append((diff, win_info))
+
+    records: list[Record] = []
+    if rising_wins:
+        records.append(_make_shape_record(
+            idx, label, "pitch_rising_excess", rising_wins, th_r,
+            syll_spans_eo, syll_labels_eo,
+        ))
+    if falling_wins:
+        records.append(_make_shape_record(
+            idx, label, "pitch_falling_excess", falling_wins, th_f,
+            syll_spans_eo, syll_labels_eo,
+        ))
+    return records
+
+
+def _make_shape_record(
+    idx: int, eojeol_label: str,
+    rule: RuleLabel, wins: list[tuple[float, dict]], threshold: float,
+    syll_spans_eo: list[tuple[float, float]],
+    syll_labels_eo: list[str],
+) -> Record:
+    max_abs = max(abs(d) for d, _ in wins)
+    windows = [info for _, info in wins]  # k(시간) 순서 — append 순서 유지
+
+    syllable_hint: str | None = None
+    if syll_spans_eo:
+        eo_start = syll_spans_eo[0][0]
+        eo_end = syll_spans_eo[-1][1]
+        eo_dur = eo_end - eo_start
+        if eo_dur > 0:
+            min_r = min(w["learner_time_ratio"][0] for w in windows)
+            max_r = max(w["learner_time_ratio"][1] for w in windows)
+            union_start = eo_start + min_r * eo_dur
+            union_end = eo_start + max_r * eo_dur
+            syllable_hint = _window_to_syllables(
+                union_start, union_end, syll_spans_eo, syll_labels_eo
+            )
+
     return Record(
         eojeol_idx=idx,
         rule_label=rule,
-        severity=sev,
-        trigger_lens="eojeol_dtw_delta",
+        severity=_quantize(max_abs, threshold),
+        trigger_lens="eojeol_dtw_delta_window",
+        syllable_hint=syllable_hint,
         evidence_metrics={
-            "eojeol_label": label,
-            "learner_mean_delta": round(l_mean, 4),
-            "native_mean_delta": round(n_mean, 4),
-            "delta_diff": round(diff, 4),
+            "eojeol_label": eojeol_label,
+            "windows": windows,
         },
     )
 
@@ -171,8 +299,8 @@ def _rule_pitch_offset(
     n_t0: float, n_t1: float, l_t0: float, l_t1: float,
     threshold: float,
 ) -> Record | None:
-    n_f, n_v = _slice(native_f0.times, native_f0.f0, native_f0.voiced_mask, n_t0, n_t1)
-    l_f, l_v = _slice(learner_f0.times, learner_f0.f0, learner_f0.voiced_mask, l_t0, l_t1)
+    n_f, n_v, _ = _slice(native_f0.times, native_f0.f0, native_f0.voiced_mask, n_t0, n_t1)
+    l_f, l_v, _ = _slice(learner_f0.times, learner_f0.f0, learner_f0.voiced_mask, l_t0, l_t1)
     n_mean = _mean_voiced(n_f, n_v)
     l_mean = _mean_voiced(l_f, l_v)
     if n_mean is None or l_mean is None:
@@ -204,7 +332,6 @@ def _rule_eojeol_slow(
     if n_dur <= 0 or l_dur <= 0:
         return None
     ratio = l_dur / n_dur
-    # 1.0이 정상 — 이탈 크기 (ratio - 1.0) 기준 trigger
     deviation = ratio - 1.0
     trigger = threshold - 1.0  # 예: threshold=1.4 → 이탈 ≥0.4면 trigger
     if abs(deviation) < trigger:
@@ -231,13 +358,12 @@ def _rule_syllable_elongation(
     syll_labels: list[str],
     threshold: float,
 ) -> Record | None:
-    s1_eff = min(s1, len(syll_native_spans), len(syll_learner_spans))
-    if s0 >= s1_eff:
+    if s0 >= s1:
         return None
     max_ratio = 0.0
     max_pos = -1
     learner_dur = native_dur = 0.0
-    for i in range(s0, s1_eff):
+    for i in range(s0, s1):
         n_dur = syll_native_spans[i][1] - syll_native_spans[i][0]
         l_dur = syll_learner_spans[i][1] - syll_learner_spans[i][0]
         if n_dur <= 0:
@@ -256,7 +382,7 @@ def _rule_syllable_elongation(
         rule_label="syllable_elongation",
         severity=_quantize(deviation, trigger),
         trigger_lens="syllable_noalign",
-        syllable_hint=_position_hint(max_pos, s1_eff - s0, syll_label),
+        syllable_hint=_position_hint(max_pos, s1 - s0, syll_label),
         evidence_metrics={
             "eojeol_label": label,
             "syllable_idx_in_eojeol": max_pos,

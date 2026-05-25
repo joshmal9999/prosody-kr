@@ -9,8 +9,8 @@
 [thresholds]
 # delta_diff (z-score/frame): DTW path 위 learner-time 윈도우 내 (l_mean − n_mean)
 # trigger = rules.py가 DTW path 직접 계산 (lens 무관, 어절 평균 v2 폐기 → 윈도우 v3)
-pitch_rising_excess  = 0.5
-pitch_falling_excess = 0.5
+pitch_rising_excess  = 0.1
+pitch_falling_excess = 0.1
 
 # z_diff (z-score): |z_learner_eojeol_mean − z_native_eojeol_mean|
 # trigger = f0_extractor에서 직접 계산
@@ -26,5 +26,5 @@ eojeol_slow = 1.4
 
 [window]
 # learner 어절 시간 비율 기준. DTW path 위에서 평가하되 윈도우 경계는 learner 시간으로.
-size_ratio   = 0.25     # 윈도우 폭 = learner 어절의 25% (≈ 1음절)
-stride_ratio = 0.125    # 50% overlap → 어절당 7개 윈도우
+size_ratio   = 0.1     # 윈도우 폭 = learner 어절의 25% (≈ 1음절)
+stride_ratio = 0.05    # 50% overlap → 어절당 7개 윈도우
