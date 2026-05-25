@@ -15,6 +15,7 @@ import sys
 from dataclasses import asdict
 from pathlib import Path
 
+
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # NOTE: core/* (parselmouth·dtaidistance) 임포트는 run() 안에서 torch 모델
@@ -63,6 +64,7 @@ def run(
     from core.features import delta_f0
     from core.lens import build_plot_model
     from core.plotter import figure_from_model
+    from core.rules import evaluate as evaluate_rules
     from core.segmenter import EojeolSegmenter, SyllableSegmenter, WholeSegmenter
 
     print("learner forced alignment 중...")
@@ -136,6 +138,30 @@ def run(
         plot_path = out_dir / f"plot_{name}.html"
         figure_from_model(model).write_html(plot_path)
         print(f"plot 저장 → {plot_path}")
+
+    # ── Records (lens-rule paradigm) ─────────────────────────────────────────
+    # Segmenter 인스턴스를 rules용으로 한 번 더 만든다 — 매트릭스 내부 인스턴스와 분리.
+    eojeol_seg = EojeolSegmenter(n_seg, l_seg, positions, clean_text)
+    syllable_seg = SyllableSegmenter(n_seg, l_seg, positions, syllable_labels)
+    records = evaluate_rules(
+        native_f0, learner_f0,
+        eojeol_native_spans=eojeol_seg.native_spans(),
+        eojeol_learner_spans=eojeol_seg.learner_spans(),
+        eojeol_labels=eojeol_seg.labels(),
+        syllable_native_spans=syllable_seg.native_spans(),
+        syllable_learner_spans=syllable_seg.learner_spans(),
+        syllable_labels=syllable_seg.labels(),
+        eojeol_text=clean_text,
+    )
+    records_payload = {
+        "reference_text": text,
+        "records": [asdict(r) for r in records],
+    }
+    records_path = out_dir / "records.json"
+    records_path.write_text(
+        json.dumps(records_payload, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(f"records 저장 → {records_path} ({len(records)}개)")
 
 
 if __name__ == "__main__":
