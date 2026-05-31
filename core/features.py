@@ -49,3 +49,12 @@ def delta_f0(
         win = 3
     poly = min(polyorder, win - 1)
     return savgol_filter(c, win, poly, deriv=1)
+
+
+def slice_signal(
+    times: np.ndarray, arr: np.ndarray, voiced: np.ndarray,
+    t0: float, t1: float,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """시간 구간 [t0, t1)으로 신호 슬라이스. (arr, voiced, times) 반환."""
+    mask = (times >= t0) & (times < t1)
+    return arr[mask], voiced[mask], times[mask]

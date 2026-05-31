@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 
 from core.f0_extractor import F0Result
-from core.features import delta_f0, interp_unvoiced
+from core.features import delta_f0, interp_unvoiced, slice_signal
 from core.record import Record, RuleLabel, Severity, sort_by_severity
 
 _HANGUL_LO, _HANGUL_HI = 0xAC00, 0xD7A3
@@ -32,12 +32,6 @@ def load_config(path: str | Path | None = None) -> dict:
 def _quantize(value: float, threshold: float) -> Severity:
     return "major" if abs(value) >= 2 * threshold else "minor"
 
-
-def _slice(
-    times: np.ndarray, arr: np.ndarray, voiced: np.ndarray, t0: float, t1: float
-) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    mask = (times >= t0) & (times < t1)
-    return arr[mask], voiced[mask], times[mask]
 
 
 def _mean_voiced(arr: np.ndarray, voiced: np.ndarray) -> float | None:
@@ -174,8 +168,8 @@ def _rule_pitch_shape_windowed(
     win: dict[str, float],
 ) -> list[Record]:
     """DTW path + learner-time 슬라이딩 윈도우. 부호별로 0~2 record."""
-    n_d, n_v, _ = _slice(native_f0.times, n_delta, native_f0.voiced_mask, n_t0, n_t1)
-    l_d, l_v, l_t = _slice(learner_f0.times, l_delta, learner_f0.voiced_mask, l_t0, l_t1)
+    n_d, n_v, _ = slice_signal(native_f0.times, n_delta, native_f0.voiced_mask, n_t0, n_t1)
+    l_d, l_v, l_t = slice_signal(learner_f0.times, l_delta, learner_f0.voiced_mask, l_t0, l_t1)
     if len(n_d) < 3 or len(l_d) < 3:
         return []
 
@@ -299,8 +293,8 @@ def _rule_pitch_offset(
     n_t0: float, n_t1: float, l_t0: float, l_t1: float,
     threshold: float,
 ) -> Record | None:
-    n_f, n_v, _ = _slice(native_f0.times, native_f0.f0, native_f0.voiced_mask, n_t0, n_t1)
-    l_f, l_v, _ = _slice(learner_f0.times, learner_f0.f0, learner_f0.voiced_mask, l_t0, l_t1)
+    n_f, n_v, _ = slice_signal(native_f0.times, native_f0.f0, native_f0.voiced_mask, n_t0, n_t1)
+    l_f, l_v, _ = slice_signal(learner_f0.times, learner_f0.f0, learner_f0.voiced_mask, l_t0, l_t1)
     n_mean = _mean_voiced(n_f, n_v)
     l_mean = _mean_voiced(l_f, l_v)
     if n_mean is None or l_mean is None:

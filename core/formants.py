@@ -33,6 +33,14 @@ class FormantResult:
     times: np.ndarray
     voiced_mask: np.ndarray
 
+    def slice(self, t0: float, t1: float) -> FormantResult:
+        """시간 구간 [t0, t1)으로 슬라이스."""
+        mask = (self.times >= t0) & (self.times < t1)
+        return FormantResult(
+            f1=self.f1[mask], f2=self.f2[mask],
+            times=self.times[mask], voiced_mask=self.voiced_mask[mask],
+        )
+
 
 def extract_formants(wav_path: str | Path) -> FormantResult:
     snd = parselmouth.Sound(str(wav_path)).resample(new_frequency=SAMPLE_RATE, precision=50)
@@ -65,13 +73,6 @@ def _zscore(x: np.ndarray) -> np.ndarray:
         return x - mean
     return (x - mean) / std
 
-
-def _slice(fr: FormantResult, t0: float, t1: float) -> FormantResult:
-    mask = (fr.times >= t0) & (fr.times < t1)
-    return FormantResult(
-        f1=fr.f1[mask], f2=fr.f2[mask],
-        times=fr.times[mask], voiced_mask=fr.voiced_mask[mask],
-    )
 
 
 def _align_dtw(learner: FormantResult, native: FormantResult) -> np.ndarray | None:
@@ -223,8 +224,8 @@ def build_eojeol_figure(
         vertical_spacing=0.05, horizontal_spacing=0.06,
     )
     for i in range(n_eo):
-        l_slice = _slice(learner, *eojeol_learner_spans[i])
-        n_slice = _slice(native, *eojeol_native_spans[i])
+        l_slice = learner.slice(*eojeol_learner_spans[i])
+        n_slice = native.slice(*eojeol_native_spans[i])
         wp = _align_dtw(l_slice, n_slice)
         if wp is None or len(wp) == 0:
             continue

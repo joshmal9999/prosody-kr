@@ -9,19 +9,13 @@ import numpy as np
 
 from core.comparator import SyllableComparison
 from core.f0_extractor import F0Result
-from core.features import f0_feature
+from core.features import f0_feature, slice_signal
 from core.metrics import compute_metrics
 from core.plot_model import PlotModel, Series, Span
 
 NATIVE_COLOR = "#185FA5"
 LEARNER_COLOR = "#993C1D"
 
-
-def _slice(
-    times: np.ndarray, arr: np.ndarray, voiced: np.ndarray, t0: float, t1: float
-) -> tuple[np.ndarray, np.ndarray]:
-    mask = (times >= t0) & (times < t1)
-    return arr[mask], voiced[mask]
 
 
 def build_plot_model(
@@ -51,8 +45,8 @@ def build_plot_model(
     comparisons: list[SyllableComparison] = []
     seg_curves: list[tuple[np.ndarray, np.ndarray]] = []
     for idx, ((n0, n1), (l0, l1)) in enumerate(zip(nb, lb)):
-        n_f0, n_v = _slice(native_f0.times, n_feat, native_f0.voiced_mask, n0, n1)
-        l_f0, l_v = _slice(learner_f0.times, l_feat, learner_f0.voiced_mask, l0, l1)
+        n_f0, n_v, _ = slice_signal(native_f0.times, n_feat, native_f0.voiced_mask, n0, n1)
+        l_f0, l_v, _ = slice_signal(learner_f0.times, l_feat, learner_f0.voiced_mask, l0, l1)
         _, nc, lc, jv = aligner.align(n_f0, n_v, l_f0, l_v)
         seg_curves.append((nc, lc))
         comparisons.append(SyllableComparison(
