@@ -27,7 +27,6 @@ build/
 # Prosody pipeline outputs (큰 결과물 — fixture는 git add -f로 강제 트래킹)
 artifacts/
 datasets/
-data/
 
 # Claude.md
 CLAUDE.md

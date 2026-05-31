@@ -1,0 +1,229 @@
+{
+  "reference_text": "영수증 주세요.",
+  "native": {
+    "wav": "/Users/jeawook02094/Downloads/prosody/data/tts/영수증 주세요.wav",
+    "phoneme_segments": [
+      {
+        "token": "jʌ",
+        "label": "iEO",
+        "start_time": 0.1408974358974359,
+        "end_time": 0.2214102564102564,
+        "frame_start": 7,
+        "frame_end": 10,
+        "confidence": 0.9889622634526332
+      },
+      {
+        "token": "ŋ",
+        "label": "NG",
+        "start_time": 0.2214102564102564,
+        "end_time": 0.3220512820512821,
+        "frame_start": 11,
+        "frame_end": 15,
+        "confidence": 0.9446315463901919
+      },
+      {
+        "token": "s",
+        "label": "S",
+        "start_time": 0.3220512820512821,
+        "end_time": 0.4025641025641026,
+        "frame_start": 16,
+        "frame_end": 19,
+        "confidence": 0.9946905645674464
+      },
+      {
+        "token": "u",
+        "label": "U",
+        "start_time": 0.4025641025641026,
+        "end_time": 0.48307692307692307,
+        "frame_start": 20,
+        "frame_end": 23,
+        "confidence": 0.9891672518577416
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 0.48307692307692307,
+        "end_time": 0.5434615384615384,
+        "frame_start": 24,
+        "frame_end": 26,
+        "confidence": 0.9719261818616511
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 0.5434615384615384,
+        "end_time": 0.6038461538461538,
+        "frame_start": 27,
+        "frame_end": 29,
+        "confidence": 0.9587020912914768
+      },
+      {
+        "token": "ŋ",
+        "label": "NG",
+        "start_time": 0.6038461538461538,
+        "end_time": 0.6843589743589744,
+        "frame_start": 30,
+        "frame_end": 33,
+        "confidence": 0.9788285836676305
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 0.6843589743589744,
+        "end_time": 0.785,
+        "frame_start": 34,
+        "frame_end": 38,
+        "confidence": 0.9938806091848572
+      },
+      {
+        "token": "u",
+        "label": "U",
+        "start_time": 0.785,
+        "end_time": 0.8655128205128205,
+        "frame_start": 39,
+        "frame_end": 42,
+        "confidence": 0.989613284107495
+      },
+      {
+        "token": "s",
+        "label": "S",
+        "start_time": 0.8655128205128205,
+        "end_time": 0.9460256410256411,
+        "frame_start": 43,
+        "frame_end": 46,
+        "confidence": 0.9910181778999557
+      },
+      {
+        "token": "e",
+        "label": "E",
+        "start_time": 0.9460256410256411,
+        "end_time": 1.0466666666666666,
+        "frame_start": 47,
+        "frame_end": 51,
+        "confidence": 0.9891095573655454
+      },
+      {
+        "token": "jo",
+        "label": "iO",
+        "start_time": 1.5096153846153846,
+        "end_time": 1.57,
+        "frame_start": 75,
+        "frame_end": 77,
+        "confidence": 0.9935597189571934
+      }
+    ]
+  },
+  "learner": {
+    "wav": "/Users/jeawook02094/Downloads/prosody/data/learner/영수증주세요_2.wav",
+    "phoneme_segments": [
+      {
+        "token": "jʌ",
+        "label": "iEO",
+        "start_time": 0.12075,
+        "end_time": 0.20125,
+        "frame_start": 6,
+        "frame_end": 9,
+        "confidence": 0.7853243125008013
+      },
+      {
+        "token": "ŋ",
+        "label": "NG",
+        "start_time": 0.20125,
+        "end_time": 0.301875,
+        "frame_start": 10,
+        "frame_end": 14,
+        "confidence": 0.9875335190716071
+      },
+      {
+        "token": "s",
+        "label": "S",
+        "start_time": 0.301875,
+        "end_time": 0.42262500000000003,
+        "frame_start": 15,
+        "frame_end": 20,
+        "confidence": 0.8672894007272534
+      },
+      {
+        "token": "u",
+        "label": "U",
+        "start_time": 0.42262500000000003,
+        "end_time": 0.503125,
+        "frame_start": 21,
+        "frame_end": 24,
+        "confidence": 0.8843755823794449
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 0.503125,
+        "end_time": 0.60375,
+        "frame_start": 25,
+        "frame_end": 29,
+        "confidence": 0.9983365758895634
+      },
+      {
+        "token": "ɯ",
+        "label": "EU",
+        "start_time": 0.60375,
+        "end_time": 0.6641250000000001,
+        "frame_start": 30,
+        "frame_end": 32,
+        "confidence": 0.0002394541278612845
+      },
+      {
+        "token": "ŋ",
+        "label": "NG",
+        "start_time": 0.6641250000000001,
+        "end_time": 0.76475,
+        "frame_start": 33,
+        "frame_end": 37,
+        "confidence": 0.00014471937812029793
+      },
+      {
+        "token": "tɕ",
+        "label": "J",
+        "start_time": 0.76475,
+        "end_time": 0.865375,
+        "frame_start": 38,
+        "frame_end": 42,
+        "confidence": 0.8913667436435393
+      },
+      {
+        "token": "u",
+        "label": "U",
+        "start_time": 0.865375,
+        "end_time": 1.00625,
+        "frame_start": 43,
+        "frame_end": 49,
+        "confidence": 0.006218815179622593
+      },
+      {
+        "token": "s",
+        "label": "S",
+        "start_time": 1.00625,
+        "end_time": 1.1270000000000002,
+        "frame_start": 50,
+        "frame_end": 55,
+        "confidence": 0.0013295733387402391
+      },
+      {
+        "token": "e",
+        "label": "E",
+        "start_time": 1.1270000000000002,
+        "end_time": 1.2075,
+        "frame_start": 56,
+        "frame_end": 59,
+        "confidence": 0.9982138198949396
+      },
+      {
+        "token": "jo",
+        "label": "iO",
+        "start_time": 1.5496250000000003,
+        "end_time": 1.61,
+        "frame_start": 77,
+        "frame_end": 79,
+        "confidence": 0.9926600710134561
+      }
+    ]
+  }
+}
