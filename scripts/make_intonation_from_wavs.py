@@ -59,6 +59,7 @@ def run(
     recognizer = AudioToIPARecognizer()
 
     # torch 모델 구성 완료 후에만 parselmouth/dtaidistance 로드 (segfault 회피)
+    from core import formants, mfcc
     from core.aligner import DtwAligner, NoAligner
     from core.f0_extractor import extract_f0
     from core.features import delta_f0
@@ -143,6 +144,41 @@ def run(
     # Segmenter 인스턴스를 rules용으로 한 번 더 만든다 — 매트릭스 내부 인스턴스와 분리.
     eojeol_seg = EojeolSegmenter(n_seg, l_seg, positions, clean_text)
     syllable_seg = SyllableSegmenter(n_seg, l_seg, positions, syllable_labels)
+
+    # ── F0/F1/F2 시각화 (record/rule 무관 — 모음 정체성 + 피치 한 화면 비교) ─
+    # F1+F2 DTW로 alignment, F0는 그 시간 좌표 위에 함께 그림 (redundant 의도 —
+    # 기존 plot_eojeol_dtw_delta 등 F0 자체 alignment lens는 그대로 유지).
+    learner_formants = formants.extract_formants(learner_wav)
+    native_formants = formants.extract_formants(native_wav)
+    f0f1f2_global_path = out_dir / "plot_f0f1f2_global.html"
+    formants.build_global_figure(
+        learner_formants, native_formants, learner_f0, native_f0,
+        title=f"{text} — F0/F1/F2 global (F1+F2 DTW 정렬)",
+    ).write_html(f0f1f2_global_path)
+    print(f"plot 저장 → {f0f1f2_global_path}")
+
+    f0f1f2_eojeol_path = out_dir / "plot_f0f1f2_eojeol.html"
+    formants.build_eojeol_figure(
+        learner_formants, native_formants, learner_f0, native_f0,
+        eojeol_native_spans=eojeol_seg.native_spans(),
+        eojeol_learner_spans=eojeol_seg.learner_spans(),
+        eojeol_labels=eojeol_seg.labels(),
+        title=f"{text} — F0/F1/F2 어절별 (F1+F2 DTW 정렬)",
+    ).write_html(f0f1f2_eojeol_path)
+    print(f"plot 저장 → {f0f1f2_eojeol_path}")
+
+    # ── MFCC + F0 overlay (no-norm vs CMVN — speaker normalization 효과 비교) ─
+    # MFCC c1~c12 multivariate DTW path 위 F0 lookup. articulation 채널.
+    learner_mfcc = mfcc.extract_mfcc(learner_wav)
+    native_mfcc = mfcc.extract_mfcc(native_wav)
+    for normalize, suffix in ((False, "global"), (True, "cmvn_global")):
+        mfcc_path = out_dir / f"plot_mfcc_{suffix}.html"
+        mfcc.build_global_figure(
+            learner_mfcc, native_mfcc, learner_f0, native_f0,
+            normalize=normalize,
+            title=f"{text} — MFCC + F0 ({'CMVN' if normalize else 'no-norm'})",
+        ).write_html(mfcc_path)
+        print(f"plot 저장 → {mfcc_path}")
     records = evaluate_rules(
         native_f0, learner_f0,
         eojeol_native_spans=eojeol_seg.native_spans(),
