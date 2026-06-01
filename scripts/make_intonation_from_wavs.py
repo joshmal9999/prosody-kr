@@ -43,6 +43,39 @@ def _forced_align(recognizer: AudioToIPARecognizer, wav_path: Path, text: str):
     )
 
 
+def _write_combined_html(
+    figures: list[tuple[str, "go.Figure"]],
+    title: str,
+    out_path: Path,
+) -> None:
+    sections = []
+    for i, (name, fig) in enumerate(figures):
+        div = fig.to_html(full_html=False, include_plotlyjs=(i == 0))
+        heading = (
+            f'<h2 style="margin-top:2em;font-family:sans-serif;'
+            f'border-bottom:1px solid #ccc;padding-bottom:.3em">{name}</h2>'
+        )
+        sections.append(heading + "\n" + div)
+
+    html = (
+        "<!DOCTYPE html>\n"
+        '<html lang="ko">\n'
+        "<head>\n"
+        '<meta charset="utf-8">\n'
+        f"<title>{title} — 통합 분석</title>\n"
+        "<style>"
+        "body{margin:24px;font-family:sans-serif}"
+        "h1{border-bottom:2px solid #333;padding-bottom:.4em}"
+        "</style>\n"
+        "</head>\n"
+        "<body>\n"
+        f"<h1>{title} — prosody 분석 통합 뷰</h1>\n"
+        + "\n".join(sections)
+        + "\n</body>\n</html>"
+    )
+    out_path.write_text(html, encoding="utf-8")
+
+
 def run(
     learner_wav: Path,
     native_wav: Path,
@@ -62,6 +95,7 @@ def run(
     from core import formants, mfcc
     from core.aligner import DtwAligner, NoAligner
     from core.f0_extractor import extract_f0
+    from core.feedback import build_payload as build_records_payload
     from core.features import delta_f0
     from core.lens import build_plot_model
     from core.plotter import figure_from_model
@@ -128,6 +162,8 @@ def run(
              segmenter=WholeSegmenter(native_f0, learner_f0),
              aligner=DtwAligner()),
     ]
+    generated_figs: list[tuple[str, "go.Figure"]] = []
+
     for cfg in lenses:
         name = cfg.pop("name")
         model = build_plot_model(
@@ -137,7 +173,9 @@ def run(
             print(f"렌즈 {name}: 경계 없음, 건너뜀")
             continue
         plot_path = out_dir / f"plot_{name}.html"
-        figure_from_model(model).write_html(plot_path)
+        fig = figure_from_model(model)
+        fig.write_html(plot_path)
+        generated_figs.append((name, fig))
         print(f"plot 저장 → {plot_path}")
 
     # ── Records (lens-rule paradigm) ─────────────────────────────────────────
@@ -151,20 +189,24 @@ def run(
     learner_formants = formants.extract_formants(learner_wav)
     native_formants = formants.extract_formants(native_wav)
     f0f1f2_global_path = out_dir / "plot_f0f1f2_global.html"
-    formants.build_global_figure(
+    fig_f0f1f2_global = formants.build_global_figure(
         learner_formants, native_formants, learner_f0, native_f0,
         title=f"{text} — F0/F1/F2 global (F1+F2 DTW 정렬)",
-    ).write_html(f0f1f2_global_path)
+    )
+    fig_f0f1f2_global.write_html(f0f1f2_global_path)
+    generated_figs.append(("f0f1f2_global", fig_f0f1f2_global))
     print(f"plot 저장 → {f0f1f2_global_path}")
 
     f0f1f2_eojeol_path = out_dir / "plot_f0f1f2_eojeol.html"
-    formants.build_eojeol_figure(
+    fig_f0f1f2_eojeol = formants.build_eojeol_figure(
         learner_formants, native_formants, learner_f0, native_f0,
         eojeol_native_spans=eojeol_seg.native_spans(),
         eojeol_learner_spans=eojeol_seg.learner_spans(),
         eojeol_labels=eojeol_seg.labels(),
         title=f"{text} — F0/F1/F2 어절별 (F1+F2 DTW 정렬)",
-    ).write_html(f0f1f2_eojeol_path)
+    )
+    fig_f0f1f2_eojeol.write_html(f0f1f2_eojeol_path)
+    generated_figs.append(("f0f1f2_eojeol", fig_f0f1f2_eojeol))
     print(f"plot 저장 → {f0f1f2_eojeol_path}")
 
     # ── MFCC + F0 overlay (no-norm vs CMVN — speaker normalization 효과 비교) ─
@@ -173,12 +215,19 @@ def run(
     native_mfcc = mfcc.extract_mfcc(native_wav)
     for normalize, suffix in ((False, "global"), (True, "cmvn_global")):
         mfcc_path = out_dir / f"plot_mfcc_{suffix}.html"
-        mfcc.build_global_figure(
+        fig_mfcc = mfcc.build_global_figure(
             learner_mfcc, native_mfcc, learner_f0, native_f0,
             normalize=normalize,
             title=f"{text} — MFCC + F0 ({'CMVN' if normalize else 'no-norm'})",
-        ).write_html(mfcc_path)
+        )
+        fig_mfcc.write_html(mfcc_path)
+        generated_figs.append((f"mfcc_{suffix}", fig_mfcc))
         print(f"plot 저장 → {mfcc_path}")
+
+    combined_path = out_dir / "plot_combined.html"
+    _write_combined_html(list(reversed(generated_figs)), text, combined_path)
+    print(f"통합 plot 저장 → {combined_path}")
+
     records = evaluate_rules(
         native_f0, learner_f0,
         eojeol_native_spans=eojeol_seg.native_spans(),
@@ -189,10 +238,7 @@ def run(
         syllable_labels=syllable_seg.labels(),
         eojeol_text=clean_text,
     )
-    records_payload = {
-        "reference_text": text,
-        "records": [asdict(r) for r in records],
-    }
+    records_payload = build_records_payload(records, text)
     records_path = out_dir / "records.json"
     records_path.write_text(
         json.dumps(records_payload, ensure_ascii=False, indent=2), encoding="utf-8"

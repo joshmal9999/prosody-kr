@@ -18,11 +18,11 @@ pitch_offset = 0.8
 
 # duration_ratio = max(learner_syll_dur / native_syll_dur), 음절 단위
 # trigger lens = syllable_noalign
-syllable_elongation = 1.5
+syllable_elongation = 2.5
 
 # duration_ratio = learner_eojeol_dur / native_eojeol_dur
 # trigger lens = eojeol_noalign
-eojeol_slow = 1.4
+eojeol_slow = 2.5
 
 [window]
 # learner 어절 시간 비율 기준. DTW path 위에서 평가하되 윈도우 경계는 learner 시간으로.

@@ -32,3 +32,6 @@ datasets/
 CLAUDE.md
 .codegraph
 .cursor
+
+data/output
+data/tts
